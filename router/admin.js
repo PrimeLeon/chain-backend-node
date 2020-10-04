@@ -206,12 +206,12 @@ router.post('/newAccount', [
   let { username } = req.body;
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
-  /**
-   * * ['管理员私钥:string', '用户信息字符串:string']
-   */
   findUserByUsernameForUserGoOnChain(username)
   .then(user => {
     if (user) {
+      /**
+       * * ['管理员私钥:string', '用户信息字符串:string']
+       */
       axiosChainAPI(
           "newAccount",
           [`${admin.private_key}`, JSON.stringify(user)],
@@ -298,7 +298,60 @@ router.post('/issue', (req, res, next) => {
   })
 })
 
+/**
+ * * 获取利息总积分
+ */
+router.get('/getSumFee', (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+  /**
+   * * ['管理员私钥:string']
+   */
+  axiosChainAPI(
+      'getSumFee',
+      [`${admin.private_key}`],
+      'query')
+  .then(response => {
+    let chainAPIResult = response.data;
+    // console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.result) {
+        new Result(chainAPIResult.data.result, '获取利息总积分成功').success(res);
+      } else {
+        new Result('获取利息总积分失败').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
 
-
+/**
+ * * 获取当前系统状态
+ */
+router.get('/getPausable', (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+    /**
+   * * []
+   */
+  axiosChainAPI(
+      'getPausable',
+      [],
+      'query')
+  .then(response => {
+    let chainAPIResult = response.data;
+    // console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.result) {
+        new Result(chainAPIResult.data.result, '获取积分暂停状态成功').success(res);
+      } else {
+        new Result('获取积分暂停状态失败').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
 
 module.exports = router
