@@ -1,4 +1,4 @@
-### 环境
+## 环境
 
 * Node 14.14.0 [Node download](http://nodejs.cn/download/)
 
@@ -10,7 +10,7 @@ npm -v # v6.14.8
 
 * Mysql 8.0.22 [Mysql download](https://dev.mysql.com/downloads/installer/)
 
-### 开始
+## 开始
 
 ```bash
 git clone git@github.com:PrimeLeon/chain-backend-node.git
@@ -22,7 +22,7 @@ npm install
 node app.js # 默认启动在5000端口
 ```
 
-### 静态资源目录
+## 静态资源目录
 
 ```js
 // 默认为项目根目录下的public文件夹
@@ -34,7 +34,7 @@ app.use(express.static(__dirname + '/public'));
 localhost:5000/index.html
 ```
 
-### JWT Token
+## JWT Token
 
 请求需要Bearer Token，请求需要Token的接口时需要在HTTP头部包含以下信息
 
@@ -58,22 +58,25 @@ localhost:5000/index.html
 }
 ```
 
-### <a id="API_LIST">API</a>
+## <a id="API_LIST">API</a>
 
 * 用户
   * [登录](#user_login)
   * [用户申请注册](#user_register)
   * [获取用户信息](#user_info)
   * [获取用户余额](#user_balance)
+  * [用户转账](#user_transfer)
 * 管理员
   * [登录](#admin_login)
   * [获取管理员信息](#admin_info)
   * [管理员初始化](#admin_ownerInit)
   * [积分系统初始化](#admin_integralInit)
+  * [积分系统余额查询](#admin_getOwnerBalacne)
   * [按页码查询用户](#admin_user_page)
   * [添加用户上链](#admin_newAccount)
+  * [给用户发行积分](#admin_issue)
 
-### 用户API
+## 用户API
 
 |     名称     | <a id="user_login">登录</a>   [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------- |
@@ -209,7 +212,36 @@ localhost:5000/index.html
   }
   ```
 
-### 管理员API
+|     名称     | <a id="user_transfer">用户转账</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/transfer                                                |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 用户转账                                                 |
+
+* **请求示例**
+
+  ```json
+  // 仅在请求头部包含以下字段
+  Authorization ： Bearer <Token>
+  ```
+
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "转账成功"
+  }
+  // 失败
+  {
+      "code": -1,
+      "msg": "转账失败"
+  }
+  ```
+
+
+## 管理员API
 
 |     名称     | <a id="admin_login">管理员登录 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
@@ -328,6 +360,31 @@ localhost:5000/index.html
   }
   ```
   
+|     名称     | <a id="admin_getSumFee">积分系统余额查询 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/getSumFee                                          |
+| **请求方式** | HTTP / GET                                                  |
+|   **简介**   | 积分系统余额查询                                               |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  ```
+
+* **返回值示例**
+
+  ```json
+  {
+      "code": 0,
+      "msg": "积分系统余额查询成功",
+      "data": {
+          "balance": "24999998"
+      }
+  }
+  ```
+
 |     名称     | <a id="admin_user_page">根据页码查询用户</a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/user/:page                                            |
@@ -420,3 +477,39 @@ localhost:5000/index.html
       "msg": "管理员初始化成功"
   }
   ```
+  
+|     名称     | <a id="admin_issue">给用户发行积分 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/newAccount                                            |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 给用户发行积分                                               |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // 请求参数如下
+  // username 用户名
+  {
+      "username": "testuser",
+      "balance": 1
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "发行积分成功"
+  }
+  // 失败
+  {
+      "code": -1,
+      "msg": "发行积分失败"
+  }
+  ```
+  
+  
