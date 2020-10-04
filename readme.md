@@ -221,8 +221,12 @@ localhost:5000/index.html
 * **请求示例**
 
   ```json
-  // 仅在请求头部包含以下字段
+  // 请求头部包含以下字段
   Authorization ： Bearer <Token>
+  {
+      "touser": "testuser4",
+      "balance": 10
+  }
   ```
 
 * **返回值示例**
@@ -360,11 +364,11 @@ localhost:5000/index.html
   }
   ```
   
-|     名称     | <a id="admin_getSumFee">积分系统余额查询 </a>  [回到API目录](#API_LIST) |
+|     名称     | <a id="admin_getOwnerBalacne">积分系统余额查询 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
-| **接口地址** | /admin/getSumFee                                          |
-| **请求方式** | HTTP / GET                                                  |
-|   **简介**   | 积分系统余额查询                                               |
+| **接口地址** | /admin/getOwnerBalacne                                       |
+| **请求方式** | HTTP / GET                                                   |
+|   **简介**   | 积分系统余额查询                                             |
 
 * **请求示例**
 
