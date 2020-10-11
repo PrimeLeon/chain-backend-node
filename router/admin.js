@@ -302,7 +302,7 @@ router.post('/issue', [
 })
 
 /**
- * * 获取利息总积分
+ * * 获取总利息总积分
  */
 router.get('/getSumFee', (req, res, next) => {
   let adminInfoFromToken = decodeJwt(req);

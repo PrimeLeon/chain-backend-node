@@ -72,7 +72,7 @@ localhost:5000/index.html
     * [根据哈希查询区块信息](#user_getDetailByHash)
     * [查询高度](#user_getHeight)
     * [创建存证](#user_createStore)
-    * [获取存证](#user_getStore)
+    * [通过哈希获取存证](#user_getStore)
     * [查询存证](#user_queryStore)
 * 管理员
   * [登录](#admin_login)
@@ -435,7 +435,90 @@ localhost:5000/index.html
       }
   }
   ```
+  
+|     名称     | <a id="user_getStore">通过哈希获取存证</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/getStore                                        |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 通过哈希获取存证                                   |
 
+* **请求示例**
+
+  ```json
+  // 请求头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "hash": "xCRCGgvMQLb+DHUlo7N9JFdKQxT5g6yhcbJJJW5rIKE="
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "获取存证成功",
+      "data": {
+          "data": "{\"name\":\"daniel\",\"money\":\"999\"}",
+          "businessId": "100",
+          "blockHeight": 211,
+          "timestamp": 1603971710
+      }
+  }
+  ```
+
+
+
+
+|     名称     | <a id="user_queryStore">查询存证</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/queryStore                                             |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 查询存证                                                     |
+
+* **请求示例**
+
+  ```json
+  // 请求头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "businessId": "100",
+      "startTime": "",
+      "endTime": "",
+      "start" : 0
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  {
+      "code": 0,
+      "msg": "查询存证成功",
+      "data": {
+          "total": 18,
+          "items": [
+              {
+                  "createdTime": "2020-11-04 20:54:27",
+                  "txsHash": "3Jv591vK8q/+OsYMhlti1/banb3jrwfXJK5WLgDIqRo=",
+                  "data": "{\"name\":\"daniel\",\"money\":\"999\"}",
+                  "businessId": "100",
+                  "blockHeight": 268
+              },
+              {
+                  "createdTime": "2020-11-04 20:53:47",
+                  "txsHash": "cetMfOAfpr+9No87ElmSigv3bi8bnXvuexC0vGEOdZQ=",
+                  "data": "{\"name\":\"daniel\",\"money\":\"999\"}",
+                  "businessId": "100",
+                  "blockHeight": 267
+              }
+          ]
+      }
+  }
+  ```
 
 
 

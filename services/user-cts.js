@@ -174,7 +174,7 @@ function queryStore(businessId, startTime, endTime, start) { //start：从第几
 // // 测试通过存证的哈希值获取存证信息
 // getStore("xCRCGgvMQLb+DHUlo7N9JFdKQxT5g6yhcbJJJW5rIKE=")
 
-// // 测试通过ID查询存证，返回多个
+// 测试通过ID查询存证，返回多个
 // queryStore("100", "", "", "0")
 
 
