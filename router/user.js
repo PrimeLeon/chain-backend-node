@@ -57,9 +57,9 @@ router.get('/info', (req, res, next) => {
    * * 解析token
    */
   let userInfoFromToken = decodeJwt(req);
-  userInfoFromToken = userInfoFromToken.user;
-  if (userInfoFromToken && userInfoFromToken.username) {
-    findUserByUsername(userInfoFromToken.username).then(user => {
+  let user = userInfoFromToken.user;
+  if (user && user.username) {
+    findUserByUsername(user.username).then(user => {
       if (user) {
         /**
          * * 此处为RowDataPacket : [Array:object] 长度为1
@@ -81,7 +81,6 @@ router.get('/balance', (req, res, next) => {
    */
   let userInfoFromToken = decodeJwt(req);
   let user = userInfoFromToken.user;
-
   if (user && user.address) {
     axiosChainAPI(
         'getAccountBalance',
@@ -110,9 +109,9 @@ router.post('/transfer', (req, res, next) => {
    * * 解析token
    */
   let userInfoFromToken = decodeJwt(req);
-  userInfoFromToken = userInfoFromToken.user;
-  if (userInfoFromToken && userInfoFromToken.address) {
-    res.send(userInfoFromToken);
+  let user = userInfoFromToken.user;
+  if (user && user.address) {
+    res.send(user);
   } else {
     new Result('余额查询失败').jwtError(res);
   }
