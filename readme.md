@@ -398,12 +398,9 @@ localhost:5000/index.html
   // 成功
   {
       "code": 0,
-      "msg": "创建存证成功",
+      "msg": "获取高度成功",
       "data": {
-          "result": {
-              "Figure": "3Jv591vK8q/+OsYMhlti1/banb3jrwfXJK5WLgDIqRo=",
-              "OK": true
-          }
+          "height": 266
       }
   }
   ```
@@ -429,11 +426,15 @@ localhost:5000/index.html
   // 成功
   {
       "code": 0,
-      "msg": "获取高度成功",
+      "msg": "创建存证成功",
       "data": {
-          "height": 266
+          "result": {
+              "Figure": "3Jv591vK8q/+OsYMhlti1/banb3jrwfXJK5WLgDIqRo=",
+              "OK": true
+          }
       }
   }
+  
   ```
   
 |     名称     | <a id="user_getStore">通过哈希获取存证</a>   [回到API目录](#API_LIST) |
