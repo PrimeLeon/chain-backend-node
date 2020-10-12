@@ -86,7 +86,6 @@ router.get('/balance', (req, res, next) => {
         'getAccountBalance',
         [user.address])
       .then(async response => {
-        // console.log(response)
         let chainAPIResult = response.data;
         if (chainAPIResult.message == 'success') {
           /**
@@ -96,7 +95,7 @@ router.get('/balance', (req, res, next) => {
           await updateBalanceByUsername(user.username, user.balance);
           new Result(user, "用户余额查询成功").success(res);
         } else {
-          new Result('余额查询失败').fail(res);
+          new Result('Chainblock环境错误').chainError(res);
         }
       })
   } else {
@@ -105,18 +104,16 @@ router.get('/balance', (req, res, next) => {
 })
 
 router.post('/transfer', (req, res, next) => {
-  /**
-   * * 解析token
-   */
-  let userInfoFromToken = decodeJwt(req);
-  let user = userInfoFromToken.user;
-  if (user && user.address) {
-    res.send(user);
-  } else {
-    new Result('余额查询失败').jwtError(res);
-  }
+  // TODO:...
+  // let userInfoFromToken = decodeJwt(req);
+  // let user = userInfoFromToken.user;
+  // if (user && user.address) {
+  //   res.send(user);
+  // } else {
+  //   new Result('余额查询失败').jwtError(res);
+  // }
 })
 
 module.exports = router
 
-// console.log(md5(`testadminpsd${PWD_SALT}`));
+// console.log(md5(`xwj123psd${PWD_SALT}`));

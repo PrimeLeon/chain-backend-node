@@ -25,6 +25,9 @@ router.get('/', (req, res, next) => {
   res.send('hello admin');
 })
 
+/**
+ * @brief 管理员登录
+ */
 router.post('/login', [
   body('username').isString().withMessage('用户名必须为字符'),
   body('password').isString().withMessage('密码必须为字符')
@@ -59,15 +62,17 @@ router.post('/login', [
   }
 })
 
+/**
+ * @brief 获取管理员信息
+ */
 router.get('/info', (req, res, next) => {
   /**
    * * 解析token
    */
   let adminInfoFromToken = decodeJwt(req);
-  console.log(adminInfoFromToken);
-  adminInfoFromToken = adminInfoFromToken.admin;
-  if (adminInfoFromToken && adminInfoFromToken.username) {
-    findAdminByUsername(adminInfoFromToken.username).then(admin => {
+  admin = adminInfoFromToken.admin;
+  if (admin && admin.username) {
+    findAdminByUsername(admin.username).then(admin => {
       if (admin) {
         new Result(admin, '管理员信息查询成功').success(res);
       } else {
@@ -77,6 +82,30 @@ router.get('/info', (req, res, next) => {
   } else {
     new Result('管理员信息查询失败').fail(res);
   }
+})
+
+/**
+ * @brief Chain系统管理员初始化
+ */
+router.post('/ownerInit', (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+  // console.log(admin);
+  axiosChainAPI(
+      "ownerInit",
+      [`${admin.private_key}`])
+    .then(response => {
+      let chainAPIResult = response.data;
+      if (chainAPIResult.message === 'success') {
+        if (chainAPIResult.data.result === 'success') {
+          new Result('管理员初始化成功').success(res);
+        } else {
+          new Result('管理员初始化失败').fail(res);
+        }
+      } else {
+        new Result('Chainblock环境错误').chainError(res);
+      }
+    })
 })
 
 

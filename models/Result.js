@@ -1,4 +1,4 @@
-const { CODE_ERROR, CODE_SUCCESS, CODE_TOKEN_EXPIRED } = require('../utils/constant');
+const { CODE_ERROR, CODE_SUCCESS, CODE_TOKEN_EXPIRED, CODE_TOKEN_ERROR, } = require('../utils/constant');
 
 class Result {
   /**
@@ -55,7 +55,11 @@ class Result {
     this.json(res);
   }
   jwtError(res){
-    this.code = CODE_TOKEN_EXPIRED;
+    this.code = CODE_TOKEN_ERROR;
+    this.json(res);
+  }
+  chainError(res){
+    this.code = CODE_CHAIN_ERROR;
     this.json(res);
   }
 }
