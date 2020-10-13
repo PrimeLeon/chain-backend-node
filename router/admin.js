@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
 })
 
 /**
- * @brief 管理员登录
+ * * 管理员登录
  */
 router.post('/login', [
   body('username').isString().withMessage('用户名必须为字符'),
@@ -35,7 +35,6 @@ router.post('/login', [
   /**
    * * 使用express-validator模块处理输入异常
    */
-
   const err = validationResult(req);
   if (!err.isEmpty()) {
     const [{ msg }] = err.errors;
@@ -63,7 +62,7 @@ router.post('/login', [
 })
 
 /**
- * @brief 获取管理员信息
+ * * 获取管理员信息
  */
 router.get('/info', (req, res, next) => {
   /**
@@ -85,12 +84,14 @@ router.get('/info', (req, res, next) => {
 })
 
 /**
- * @brief Chain系统管理员初始化
+ * * 管理员初始化
  */
 router.post('/ownerInit', (req, res, next) => {
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
-  // console.log(admin);
+  /**
+   * * ['管理员私钥:string']
+   */
   axiosChainAPI(
       "ownerInit",
       [`${admin.private_key}`])
@@ -106,6 +107,49 @@ router.post('/ownerInit', (req, res, next) => {
         new Result('Chainblock环境错误').chainError(res);
       }
     })
+})
+
+/**
+ * * 积分系统初始化
+ */
+router.post('/integralInit', [
+  body('bpr').isNumeric().withMessage('bpr必须为数字'),
+  body('mf').isNumeric().withMessage('mf必须为数字')
+], (req, res, next) => {
+
+  /**
+   * * 使用express-validator模块处理输入异常
+   */
+
+  const err = validationResult(req);
+  if (!err.isEmpty()) {
+    const [{ msg }] = err.errors;
+    next(boom.badRequest(msg));
+  } else {
+    let adminInfoFromToken = decodeJwt(req);
+    admin = adminInfoFromToken.admin;
+    let { bpr, mf } = req.body;
+
+    /**
+     * * ['管理员私钥:string', 'bpr基准利率:int64', 'mf最大利息金额:int64']
+     */
+    axiosChainAPI(
+        "integralInit",
+        [`${admin.private_key}`, bpr, mf])
+      .then(response => {
+        let chainAPIResult = response.data;
+        console.log(chainAPIResult)
+        if (chainAPIResult.message === 'success') {
+          if (chainAPIResult.data.result === 'success') {
+            new Result('积分系统初始化成功').success(res);
+          } else {
+            new Result('积分系统初始化失败').fail(res);
+          }
+        } else {
+          new Result('Chainblock环境错误').chainError(res);
+        }
+      })
+  }
 })
 
 
