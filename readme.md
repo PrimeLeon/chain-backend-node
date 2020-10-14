@@ -70,8 +70,8 @@ localhost:5000/index.html
   ```json
   //json格式
   {
-      "username": "testuser",
-      "password": "testuserpsd"
+      "username": "testuser", // 用户名
+      "password": "testuserpsd" // 用户密码
   }
   //urlencoded格式
   username : "testuser"
@@ -173,8 +173,8 @@ localhost:5000/index.html
   ```json
   //json格式
   {
-      "username": "testadmin",
-      "password": "testadminpsd"
+      "username": "testadmin", // 管理员用户名
+      "password": "testadminpsd" // 管理员密码
   }
   //urlencoded格式
   username : "testadmin"
@@ -227,16 +227,42 @@ localhost:5000/index.html
   }
   ```
 
-|   接口地址   | /admin/ownerInit |
-| :----------: | ---------------- |
-| **请求方式** | HTTP / POST      |
-|   **简介**   | 管理员初始化     |
+|   接口地址   | /admin/ownerInit                   |
+| :----------: | ---------------------------------- |
+| **请求方式** | HTTP / POST                        |
+|   **简介**   | 管理员初始化（初始化区块链管理员） |
 
 * **请求示例**
 
   ```json
   // 仅在请求头部包含以下字段
   Authorization ： Bearer <Token>
+  ```
+
+* **返回值示例**
+
+  ```json
+  {
+      "code": 0,
+      "msg": "管理员初始化成功"
+  }
+  ```
+  
+|   接口地址   | /admin/integralInit |
+| :----------: | ------------------- |
+| **请求方式** | HTTP / POST         |
+|   **简介**   | 积分系统初始化      |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // 请求参数如下
+  {
+      "bpr": 1000, // 基准利率
+      "mf": 10 // 最大利息金额
+  }
   ```
 
 * **返回值示例**
