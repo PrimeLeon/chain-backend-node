@@ -58,20 +58,26 @@ localhost:5000/index.html
 }
 ```
 
+### API
+
+* 用户
+  * [登录接口](#用户-登录)
+
 ### 用户API
 
-|   接口地址   | /user/login |
-| :----------: | ----------- |
-| **请求方式** | HTTP / POST |
-|   **简介**   | 用户登录    |
+|     名称     | <a id="用户-登录">登录</a> |
+| :----------: | :------------------------- |
+| **接口地址** | /user/login                |
+| **请求方式** | HTTP / POST                |
+|   **简介**   | 用户登录                   |
 
 * **请求示例**
 
   ```json
   //json格式
   {
-      "username": "testuser", // 用户名
-      "password": "testuserpsd" // 用户密码
+      "username": "testuser",
+      "password": "testuserpsd"
   }
   //urlencoded格式
   username : "testuser"
@@ -173,8 +179,8 @@ localhost:5000/index.html
   ```json
   //json格式
   {
-      "username": "testadmin", // 管理员用户名
-      "password": "testadminpsd" // 管理员密码
+      "username": "testadmin",
+      "password": "testadminpsd"
   }
   //urlencoded格式
   username : "testadmin"
@@ -249,7 +255,7 @@ localhost:5000/index.html
   ```
   
 |   接口地址   | /admin/integralInit |
-| :----------: | ------------------- |
+| :----------: | :------------------ |
 | **请求方式** | HTTP / POST         |
 |   **简介**   | 积分系统初始化      |
 
@@ -259,9 +265,11 @@ localhost:5000/index.html
   // 头部包含以下字段
   Authorization ： Bearer <Token>
   // 请求参数如下
+  // bpr 基准利率
+  // mf 最大利息金额
   {
-      "bpr": 1000, // 基准利率
-      "mf": 10 // 最大利息金额
+      "bpr": 1000,
+      "mf": 10
   }
   ```
 
