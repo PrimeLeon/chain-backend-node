@@ -234,4 +234,23 @@ router.post('/newAccount', [
     })
 })
 
+/**
+ * * 管理员查询积分余额
+ */
+router.get('/getOwnerBalacne', (req, res, next) => {
+  axiosChainAPI(
+      'getOwnerBalacne', []
+    )
+    .then(response => {
+      let chainAPIResult = response.data;
+      console.log(chainAPIResult)
+      if (chainAPIResult.message === 'success') {
+        let balanceData = { balance: chainAPIResult.data.result };
+        new Result(balanceData, '积分系统余额查询成功').success(res);
+      } else {
+        new Result('积分系统余额查询失败').chainError(res);
+      }
+    })
+})
+
 module.exports = router
