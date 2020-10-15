@@ -75,6 +75,8 @@ localhost:5000/index.html
   * [按页码查询用户](#admin_user_page)
   * [添加用户上链](#admin_newAccount)
   * [给用户发行积分](#admin_issue)
+  * [获取当前系统利息总积分](#admin_getSumFee)
+  * [获取当前系统暂停状态](#admin_getPausable)
 
 ## 用户API
 
@@ -515,5 +517,51 @@ localhost:5000/index.html
       "msg": "发行积分失败"
   }
   ```
+|     名称     | <a id="admin_getSumFee">获取当前系统利息总积分 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/getSumFee                                                 |
+| **请求方式** | HTTP / GET                                                  |
+|   **简介**   | 给用户发行积分                                               |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  ```
   
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "获取利息总积分成功",
+      "data": "4"
+  }
+  ```
+  
+|     名称     | <a id="admin_getPausable">获取当前系统暂停状态 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/getPausable                                           |
+| **请求方式** | HTTP / GET                                                   |
+|   **简介**   | 获取当前系统暂停状态                                         |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "获取积分系统状态成功",
+      "data": "false"
+  }
+  ```
   
