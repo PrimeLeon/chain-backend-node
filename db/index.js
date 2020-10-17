@@ -47,7 +47,22 @@ function queryOne(sql) {
   })
 }
 
+function queryZero(sql) {
+  return new Promise((resolve, reject) => {
+    querySql(sql).then(results => {
+      if (results) {
+        resolve(results);
+      } else {
+        resolve(null);
+      }
+    }).catch(err => {
+      reject(err);
+    })
+  })
+}
+
 module.exports = {
   querySql,
-  queryOne
+  queryOne,
+  queryZero
 }
