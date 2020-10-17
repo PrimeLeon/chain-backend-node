@@ -19,6 +19,7 @@ module.exports = jwt({
   path: [
     '/user/login',
     '/admin/login',
+    '/user/register',
     '/admin'
   ]
 });
