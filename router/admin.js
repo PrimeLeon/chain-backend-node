@@ -213,6 +213,7 @@ router.post('/newAccount', [
             // console.log(chainAPIResult)
             if (chainAPIResult.message === 'success') {
               if (chainAPIResult.data.result === 'success') {
+                
                 new Result('用户添加上链').success(res);
               } else {
                 new Result('用户添加上链失败').fail(res);

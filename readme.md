@@ -71,6 +71,7 @@ localhost:5000/index.html
   * [管理员初始化](#admin_ownerInit)
   * [积分系统初始化](#admin_integralInit)
   * [按页码查询用户](#admin_user_page)
+  * [添加用户上链](#admin_newAccount)
 
 ### 用户API
 
@@ -390,5 +391,32 @@ localhost:5000/index.html
       "code": 0,
       "msg": "用户信息查询成功",
       "data": []
+  }
+  ```
+  
+|     名称     | <a id="admin_newAccount">添加用户上链 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/newAccount                                            |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 积分系统初始化                                               |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // 请求参数如下
+  // username 用户名
+  {
+      "username": "testuser"
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  {
+      "code": 0,
+      "msg": "管理员初始化成功"
   }
   ```
