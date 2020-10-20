@@ -25,7 +25,6 @@ function findAdminByUsername(username) {
   FROM admin 
   WHERE username='${username}'`);
 }
-
 /**
  * @brief 获取所有用户
  * @param {string} username 用户名
@@ -39,9 +38,22 @@ function findUserOrderByRegisterTimeWithPage(page) {
   LIMIT ${(page-1) * itemsPerPage},${page * itemsPerPage}`);
 }
 
+/**
+ * * 与上一个函数不同 查找指定用户部分信息注册上链
+ * @brief 根据用户名查找用户信息
+ * @param {string} username 用户名
+ */
+function findUserByUsernameForUserGoOnChain(username) {
+  return queryOne(`
+  SELECT address,id as ID,balance,password,private_key as privateKey
+  FROM user 
+  WHERE username='${username}'`);
+} 
+
 
 module.exports = {
   login,
   findAdminByUsername,
-  findUserOrderByRegisterTimeWithPage
+  findUserOrderByRegisterTimeWithPage,
+  findUserByUsernameForUserGoOnChain
 }

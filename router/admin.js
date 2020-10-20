@@ -13,7 +13,17 @@ const jwt = require('jsonwebtoken');
 const { param, body, validationResult } = require('express-validator');
 
 const Result = require('../models/Result');
-const { login, findAdminByUsername, findUserOrderByRegisterTimeWithPage } = require('../services/admin');
+
+/**
+ * * service 层服务
+ */
+const {
+  login,
+  findAdminByUsername,
+  findUserOrderByRegisterTimeWithPage,
+  findUserByUsernameForUserGoOnChain
+} = require('../services/admin');
+
 const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 const { axiosChainAPI } = require('../chainAPI/index');
@@ -158,14 +168,14 @@ router.post('/integralInit', [
     let { bpr, mf } = req.body;
 
     /**
-     * * ['管理员私钥:string', 'bpr基准利率:int64', 'mf最大利息金额:int64']
+     * * ['管理员私钥:string', 'bpr基准利率:number', 'mf最大利息金额:number']
      */
     axiosChainAPI(
         "integralInit",
         [`${admin.private_key}`, bpr, mf])
       .then(response => {
         let chainAPIResult = response.data;
-        console.log(chainAPIResult)
+        // console.log(chainAPIResult)
         if (chainAPIResult.message === 'success') {
           if (chainAPIResult.data.result === 'success') {
             new Result('积分系统初始化成功').success(res);
@@ -182,8 +192,39 @@ router.post('/integralInit', [
 /**
  * * 新建普通用户
  */
-router.post('/newAccount', (req, res, next) => {
-    
-}) 
+router.post('/newAccount', [
+  body('username').isString().withMessage('用户名必须为字符')
+], (req, res, next) => {
+  let { username } = req.body;
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+  /**
+   * * ['管理员私钥:string', '用户信息字符串:string']
+   */
+  findUserByUsernameForUserGoOnChain(username)
+    .then(user => {
+      console.log(user);
+      if (user) {
+        axiosChainAPI(
+            "newAccount",
+            [`${admin.private_key}`, JSON.stringify(user)])
+          .then(response => {
+            let chainAPIResult = response.data;
+            // console.log(chainAPIResult)
+            if (chainAPIResult.message === 'success') {
+              if (chainAPIResult.data.result === 'success') {
+                new Result('用户添加上链').success(res);
+              } else {
+                new Result('用户添加上链失败').fail(res);
+              }
+            } else {
+              new Result('Chainblock环境错误').chainError(res);
+            }
+          })
+      } else {
+        new Result('用户不存在').fail(res);
+      }
+    })
+})
 
 module.exports = router

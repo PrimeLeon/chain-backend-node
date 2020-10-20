@@ -12,16 +12,6 @@ function axiosChainAPI(method, args = []) {
   return axios.post(baseUrl, body);
 }
 
-// axiosChain(
-//   "issue",
-//   ["xwj123","testuseraddress",10000])
-// .then(response => console.log(response.data))
-
-// axiosChain(
-//   "getAccountBalance",
-//   ['testuseraddress'])
-// .then(response => console.log(response.data))
-
 module.exports = {
   axiosChainAPI
 }
