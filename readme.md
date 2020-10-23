@@ -319,18 +319,38 @@ localhost:5000/index.html
       "msg": "用户信息查询成功",
       "data": [
           {
-              "id": 4,
-              "username": "testuser2",
-              "password": "b04a7ca45ee3f3afe375161a120f9eaa",
-              "nickname": "testuser2nickname"
-              ...
+              "id": 1,
+              "username": "admin",
+              "password": "8e00fc431376061563a4b719cb5eed0a",
+              "nickname": "nickname",
+              "role": "admin",
+              "address": "8e00fc431376061563a4b719cb5eed0a",
+              "private_key": "xwj123",
+              "balance": 0,
+              "create_time": "0000-00-00 00:00:00",
+              "change_time": "0000-00-00 00:00:00",
+              "delete_time": "0000-00-00 00:00:00",
+              "isBlack": "false",
+              "isDelete": "false",
+              "isActivate": 0,
+              "paycode": null
           },
           {
-              "id": 3,
-              "username": "testuser",
-              "password": "b04a7ca45ee3f3afe375161a120f9eaa",
-              "nickname": "testusernickname"
-              ...
+              "id": 2,
+              "username": "user",
+              "password": "db01125b62262f49f4ba06841af01b68",
+              "nickname": "usernickname",
+              "role": "user",
+              "address": "8e00fc431376061563a4b719cb5eed0a",
+              "private_key": "8e00fc431376061563a4b719cb5eed0a",
+              "balance": 0,
+              "create_time": "0000-00-00 00:00:00",
+              "change_time": "0000-00-00 00:00:00",
+              "delete_time": "0000-00-00 00:00:00",
+              "isBlack": "false",
+              "isDelete": "false",
+              "isActivate": 0,
+              "paycode": null
           }
       ]
   }
