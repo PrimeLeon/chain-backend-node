@@ -1,7 +1,4 @@
-const {
-  CODE_ERROR,
-  CODE_SUCCESS
-} = require('../utils/constant');
+const { CODE_ERROR, CODE_SUCCESS } = require('../utils/constant');
 
 class Result {
   constructor(data, msg = '操作成功', option) {

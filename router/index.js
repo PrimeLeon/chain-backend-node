@@ -2,9 +2,7 @@ const express = require('express');
 const boom = require('boom');
 const userRouter = require('./user');
 
-const {
-  CODE_ERROR
-} = require('../utils/constant.js');
+const { CODE_ERROR } = require('../utils/constant.js');
 
 const router = express.Router();
 

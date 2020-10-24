@@ -1,8 +1,6 @@
 const mysql = require('mysql');
 const config = require('./config');
-const {
-  debug
-} = require('../utils/constant');
+const { debug } = require('../utils/constant');
 
 function connect() {
   return mysql.createConnection({
