@@ -1,7 +1,12 @@
-const { CODE_ERROR, CODE_SUCCESS } = require('../utils/constant');
+const { CODE_ERROR, CODE_SUCCESS, CODE_TOKEN_EXPIRED } = require('../utils/constant');
 
 class Result {
-  constructor(data, msg = '操作成功', option) {
+  /**
+   * @param {object} data 传回前端的数据
+   * @param {string} msg 操作信息
+   * @param {object} options 可选项
+   */
+  constructor(data, msg = '操作成功', options) {
     this.data = null;
     if (arguments.length === 0) {
       this.msg = '操作成功';
@@ -47,6 +52,10 @@ class Result {
   }
   fail(res) {
     this.code = CODE_ERROR;
+    this.json(res);
+  }
+  jwtError(res){
+    this.code = CODE_TOKEN_EXPIRED;
     this.json(res);
   }
 }
