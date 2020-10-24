@@ -1,14 +1,14 @@
 #### 环境
 
-* Node 14.14.0 [Node download][http://nodejs.cn/download/]
+* Node 14.14.0 [Node download](http://nodejs.cn/download/)
 
 ```bash
-// in cmd
+// run in cmd
 node -v // v14.14.0
 npm -v // v6.14.8
 ```
 
-* Mysql 8.0.22 [Mysql download][https://dev.mysql.com/downloads/installer/]
+* Mysql 8.0.22 [Mysql download](https://dev.mysql.com/downloads/installer/)
 
 #### 开始
 
