@@ -29,7 +29,6 @@ node app.js
 请求需要Bearer Token，请求需要Token的接口时需要在HTTP头部包含以下信息
 
 * **Authorization ：Bearer \<Token\>**
-* **注：Bearer和\<Token\>之间必须包含一个空格**
 
 | 接口类型 | API | 描述 |
 | :----: | ------ | ------ |
