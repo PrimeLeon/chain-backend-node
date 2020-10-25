@@ -14,7 +14,7 @@ const { body, validationResult } = require('express-validator');
 
 const Result = require('../models/Result');
 const { login, findUserByUsername } = require('../services/user');
-const { md5 } = require('../utils/index');
+const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 
 const router = express.Router();
@@ -52,14 +52,21 @@ router.post('/login', [
 })
 
 router.get('/info', (req, res, next) => {
-  findUserByUsername('admin').then(user => {
-    console.log(req.headers);
-    if (user) {
-      new Result(user, '用户信息查询成功').success(res);
-    } else {
-      new Result(user, '用户信息查询失败').fail(res);
-    }
-  })
+  const jwtDecodeRes = decodeJwt(req);
+  console.log(jwtDecodeRes);
+  if (jwtDecodeRes && jwtDecodeRes.username) {
+    findUserByUsername(jwtDecodeRes.username).then(user => {
+      console.log(req.headers);
+      if (user) {
+        new Result(user, '用户信息查询成功').success(res);
+      } else {
+        new Result(user, '用户信息查询失败').fail(res);
+      }
+    })
+  } else {
+    new Result(user, '用户信息查询失败').fail(res);
+
+  }
 })
 
 module.exports = router
