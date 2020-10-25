@@ -13,7 +13,7 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 
 const Result = require('../models/Result');
-const { login } = require('../services/user');
+const { login, findUserByUsername } = require('../services/user');
 const { md5 } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 
@@ -31,6 +31,9 @@ router.post('/login', [
     const [{ msg }] = err.errors;
     next(boom.badRequest(msg));
   } else {
+    /**
+     * * 查询用户是否存在
+     */
     let { username, password } = req.body;
     password = md5(`${password}${PWD_SALT}`);
     login(username, password).then(user => {
@@ -40,10 +43,8 @@ router.post('/login', [
         /**
          * * 注册token
          */
-        const token = jwt.sign(
-          { username },
-          PRIVATE_KEY, 
-          { expiresIn: JWT_EXPIRED });
+        const token = jwt.sign({ username },
+          PRIVATE_KEY, { expiresIn: JWT_EXPIRED });
         new Result({ token }, '登录成功').success(res);
       }
     })
@@ -51,7 +52,14 @@ router.post('/login', [
 })
 
 router.get('/info', (req, res, next) => {
-  res.json('user info')
+  findUserByUsername('admin').then(user => {
+    console.log(req.headers);
+    if (user) {
+      new Result(user, '用户信息查询成功').success(res);
+    } else {
+      new Result(user, '用户信息查询失败').fail(res);
+    }
+  })
 })
 
 module.exports = router

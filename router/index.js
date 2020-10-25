@@ -33,7 +33,6 @@ router.use((req, res, next) => {
  * * 不能只抛出异常,要用异常处理中间件处理异常
  */
 router.use((err, req, res, next) => {
-  console.dir(err);
   if (err.name && err.name === 'UnauthorizedError') {
     /**
      * * token错误
