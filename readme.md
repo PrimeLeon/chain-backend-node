@@ -69,6 +69,7 @@ localhost:5000/index.html
   * [获取管理员信息](#admin_info)
   * [管理员初始化](#admin_ownerInit)
   * [积分系统初始化](#admin_integralInit)
+  * [按页码查询用户](#admin_user_page)
 
 ### 用户API
 
@@ -292,5 +293,51 @@ localhost:5000/index.html
   {
       "code": 0,
       "msg": "管理员初始化成功"
+  }
+  ```
+  
+|     名称     | <a id="admin_user_page">根据页码查询用户</a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/user/:page                                            |
+| **请求方式** | HTTP / GET                                                   |
+|   **简介**   | 根据页码查询用户（默认一页2条记录，默认为创建时间倒序排序）  |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // 第一页 /admin/user/1
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 此页有记录
+  {
+      "code": 0,
+      "msg": "用户信息查询成功",
+      "data": [
+          {
+              "id": 4,
+              "username": "testuser2",
+              "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+              "nickname": "testuser2nickname"
+              ...
+          },
+          {
+              "id": 3,
+              "username": "testuser",
+              "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+              "nickname": "testusernickname"
+              ...
+          }
+      ]
+  }
+  // 此页没有记录
+  {
+      "code": 0,
+      "msg": "用户信息查询成功",
+      "data": []
   }
   ```
