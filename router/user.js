@@ -34,7 +34,7 @@ router.post('/login', [
     /**
      * * 查询用户是否存在
      */
-    let { username, password } = req.body;
+    let user = { username, password } = req.body;
     password = md5(`${password}${PWD_SALT}`);
     login(username, password).then(user => {
       if (!user || user.length === 0) {
@@ -53,19 +53,21 @@ router.post('/login', [
 
 router.get('/info', (req, res, next) => {
   const jwtDecodeRes = decodeJwt(req);
-  console.log(jwtDecodeRes);
   if (jwtDecodeRes && jwtDecodeRes.username) {
     findUserByUsername(jwtDecodeRes.username).then(user => {
-      console.log(req.headers);
       if (user) {
-        new Result(user, '用户信息查询成功').success(res);
+        /**
+         * / TODO: 无法添加role数组到user属性上
+         * !! 无法添加role数组到user属性上
+         */
+        user.roles = ['admin']
+        new Result(obj, '用户信息查询成功').success(res);
       } else {
-        new Result(user, '用户信息查询失败').fail(res);
+        new Result(obj, '用户信息查询失败').fail(res);
       }
     })
   } else {
     new Result(user, '用户信息查询失败').fail(res);
-
   }
 })
 
