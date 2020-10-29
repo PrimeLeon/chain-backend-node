@@ -62,7 +62,7 @@ router.get('/info', (req, res, next) => {
         /**
          * * 此处为RowDataPacket : [Array:object] 长度为1
          */
-        user[0].roles = [user[0].role]
+        user.roles = [user.role]
         new Result(user, '用户信息查询成功').success(res);
       } else {
         new Result(user, '用户信息查询失败').fail(res);
