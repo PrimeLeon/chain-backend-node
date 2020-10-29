@@ -10,11 +10,14 @@ function decodeJwt(req) {
    * * 获取token
    */
   let token = req.get('Authorization');
-  console.log(token);
-  if (token.indexOf('Bearer') === 0) {
-    token = token.replace('Bearer ', '');
+  if (token) {
+    if (token.indexOf('Bearer') === 0) {
+      token = token.replace('Bearer ', '');
+    }
+    return jwt.verify(token, PRIVATE_KEY);
+  }else{
+    return null;
   }
-  return jwt.verify(token, PRIVATE_KEY);
 }
 
 module.exports = {

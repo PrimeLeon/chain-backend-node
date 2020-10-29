@@ -8,11 +8,6 @@ const jwtAuth = require('./jwt');
  * * 注册路由
  */
 const router = express.Router();
-
-/**
- * * jwt验证
- */
-router.use(jwtAuth);
 /**
  * * 后台主页面
  */
@@ -29,6 +24,10 @@ router.use('/user', userRouter);
 router.use((req, res, next) => {
   next(boom.notFound('接口不存在'));
 })
+/**
+ * * jwt验证(先进行接口验证 在进行token验证)
+ */
+router.use(jwtAuth);
 /**
  * * 不能只抛出异常,要用异常处理中间件处理异常
  */

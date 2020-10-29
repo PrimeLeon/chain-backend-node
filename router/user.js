@@ -52,13 +52,15 @@ router.post('/login', [
 })
 
 router.get('/info', (req, res, next) => {
+  /**
+   * * 解析token
+   */
   const jwtDecodeRes = decodeJwt(req);
   if (jwtDecodeRes && jwtDecodeRes.username) {
     findUserByUsername(jwtDecodeRes.username).then(user => {
       if (user) {
         /**
-         * / TODO: 无法添加role数组到user属性上
-         * !! 无法添加role数组到user属性上
+         * * 此处为RowDataPacket : [Array:object] 长度为1
          */
         user[0].roles = [user[0].role]
         new Result(user, '用户信息查询成功').success(res);
@@ -67,7 +69,7 @@ router.get('/info', (req, res, next) => {
       }
     })
   } else {
-    new Result(user, '用户信息查询失败').fail(res);
+    new Result('用户信息查询失败').fail(res);
   }
 })
 
