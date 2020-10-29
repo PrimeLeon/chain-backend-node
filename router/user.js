@@ -60,10 +60,10 @@ router.get('/info', (req, res, next) => {
          * / TODO: 无法添加role数组到user属性上
          * !! 无法添加role数组到user属性上
          */
-        user.roles = ['admin']
-        new Result(obj, '用户信息查询成功').success(res);
+        user[0].roles = [user[0].role]
+        new Result(user, '用户信息查询成功').success(res);
       } else {
-        new Result(obj, '用户信息查询失败').fail(res);
+        new Result(user, '用户信息查询失败').fail(res);
       }
     })
   } else {
