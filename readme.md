@@ -42,10 +42,10 @@ localhost:5000/index.html
 
 #### 接口
 
-|   接口地址   | http://localhost:5000/user/login |
-| :----------: | -------------------------------- |
-| **请求方式** | HTTP / POST                      |
-|   **简介**   | 用户登录                         |
+|   接口地址   | /user/login |
+| :----------: | ----------- |
+| **请求方式** | HTTP / POST |
+|   **简介**   | 用户登录    |
 
 * **请求示例**
 
@@ -72,16 +72,16 @@ localhost:5000/index.html
   }
   ```
 
-|   接口地址   | http://localhost:5000/user/info |
-| :----------: | ------------------------------- |
-| **请求方式** | HTTP / POST                     |
-|   **简介**   | 获取用户信息                    |
+|   接口地址   | /user/info   |
+| :----------: | ------------ |
+| **请求方式** | HTTP / POST  |
+|   **简介**   | 获取用户信息 |
 
 * **请求示例**
 
   ```json
   // 仅在请求头部包含以下字段
-  Authorization ： Bearer *Token*
+  Authorization ： Bearer <Token>
   ```
 
 * **返回值示例**
@@ -90,19 +90,17 @@ localhost:5000/index.html
   {
       "code": 0,
       "msg": "用户信息查询成功",
-      "data": [
-          {
-              "id": 2,
-              "username": "user",
-              "password": "db01125b62262f49f4ba06841af01b68",
-              "nickname": "usernickname",
-              "role": "user",
-              "address": "8e00fc431376061563a4b719cb5eed0a",
-              "private_key": "8e00fc431376061563a4b719cb5eed0a",
-              "roles": [
-                  "user"
-              ]
-          }
-      ]
+      "data": {
+          "id": 2,
+          "username": "user",
+          "password": "db01125b62262f49f4ba06841af01b68",
+          "nickname": "usernickname",
+          "role": "user",
+          "address": "8e00fc431376061563a4b719cb5eed0a",
+          "private_key": "8e00fc431376061563a4b719cb5eed0a",
+          "roles": [
+              "user"
+          ]
+      }
   }
   ```
