@@ -56,8 +56,8 @@ localhost:5000/index.html
       "password": "userpsd"
   }
   //urlencoded格式
-  username = "user"
-  password = "userpsd"
+  username : "user"
+  password : "userpsd"
   ```
 
 * **返回值示例**
@@ -72,8 +72,37 @@ localhost:5000/index.html
   }
   ```
 
-  
-
 |   接口地址   | http://localhost:5000/user/info |
 | :----------: | ------------------------------- |
 | **请求方式** | HTTP / POST                     |
+|   **简介**   | 获取用户信息                    |
+
+* **请求示例**
+
+  ```json
+  // 仅在请求头部包含以下字段
+  Authorization ： Bearer *Token*
+  ```
+
+* **返回值示例**
+
+  ```json
+  {
+      "code": 0,
+      "msg": "用户信息查询成功",
+      "data": [
+          {
+              "id": 2,
+              "username": "user",
+              "password": "db01125b62262f49f4ba06841af01b68",
+              "nickname": "usernickname",
+              "role": "user",
+              "address": "8e00fc431376061563a4b719cb5eed0a",
+              "private_key": "8e00fc431376061563a4b719cb5eed0a",
+              "roles": [
+                  "user"
+              ]
+          }
+      ]
+  }
+  ```
