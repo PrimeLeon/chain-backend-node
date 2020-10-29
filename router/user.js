@@ -34,7 +34,7 @@ router.post('/login', [
     /**
      * * 查询用户是否存在
      */
-    let user = { username, password } = req.body;
+    let { username, password } = req.body;
     password = md5(`${password}${PWD_SALT}`);
     login(username, password).then(user => {
       if (!user || user.length === 0) {
@@ -43,7 +43,7 @@ router.post('/login', [
         /**
          * * 注册token
          */
-        const token = jwt.sign({ username },
+        const token = jwt.sign({ user },
           PRIVATE_KEY, { expiresIn: JWT_EXPIRED });
         new Result({ token }, '登录成功').success(res);
       }
@@ -55,9 +55,10 @@ router.get('/info', (req, res, next) => {
   /**
    * * 解析token
    */
-  const jwtDecodeRes = decodeJwt(req);
-  if (jwtDecodeRes && jwtDecodeRes.username) {
-    findUserByUsername(jwtDecodeRes.username).then(user => {
+  let userInfoFromToken = decodeJwt(req);
+  userInfoFromToken = userInfoFromToken.user;
+  if (userInfoFromToken && userInfoFromToken.username) {
+    findUserByUsername(userInfoFromToken.username).then(user => {
       if (user) {
         /**
          * * 此处为RowDataPacket : [Array:object] 长度为1
@@ -72,5 +73,21 @@ router.get('/info', (req, res, next) => {
     new Result('用户信息查询失败').fail(res);
   }
 })
+
+router.get('/balance', (req, res, next) => {
+  /**
+   * * 解析token
+   */
+  res.send('{router/user.js line 84}Todo...');
+  // let userInfoFromToken = decodeJwt(req);
+  // userInfoFromToken = userInfoFromToken.user;
+  // if (userInfoFromToken && userInfoFromToken.address) {
+
+  // } else {
+  //   new Result('余额查询失败').jwtError(res);
+  // }
+})
+
+console.log(md5(`testuserpsd${PWD_SALT}`));
 
 module.exports = router
