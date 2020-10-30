@@ -17,6 +17,8 @@ module.exports = jwt({
    * * jwt白名单
    */
   path: [
-    '/user/login'
+    '/user/login',
+    '/admin/login',
+    '/admin'
   ]
 });

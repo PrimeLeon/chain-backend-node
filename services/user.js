@@ -7,10 +7,11 @@ const { axiosChain } = require('../chainAPI/index');
  */
 function login(username, password) {
   return queryOne(`
-    SELECT id,username,password,nickname,role,address,private_key,balance,isBlack,isDelete
+    SELECT id,username,password,nickname,role,address,private_key,balance
     FROM user 
     WHERE username='${username}' 
-    AND password='${password}'`);
+    AND password='${password}'
+    AND isActivate=1`);
 }
 
 /**
@@ -19,17 +20,20 @@ function login(username, password) {
  */
 function findUserByUsername(username) {
   return queryOne(`
-  SELECT id,username,password,nickname,role,address,private_key,balance,isBlack,isDelete
+  SELECT id,username,password,nickname,role,address,private_key,balance
   FROM user 
   WHERE username='${username}'`);
 }
 
-// function getUserBlanceByAddress(address) {
-//   let method = 'getAccountBalance';
-//   return axiosChain(method, [address]);
-// }
+function updateBalanceByUsername(username, balance){
+  return queryOne(`
+  UPDATE user 
+  SET balance=${balance}
+  WHERE username='${username}'`);
+}
 
 module.exports = {
   login,
-  findUserByUsername
+  findUserByUsername,
+  updateBalanceByUsername
 }

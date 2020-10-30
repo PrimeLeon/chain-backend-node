@@ -3,6 +3,7 @@ const boom = require('boom');
 
 const Result = require('../models/Result');
 const userRouter = require('./user');
+const adminRouter = require('./admin');
 const jwtAuth = require('./jwt');
 /**
  * * 注册路由
@@ -23,6 +24,7 @@ router.get('/', (req, res) => {
  * * 引用userRouter
  */
 router.use('/user', userRouter);
+router.use('/admin', adminRouter);
 /**
  * * 使用中间件抛出接口不存在异常
  */

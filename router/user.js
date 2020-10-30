@@ -13,9 +13,10 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 
 const Result = require('../models/Result');
-const { login, findUserByUsername } = require('../services/user');
+const { login, findUserByUsername, updateBalanceByUsername } = require('../services/user');
 const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
+const { axiosChainAPI } = require('../chainAPI/index');
 
 const router = express.Router();
 
@@ -78,16 +79,45 @@ router.get('/balance', (req, res, next) => {
   /**
    * * 解析token
    */
-  res.send('{router/user.js line 84}Todo...');
-  // let userInfoFromToken = decodeJwt(req);
-  // userInfoFromToken = userInfoFromToken.user;
-  // if (userInfoFromToken && userInfoFromToken.address) {
+  let userInfoFromToken = decodeJwt(req);
+  let user = userInfoFromToken.user;
 
-  // } else {
-  //   new Result('余额查询失败').jwtError(res);
-  // }
+  if (user && user.address) {
+    axiosChainAPI(
+        'getAccountBalance',
+        [user.address])
+      .then(async response => {
+        // console.log(response)
+        let chainAPIResult = response.data;
+        if (chainAPIResult.message == 'success') {
+          /**
+           * * 更新余额
+           */
+          user.balance = chainAPIResult.data.result;
+          await updateBalanceByUsername(user.username, user.balance);
+          new Result(user, "用户余额查询成功").success(res);
+        } else {
+          new Result('余额查询失败').fail(res);
+        }
+      })
+  } else {
+    new Result('余额查询失败').jwtError(res);
+  }
 })
 
-console.log(md5(`testuserpsd${PWD_SALT}`));
+router.post('/transfer', (req, res, next) => {
+  /**
+   * * 解析token
+   */
+  let userInfoFromToken = decodeJwt(req);
+  userInfoFromToken = userInfoFromToken.user;
+  if (userInfoFromToken && userInfoFromToken.address) {
+    res.send(userInfoFromToken);
+  } else {
+    new Result('余额查询失败').jwtError(res);
+  }
+})
 
 module.exports = router
+
+// console.log(md5(`testadminpsd${PWD_SALT}`));
