@@ -26,8 +26,22 @@ function findAdminByUsername(username) {
   WHERE username='${username}'`);
 }
 
+/**
+ * @brief 获取所有用户
+ * @param {string} username 用户名
+ */
+function findUserOrderByRegisterTimeWithPage(page) {
+  let itemsPerPage = 2;
+  return querySql(`
+  SELECT * 
+  FROM user 
+  ORDER BY create_time DESC 
+  LIMIT ${(page-1) * itemsPerPage},${page * itemsPerPage}`);
+}
+
 
 module.exports = {
   login,
-  findAdminByUsername
+  findAdminByUsername,
+  findUserOrderByRegisterTimeWithPage
 }

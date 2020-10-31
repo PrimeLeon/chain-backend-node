@@ -52,6 +52,39 @@ router.post('/login', [
   }
 })
 
+router.post('/register', [
+  body('username').isString().withMessage('用户名必须为字符'),
+  body('password').isString().withMessage('密码必须为字符'),
+  body('private_key').isString().withMessage('密钥必须为字符'),
+  body('paycode').isString().withMessage('支付密码必须为数字')
+], (req, res, next) => {
+  /**
+   * * 使用express-validator模块处理输入异常
+   */
+  const err = validationResult(req);
+  if (!err.isEmpty()) {
+    const [{ msg }] = err.errors;
+    next(boom.badRequest(msg));
+  } else {
+    /**
+     * * 查询用户是否存在
+     */
+    // let { username, password } = req.body;
+    // login(username, password).then(user => {
+    //   if (!user || user.length === 0) {
+    //     new Result('登录失败').fail(res);
+    //   } else {
+        /**
+         * * 注册token
+         */
+    //     const token = jwt.sign({ user },
+    //       PRIVATE_KEY, { expiresIn: JWT_EXPIRED });
+    //     new Result({ token }, '登录成功').success(res);
+    //   }
+    // })
+  }
+})
+
 router.get('/info', (req, res, next) => {
   /**
    * * 解析token

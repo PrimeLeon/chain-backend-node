@@ -10,10 +10,10 @@ const jwt = require('jsonwebtoken');
 /**
  * * 处理输入异常
  */
-const { body, validationResult } = require('express-validator');
+const { param, body, validationResult } = require('express-validator');
 
 const Result = require('../models/Result');
-const { login, findAdminByUsername } = require('../services/admin');
+const { login, findAdminByUsername, findUserOrderByRegisterTimeWithPage } = require('../services/admin');
 const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 const { axiosChainAPI } = require('../chainAPI/index');
@@ -70,6 +70,7 @@ router.get('/info', (req, res, next) => {
    */
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
+
   if (admin && admin.username) {
     findAdminByUsername(admin.username).then(admin => {
       if (admin) {
@@ -80,6 +81,32 @@ router.get('/info', (req, res, next) => {
     })
   } else {
     new Result('管理员信息查询失败').fail(res);
+  }
+})
+
+
+/**
+ * * 获取指定页数用户
+ */
+router.get('/user/:page', [
+  param('page').isNumeric().withMessage('页码必须为数字')
+], (req, res, next) => {
+  /**
+   * * 使用express-validator模块处理输入异常
+   */
+  const err = validationResult(req);
+  if (!err.isEmpty()) {
+    const [{ msg }] = err.errors;
+    next(boom.badRequest(msg));
+  } else {
+    let { page } = req.params;
+    findUserOrderByRegisterTimeWithPage(page).then(users => {
+      if (users) {
+        new Result(users, '用户信息查询成功').success(res);
+      } else {
+        new Result(users, '用户信息查询失败').fail(res);
+      }
+    })
   }
 })
 
