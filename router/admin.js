@@ -179,5 +179,11 @@ router.post('/integralInit', [
   }
 })
 
+/**
+ * * 新建普通用户
+ */
+router.post('/newAccount', (req, res, next) => {
+    
+}) 
 
 module.exports = router

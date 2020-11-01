@@ -13,7 +13,7 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 
 const Result = require('../models/Result');
-const { login, findUserByUsername, updateBalanceByUsername } = require('../services/user');
+const { login, register, findUserByUsername, updateBalanceByUsername } = require('../services/user');
 const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 const { axiosChainAPI } = require('../chainAPI/index');
@@ -54,9 +54,7 @@ router.post('/login', [
 
 router.post('/register', [
   body('username').isString().withMessage('用户名必须为字符'),
-  body('password').isString().withMessage('密码必须为字符'),
-  body('private_key').isString().withMessage('密钥必须为字符'),
-  body('paycode').isString().withMessage('支付密码必须为数字')
+  body('password').isString().withMessage('密码必须为字符')
 ], (req, res, next) => {
   /**
    * * 使用express-validator模块处理输入异常
@@ -69,19 +67,21 @@ router.post('/register', [
     /**
      * * 查询用户是否存在
      */
-    // let { username, password } = req.body;
-    // login(username, password).then(user => {
-    //   if (!user || user.length === 0) {
-    //     new Result('登录失败').fail(res);
-    //   } else {
-        /**
-         * * 注册token
-         */
-    //     const token = jwt.sign({ user },
-    //       PRIVATE_KEY, { expiresIn: JWT_EXPIRED });
-    //     new Result({ token }, '登录成功').success(res);
-    //   }
-    // })
+    let { username, password } = req.body;
+    password = md5(`${password}${PWD_SALT}`);
+    findUserByUsername(username).then(user => {
+      if (!user || user.length === 0) {
+        register(username, password).then(result => {
+          if (result.affectedRows === 1) {
+            new Result('申请注册成功').success(res);
+          } else {
+            new Result('申请注册失败').fail(res);
+          }
+        })
+      }else {
+        new Result('用户名已存在').fail(res);
+      }
+    })
   }
 })
 
