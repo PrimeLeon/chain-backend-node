@@ -62,6 +62,7 @@ localhost:5000/index.html
 
 * 用户
   * [登录](#user_login)
+  * [用户申请注册](#user_register)
   * [获取用户信息](#user_info)
   * [获取用户余额](#user_balance)
 * 管理员
@@ -107,6 +108,36 @@ localhost:5000/index.html
   {
       "code": -1,
       "msg": "登录失败"
+  }
+  ```
+|     名称     | <a id="user_register">用户申请注册</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/register                                               |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 用户申请注册                                                 |
+
+* **请求示例**
+
+  ```json
+  //json格式
+  {
+      "username": "testuser",
+      "password": "testuserpsd"
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "申请注册成功"
+  }
+  // 失败
+  {
+      "code": -1,
+      "msg": "用户名已存在"
   }
   ```
 
