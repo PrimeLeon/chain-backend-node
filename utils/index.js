@@ -30,8 +30,8 @@ function getRSAKey() {
   const publicDer = key.exportKey("pkcs1-public-pem");
   const privateDer = key.exportKey("pkcs1-private-pem");
   
-  console.log("公钥:", publicDer);
-  console.log("私钥:", privateDer);
+  // console.log("公钥:", publicDer);
+  // console.log("私钥:", privateDer);
   return {
     address: publicDer,
     private_key: privateDer

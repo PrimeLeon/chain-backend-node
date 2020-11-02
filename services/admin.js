@@ -25,6 +25,18 @@ function findAdminByUsername(username) {
   FROM admin 
   WHERE username='${username}'`);
 }
+
+/**
+ * @brief 根据用户名查找用户信息
+ * @param {string} username 用户名
+ */
+function findUserByUsername(username) {
+  return queryOne(`
+  SELECT id,username,password,nickname,role,address,private_key,balance
+  FROM user 
+  WHERE username='${username}'`);
+}
+
 /**
  * @brief 根据页码获取用户
  * @param {string} username 用户名
@@ -62,6 +74,7 @@ module.exports = {
   login,
   findAdminByUsername,
   findUserOrderByRegisterTimeWithPage,
+  findUserByUsername,
   findUserByUsernameForUserGoOnChain,
   activateUser
 }

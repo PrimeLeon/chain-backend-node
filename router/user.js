@@ -117,7 +117,8 @@ router.get('/balance', (req, res, next) => {
   if (user && user.address) {
     axiosChainAPI(
         'getAccountBalance',
-        [user.address])
+        [user.address],
+        'query')
       .then(async response => {
         let chainAPIResult = response.data;
         if (chainAPIResult.message == 'success') {
