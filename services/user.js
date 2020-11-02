@@ -1,5 +1,6 @@
 const { querySql, queryOne, queryZero } = require('../db/index');
 const { axiosChain } = require('../chainAPI/index');
+const { getRSAKey } = require('../utils/index');
 const moment = require('moment');
 /**
  * @brief 根据用户名密码查找是否有匹配结果
@@ -17,9 +18,8 @@ function login(username, password) {
 
 function register(username, password) {
   const nickname = username;
-  // TODO:
-  const address = 'testuseraddress';
-  const private_key = 'testuserprivatekey';
+  const RSAKey = getRSAKey();
+  const { address, private_key } = RSAKey;
   const currentDate = new Date();
   const create_time = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
   const delete_time = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
