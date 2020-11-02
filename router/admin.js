@@ -21,7 +21,8 @@ const {
   login,
   findAdminByUsername,
   findUserOrderByRegisterTimeWithPage,
-  findUserByUsernameForUserGoOnChain
+  findUserByUsernameForUserGoOnChain,
+  activateUser
 } = require('../services/admin');
 
 const { md5, decodeJwt } = require('../utils/index');
@@ -109,7 +110,12 @@ router.get('/user/:page', [
     const [{ msg }] = err.errors;
     next(boom.badRequest(msg));
   } else {
-    let { page } = req.params;
+    /**
+     * ? 通过validator中间件解决?
+     * * 处理非法页码 (小于等于0的页码)
+     */
+    let page = (req.params.page > 0) ? req.params.page : 1;
+    console.log(page)
     findUserOrderByRegisterTimeWithPage(page).then(users => {
       if (users) {
         new Result(users, '用户信息查询成功').success(res);
@@ -208,12 +214,12 @@ router.post('/newAccount', [
         axiosChainAPI(
             "newAccount",
             [`${admin.private_key}`, JSON.stringify(user)])
-          .then(response => {
+          .then(async response => {
             let chainAPIResult = response.data;
             // console.log(chainAPIResult)
             if (chainAPIResult.message === 'success') {
               if (chainAPIResult.data.result === 'success') {
-                
+                await activateUser(username);
                 new Result('用户添加上链').success(res);
               } else {
                 new Result('用户添加上链失败').fail(res);
@@ -223,7 +229,7 @@ router.post('/newAccount', [
             }
           })
       } else {
-        new Result('用户不存在').fail(res);
+        new Result('用户不存在或已经上链').fail(res);
       }
     })
 })

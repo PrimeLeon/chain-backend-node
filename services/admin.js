@@ -26,7 +26,7 @@ function findAdminByUsername(username) {
   WHERE username='${username}'`);
 }
 /**
- * @brief 获取所有用户
+ * @brief 根据页码获取用户
  * @param {string} username 用户名
  */
 function findUserOrderByRegisterTimeWithPage(page) {
@@ -35,7 +35,7 @@ function findUserOrderByRegisterTimeWithPage(page) {
   SELECT * 
   FROM user 
   ORDER BY create_time DESC 
-  LIMIT ${(page-1) * itemsPerPage},${page * itemsPerPage}`);
+  LIMIT ${itemsPerPage} OFFSET ${(page-1) * itemsPerPage}`);
 }
 
 /**
@@ -47,13 +47,21 @@ function findUserByUsernameForUserGoOnChain(username) {
   return queryOne(`
   SELECT address,id as ID,balance,password,private_key as privateKey
   FROM user 
-  WHERE username='${username}'`);
+  WHERE username='${username}'
+  AND isActivate=0`);
 } 
 
+function activateUser(username){
+  return queryOne(`
+  UPDATE user
+  SET isActivate=1
+  WHERE username='${username}'`)
+}
 
 module.exports = {
   login,
   findAdminByUsername,
   findUserOrderByRegisterTimeWithPage,
-  findUserByUsernameForUserGoOnChain
+  findUserByUsernameForUserGoOnChain,
+  activateUser
 }
