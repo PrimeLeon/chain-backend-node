@@ -1,4 +1,4 @@
-const { querySql, queryOne, queryZero } = require('../db/index');
+const { querySql, queryOne, queryZero, transaction } = require('../db/index');
 const { axiosChain } = require('../chainAPI/index');
 const { getRSAKey } = require('../utils/index');
 const moment = require('moment');
@@ -11,8 +11,8 @@ function login(username, password) {
   return queryOne(`
     SELECT id,username,password,nickname,role,address,private_key,balance
     FROM user 
-    WHERE username='${username}' 
-    AND password='${password}'
+    WHERE username = '${username}' 
+    AND password = '${password}'
     AND isActivate=1`);
 }
 
@@ -40,24 +40,54 @@ function findUserByUsername(username) {
   return queryOne(`
   SELECT id,username,password,nickname,role,address,private_key,balance
   FROM user 
-  WHERE username='${username}'`);
+  WHERE username = '${username}'
+  AND isActivate = 1`);
 }
-
 /**
- * @brief 根据用户名查找用户信息
+ * @brief 根据用户名更新余额
  * @param {string} username 用户名
  * @param {number} balance 余额
  */
 function updateBalanceByUsername(username, balance) {
   return queryOne(`
   UPDATE user 
-  SET balance=${balance}
-  WHERE username='${username}'`);
+  SET balance = ${balance}
+  WHERE username = '${username}'`);
+}
+
+/**
+ * @brief 转账功能
+ * @param {string} fromuser 转账人
+ * @param {string} touser 收款人
+ * @param {number} balance 转账金额
+ */
+function findAddressOfTransferUsers(fromuser, touser) {
+  return querySql(`
+    SELECT username,address
+    FROM user
+    WHERE username = '${fromuser}' OR username = '${touser}'
+  `)
+}
+
+/**
+ * @brief 转账功能
+ * @param {string} fromuser 转账人
+ * @param {string} touser 收款人
+ * @param {number} balance 转账金额
+ */
+function transfer(fromuser, touser, balance) {
+  const sqlArr = [
+    `UPDATE user SET balance = balance - ${balance} WHERE username = '${fromuser}'`,
+    `UPDATE user SET balance = balance + ${balance} WHERE username = '${touser}'`
+  ]
+  return transaction(sqlArr)
 }
 
 module.exports = {
   login,
   register,
   findUserByUsername,
-  updateBalanceByUsername
+  updateBalanceByUsername,
+  findAddressOfTransferUsers,
+  transfer
 }

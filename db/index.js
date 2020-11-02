@@ -61,8 +61,31 @@ function queryZero(sql) {
   })
 }
 
+async function transaction(sqlArr) {
+  const conn = connect();
+  await conn.beginTransaction()
+  debug && console.log(sqlArr);
+  return new Promise(async (resolve, reject) => {
+    try {
+      for (let i = 0; i < sqlArr.length; i++) {
+        const sql = sqlArr[i];
+        await conn.query(sql)
+      }
+      await conn.commit(() => {
+        resolve('success');
+      });
+    } catch (err) {
+      await conn.rollback();
+      reject(err);
+    } finally {
+      conn.end();
+    }
+  })
+}
+
 module.exports = {
   querySql,
   queryOne,
-  queryZero
+  queryZero,
+  transaction
 }

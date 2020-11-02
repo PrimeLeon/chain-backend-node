@@ -140,18 +140,18 @@ router.post('/ownerInit', (req, res, next) => {
       "ownerInit",
       [`${admin.private_key}`],
       'invoke')
-    .then(response => {
-      let chainAPIResult = response.data;
-      if (chainAPIResult.message === 'success') {
-        if (chainAPIResult.data.txId) {
-          new Result('管理员初始化成功').success(res);
-        } else {
-          new Result('管理员初始化失败').fail(res);
-        }
+  .then(response => {
+    let chainAPIResult = response.data;
+    if (chainAPIResult.message === 'success') {
+      if (chainAPIResult.data.txId) {
+        new Result('管理员初始化成功').success(res);
       } else {
-        new Result('函数调用失败').chainError(res);
+        new Result('管理员初始化失败').fail(res);
       }
-    })
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
 })
 
 /**
@@ -174,7 +174,6 @@ router.post('/integralInit', [
     let adminInfoFromToken = decodeJwt(req);
     admin = adminInfoFromToken.admin;
     let { bpr, mf } = req.body;
-
     /**
      * * ['管理员私钥:string', 'bpr基准利率:number', 'mf最大利息金额:number']
      */
@@ -182,19 +181,19 @@ router.post('/integralInit', [
         "integralInit",
         [`${admin.private_key}`, bpr, mf],
         'invoke')
-      .then(response => {
-        let chainAPIResult = response.data;
-        // console.log(chainAPIResult)
-        if (chainAPIResult.message === 'success') {
-          if (chainAPIResult.data.txId) {
-            new Result('积分系统初始化成功').success(res);
-          } else {
-            new Result('积分系统初始化失败').fail(res);
-          }
+    .then(response => {
+      let chainAPIResult = response.data;
+      // console.log(chainAPIResult)
+      if (chainAPIResult.message === 'success') {
+        if (chainAPIResult.data.txId) {
+          new Result('积分系统初始化成功').success(res);
         } else {
-          new Result('函数调用失败').chainError(res);
+          new Result('积分系统初始化失败').fail(res);
         }
-      })
+      } else {
+        new Result('函数调用失败').chainError(res);
+      }
+    })
   }
 })
 
@@ -211,30 +210,30 @@ router.post('/newAccount', [
    * * ['管理员私钥:string', '用户信息字符串:string']
    */
   findUserByUsernameForUserGoOnChain(username)
-    .then(user => {
-      if (user) {
-        axiosChainAPI(
-            "newAccount",
-            [`${admin.private_key}`, JSON.stringify(user)],
-            'invoke')
-          .then(async response => {
-            let chainAPIResult = response.data;
-            // console.log(chainAPIResult)
-            if (chainAPIResult.message === 'success') {
-              if (chainAPIResult.data.txId) {
-                await activateUser(username);
-                new Result('用户上链成功').success(res);
-              } else {
-                new Result('用户上链失败').fail(res);
-              }
-            } else {
-              new Result('函数执行失败').chainError(res);
-            }
-          })
-      } else {
-        new Result('用户不存在或已经上链').fail(res);
-      }
-    })
+  .then(user => {
+    if (user) {
+      axiosChainAPI(
+          "newAccount",
+          [`${admin.private_key}`, JSON.stringify(user)],
+          'invoke')
+      .then(async response => {
+        let chainAPIResult = response.data;
+        // console.log(chainAPIResult)
+        if (chainAPIResult.message === 'success') {
+          if (chainAPIResult.data.txId) {
+            await activateUser(username);
+            new Result('用户上链成功').success(res);
+          } else {
+            new Result('用户上链失败').fail(res);
+          }
+        } else {
+          new Result('函数执行失败').chainError(res);
+        }
+      })
+    } else {
+      new Result('用户不存在或已经上链').fail(res);
+    }
+  })
 })
 
 /**
@@ -245,20 +244,20 @@ router.get('/getOwnerBalacne', (req, res, next) => {
       'getOwnerBalacne',
       [],
       'query')
-    .then(response => {
-      let chainAPIResult = response.data;
-      console.log(chainAPIResult)
-      if (chainAPIResult.message === 'success') {
-        if (chainAPIResult.data.result) {
-          let balanceData = { balance: chainAPIResult.data.result };
-          new Result(balanceData, '积分系统余额查询成功').success(res);
-        } else {
-          new Result('积分系统余额查询失败').fail(res);
-        }
+  .then(response => {
+    let chainAPIResult = response.data;
+    console.log(chainAPIResult)
+    if (chainAPIResult.message === 'success') {
+      if (chainAPIResult.data.result) {
+        let balanceData = { balance: chainAPIResult.data.result };
+        new Result(balanceData, '积分系统余额查询成功').success(res);
       } else {
-        new Result('函数执行失败').chainError(res);
+        new Result('积分系统余额查询失败').fail(res);
       }
-    })
+    } else {
+      new Result('函数执行失败').chainError(res);
+    }
+  })
 })
 
 
@@ -273,30 +272,32 @@ router.post('/issue', (req, res, next) => {
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
   findUserByUsername(username)
-    .then(user => {
-      if (user) {
-        axiosChainAPI(
-            'issue',
-            [`${admin.private_key}`, `${user.address}`, balance],
-            'invoke')
-          .then(response => {
-            let chainAPIResult = response.data;
-            console.log(chainAPIResult)
-            if (chainAPIResult.message === 'success') {
-              if (chainAPIResult.data.txId) {
-                new Result('发行积分成功').success(res);
-              } else {
-                new Result('发行积分失败').fail(res);
-              }
-            } else {
-              new Result('函数执行失败').chainError(res);
-            }
-          })
-      } else {
-        new Result('用户不存在').fail(res);
-      }
-    })
+  .then(user => {
+    if (user) {
+      axiosChainAPI(
+          'issue',
+          [`${admin.private_key}`, `${user.address}`, balance],
+          'invoke')
+      .then(response => {
+        // console.log(user.address,balance);
+        let chainAPIResult = response.data;
+        // console.log(chainAPIResult)
+        if (chainAPIResult.message === 'success') {
+          if (chainAPIResult.data.txId) {
+            new Result('发行积分成功').success(res);
+          } else {
+            new Result('发行积分失败').fail(res);
+          }
+        } else {
+          new Result('函数执行失败').chainError(res);
+        }
+      })
+    } else {
+      new Result('用户不存在').fail(res);
+    }
+  })
 })
+
 
 
 
