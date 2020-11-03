@@ -66,18 +66,21 @@ localhost:5000/index.html
   * [获取用户信息](#user_info)
   * [获取用户余额](#user_balance)
   * [用户转账](#user_transfer)
+  * [获取用户是否在黑名单](#user_getAccountIsBlack)
 * 管理员
   * [登录](#admin_login)
   * [获取管理员信息](#admin_info)
   * [管理员初始化](#admin_ownerInit)
-  * [积分系统初始化](#admin_integralInit)
-  * [暂停 / 恢复 积分系统](#admin_pausable)
-  * [积分系统余额查询](#admin_getOwnerBalacne)
+  * **积分系统控制**
+    * [积分系统初始化](#admin_integralInit)
+    * [暂停 / 恢复 积分系统](#admin_pausable)
+    * [积分系统余额查询](#admin_getOwnerBalacne)
+    * [获取当前系统利息总积分](#admin_getSumFee)
+    * [获取当前系统暂停状态](#admin_getPausable)
   * [按页码查询用户](#admin_user_page)
   * [添加用户上链](#admin_newAccount)
+  * [从黑名单移除 / 添加用户](#admin_addBlackList)
   * [给用户发行积分](#admin_issue)
-  * [获取当前系统利息总积分](#admin_getSumFee)
-  * [获取当前系统暂停状态](#admin_getPausable)
 
 ## 用户API
 
@@ -226,6 +229,32 @@ localhost:5000/index.html
   ```json
   // 请求头部包含以下字段
   Authorization ： Bearer <Token>
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "状态查询成功",
+      "data": {
+          "result": "false"
+      }
+  }
+  ```
+
+|     名称     | <a id="user_getAccountIsBlack">获取用户黑名单状态</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/getAccountIsBlack                                                |
+| **请求方式** | HTTP / GET                                                   |
+|   **简介**   | 获取用户黑名单状态                                                 |
+
+* **请求示例**
+
+  ```json
+  // 请求头部包含以下字段
+  Authorization ： Bearer <Token>
   {
       "touser": "testuser4",
       "balance": 10
@@ -246,6 +275,7 @@ localhost:5000/index.html
       "msg": "转账失败"
   }
   ```
+
 
 
 ## 管理员API
@@ -595,5 +625,33 @@ localhost:5000/index.html
   {
       "code": -1,
       "msg": "积分系统状态已改变"
+  }
+  ```
+
+|     名称     | <a id="admin_addBlackList">从黑名单添加 / 移除用户 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/addBlackList                                           |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 从黑名单添加 / 移除用户                                         |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "username": "testuser4",
+      "isBlack": false
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "用户黑名单状态改变成功"
   }
   ```
