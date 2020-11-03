@@ -25,9 +25,13 @@ const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 const { axiosChainAPI } = require('../chainAPI/index');
 const user = require('../services/user');
+const { response } = require('express');
 
 const router = express.Router();
 
+/**
+ * * 用户登录
+ */
 router.post('/login', [
   body('username').isString().withMessage('用户名必须为字符'),
   body('password').isString().withMessage('密码必须为字符')
@@ -60,6 +64,9 @@ router.post('/login', [
   }
 })
 
+/**
+ * * 用户注册
+ */
 router.post('/register', [
   body('username').isString().withMessage('用户名必须为字符'),
   body('password').isString().withMessage('密码必须为字符')
@@ -93,6 +100,9 @@ router.post('/register', [
   }
 })
 
+/**
+ * * 获取用户信息
+ */
 router.get('/info', (req, res, next) => {
   /**
    * * 解析token
@@ -129,6 +139,42 @@ router.get('/info', (req, res, next) => {
   }
 })
 
+/**
+ * * 获取用户信息
+ */
+router.get('/getAccountIsBlack', (req, res, next) => {
+  /**
+   * * 解析token
+   */
+  let userInfoFromToken = decodeJwt(req);
+  let user = userInfoFromToken.user;
+  if (user && user.address) {
+    axiosChainAPI(
+        'getAccountIsBlack',
+        [`${user.address}`],
+        'query')
+    .then(response => {
+      let chainAPIResult = response.data;
+      console.log(chainAPIResult)
+      if (chainAPIResult.message === 'success') {
+        if (chainAPIResult.data.result) {
+          new Result(chainAPIResult.data, "状态查询成功").success(res);
+        } else {
+          new Result("状态查询失败").fail(res);
+        }
+      } else {
+        new Result("函数调用失败").chainError(res);
+      }
+    })
+  } else {
+    new Result('用户信息查询失败').fail(res);
+  }
+})
+
+
+/**
+ * * 获取用户余额
+ */
 router.get('/balance', (req, res, next) => {
   /**
    * * 解析token
@@ -144,7 +190,7 @@ router.get('/balance', (req, res, next) => {
     .then(async response => {
       let chainAPIResult = response.data;
       console.log(chainAPIResult)
-      if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.message === 'success') {
         /**
          * * 更新余额
          */
@@ -204,6 +250,10 @@ router.get('/balance', (req, res, next) => {
 //   }
 // })
 
+
+/**
+ * * 用户转账
+ */
 router.post('/transfer', [
   body('touser').isString().withMessage('密码必须为字符'),
   body('balance').isNumeric().withMessage('密码必须为字符')
