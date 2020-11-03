@@ -327,6 +327,37 @@ router.get('/getSumFee', (req, res, next) => {
 })
 
 /**
+ * * 暂停或者启动系统
+ */
+router.post('/pausable', (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+
+  let { pausable } = req.body;
+    /**
+   * * ['管理员私钥:string', '设置系统状态:bool']
+   */
+  axiosChainAPI(
+      'pausable',
+      [`${admin.private_key}`, pausable],
+      'invoke')
+  .then(response => {
+    let chainAPIResult = response.data;
+    console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.txId) {
+        new Result('积分系统状态已改变').success(res);
+      } else {
+        new Result('积分系统状态改变失败').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
+
+/**
  * * 获取当前系统状态
  */
 router.get('/getPausable', (req, res, next) => {

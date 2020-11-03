@@ -71,6 +71,7 @@ localhost:5000/index.html
   * [获取管理员信息](#admin_info)
   * [管理员初始化](#admin_ownerInit)
   * [积分系统初始化](#admin_integralInit)
+  * [暂停 / 恢复 积分系统](#admin_pausable)
   * [积分系统余额查询](#admin_getOwnerBalacne)
   * [按页码查询用户](#admin_user_page)
   * [添加用户上链](#admin_newAccount)
@@ -565,3 +566,34 @@ localhost:5000/index.html
   }
   ```
   
+|     名称     | <a id="admin_pausable">暂停 / 恢复 积分系统 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/pausable                                           |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 获取当前系统暂停状态                                         |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "pausable" : false
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "积分系统状态已改变"
+  }
+  // 失败
+  {
+      "code": -1,
+      "msg": "积分系统状态已改变"
+  }
+  ```
