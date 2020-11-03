@@ -267,12 +267,10 @@ localhost:5000/index.html
   // 成功
   {
       "code": 0,
-      "msg": "转账成功"
-  }
-  // 失败
-  {
-      "code": -1,
-      "msg": "转账失败"
+      "msg": "状态查询成功",
+      "data": {
+          "result": "false"
+      }
   }
   ```
 
@@ -447,10 +445,10 @@ localhost:5000/index.html
           {
               "id": 1,
               "username": "admin",
-              "password": "8e00fc431376061563a4b719cb5eed0a",
+              "password": "...",
               "nickname": "nickname",
               "role": "admin",
-              "address": "8e00fc431376061563a4b719cb5eed0a",
+              "address": "...",
               "private_key": "xwj123",
               "balance": 0,
               "create_time": "0000-00-00 00:00:00",
@@ -464,11 +462,11 @@ localhost:5000/index.html
           {
               "id": 2,
               "username": "user",
-              "password": "db01125b62262f49f4ba06841af01b68",
+              "password": "...",
               "nickname": "usernickname",
               "role": "user",
-              "address": "8e00fc431376061563a4b719cb5eed0a",
-              "private_key": "8e00fc431376061563a4b719cb5eed0a",
+              "address": "...",
+              "private_key": "...",
               "balance": 0,
               "create_time": "0000-00-00 00:00:00",
               "change_time": "0000-00-00 00:00:00",
@@ -591,16 +589,18 @@ localhost:5000/index.html
   // 成功
   {
       "code": 0,
-      "msg": "获取积分系统状态成功",
-      "data": "false"
+      "msg": "获取积分暂停状态成功",
+      "data": {
+          "result": "false"
+      }
   }
   ```
   
-|     名称     | <a id="admin_pausable">暂停 / 恢复 积分系统 </a>  [回到API目录](#API_LIST) |
+|     名称     | <a id="admin_pausable">暂停 / 恢复积分系统 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
-| **接口地址** | /admin/pausable                                           |
-| **请求方式** | HTTP / POST                                                   |
-|   **简介**   | 获取当前系统暂停状态                                         |
+| **接口地址** | /admin/pausable                                              |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 暂停 / 恢复积分系统                                          |
 
 * **请求示例**
 

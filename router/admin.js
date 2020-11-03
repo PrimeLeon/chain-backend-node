@@ -412,7 +412,7 @@ router.get('/getPausable', (req, res, next) => {
     // console.log(chainAPIResult)
     if (chainAPIResult.message == 'success') {
       if (chainAPIResult.data.result) {
-        new Result(chainAPIResult.data.result, '获取积分暂停状态成功').success(res);
+        new Result(chainAPIResult.data, '获取积分暂停状态成功').success(res);
       } else {
         new Result('获取积分暂停状态失败').fail(res);
       }
