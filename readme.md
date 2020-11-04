@@ -75,8 +75,12 @@ localhost:5000/index.html
     * [积分系统初始化](#admin_integralInit)
     * [暂停 / 恢复 积分系统](#admin_pausable)
     * [积分系统余额查询](#admin_getOwnerBalacne)
+    * [增加积分发行](#admin_addTotalSupply)
+    * [减少积分发行](#admin_subTotalSupply)
     * [获取当前系统利息总积分](#admin_getSumFee)
     * [获取当前系统暂停状态](#admin_getPausable)
+    * [设置积分利率](#admin_setBPR)
+    * [设置积分利率上限](#admin_setMF)
   * [按页码查询用户](#admin_user_page)
   * [添加用户上链](#admin_newAccount)
   * [从黑名单移除 / 添加用户](#admin_addBlackList)
@@ -304,6 +308,8 @@ localhost:5000/index.html
       "msg": "登录失败"
   }
   ```
+  
+  
 
 |     名称     | <a id="admin_info">获取管理员信息 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
@@ -358,6 +364,7 @@ localhost:5000/index.html
   }
   ```
   
+  
 |     名称     | <a id="admin_integralInit">积分系统初始化 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/integralInit                                          |
@@ -387,6 +394,7 @@ localhost:5000/index.html
   }
   ```
   
+  
 |     名称     | <a id="admin_getOwnerBalacne">积分系统余额查询 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/getOwnerBalacne                                       |
@@ -411,6 +419,8 @@ localhost:5000/index.html
       }
   }
   ```
+  
+  
 
 |     名称     | <a id="admin_user_page">根据页码查询用户</a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
@@ -451,58 +461,7 @@ localhost:5000/index.html
                   "isDelete": "false",
                   "isActivate": 1,
                   "paycode": null
-              },
-              {
-                  "id": 66,
-                  "username": "testuser3",
-                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
-                  "nickname": "testuser3",
-                  "role": "user",
-                  "address": "...",
-                  "private_key": "...",
-                  "balance": 0,
-                  "create_time": "2020-11-02T05:59:41.000Z",
-                  "change_time": "2020-11-02T05:59:41.000Z",
-                  "delete_time": "2020-11-02T05:59:41.000Z",
-                  "isBlack": "false",
-                  "isDelete": "false",
-                  "isActivate": 1,
-                  "paycode": null
-              },
-              {
-                  "id": 65,
-                  "username": "testuser2",
-                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
-                  "nickname": "testuser2",
-                  "role": "user",
-                  "address": "...",
-                  "private_key": "...",
-                  "balance": 0,
-                  "create_time": "2020-11-02T05:59:38.000Z",
-                  "change_time": "2020-11-02T05:59:38.000Z",
-                  "delete_time": "2020-11-02T05:59:38.000Z",
-                  "isBlack": "false",
-                  "isDelete": "false",
-                  "isActivate": 1,
-                  "paycode": null
-              },
-              {
-                  "id": 64,
-                  "username": "testuser1",
-                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
-                  "nickname": "testuser1",
-                  "role": "user",
-                  "address": "...",
-                  "private_key": "...",
-                  "balance": 0,
-                  "create_time": "2020-11-02T05:59:34.000Z",
-                  "change_time": "2020-11-02T05:59:34.000Z",
-                  "delete_time": "2020-11-02T05:59:34.000Z",
-                  "isBlack": "false",
-                  "isDelete": "false",
-                  "isActivate": 1,
-                  "paycode": null
-              }
+              },{},{}
           ]
       }
   }
@@ -513,6 +472,7 @@ localhost:5000/index.html
       "data": []
   }
   ```
+  
   
 |     名称     | <a id="admin_newAccount">添加用户上链 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
@@ -539,6 +499,7 @@ localhost:5000/index.html
       "msg": "用户上链成功"
   }
   ```
+  
   
 |     名称     | <a id="admin_issue">给用户发行积分 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
@@ -576,6 +537,8 @@ localhost:5000/index.html
       "msg": "发行积分失败"
   }
   ```
+  
+  
 |     名称     | <a id="admin_getSumFee">获取当前系统利息总积分 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/getSumFee                                                 |
@@ -602,6 +565,7 @@ localhost:5000/index.html
   }
   ```
   
+  
 |     名称     | <a id="admin_getPausable">获取当前系统暂停状态 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/getPausable                                           |
@@ -627,6 +591,7 @@ localhost:5000/index.html
       }
   }
   ```
+  
   
 |     名称     | <a id="admin_pausable">暂停 / 恢复积分系统 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
@@ -657,6 +622,8 @@ localhost:5000/index.html
       }
   }
   ```
+  
+  
 
 |     名称     | <a id="admin_addBlackList">从黑名单添加 / 移除用户 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
@@ -686,6 +653,124 @@ localhost:5000/index.html
       "data": {
           "user": "testuser4",
           "isBlack": false
+      }
+  }
+  ```
+  
+  
+|     名称     | <a id="admin_addTotalSupply">增加积分发行 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/addTotalSupply                                           |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 增加积分发行                                         |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "balance": 100
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "积分发行成功"
+  }
+  ```
+  
+  
+|     名称     | <a id="admin_subTotalSupply">减少积分发行 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/subTotalSupply                                           |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 减少积分发行                                         |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "balance": 100
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "积分回收成功"
+  }
+  ```
+  
+  
+|     名称     | <a id="admin_setBPR">设置积分利率 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/setBPR                                                |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 设置积分利率                                                 |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "bpr" : 800
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "设置积分利率成功",
+      "data": {
+          "bpr": 800
+      }
+  }
+  ```
+  
+  
+|     名称     | <a id="admin_setMF">设置积分利率上限 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/setMF                                                |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 设置积分利率上限                                                 |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "mf" : 8
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "设置积分利率上限成功",
+      "data": {
+          "mf": 8
       }
   }
   ```

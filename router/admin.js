@@ -496,4 +496,70 @@ router.post('/subTotalSupply', [
 })
 
 
+/**
+ * * 调整积分利率
+ */
+router.post('/setBPR', [
+  body('bpr').isNumeric().withMessage('bpr必须为数字')
+], (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+
+  let { bpr } = req.body;
+  /**
+   * * ['管理员私钥:string', '积分利率:number']
+   */
+  axiosChainAPI(
+      'setBPR',
+      [`${admin.private_key}`, bpr],
+      'invoke')
+  .then(response => {
+    let chainAPIResult = response.data;
+    console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.txId) {
+        new Result({ bpr: bpr }, '设置积分利率成功').success(res);
+      } else {
+        new Result('设置积分利率失败').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
+/**
+ * * 调整积分利率上限
+ */
+router.post('/setMF', [
+  body('mf').isNumeric().withMessage('mf必须为数字')
+], (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+
+  let { mf } = req.body;
+  console.log(mf);
+  /**
+   * * ['管理员私钥:string', '积分利率上限:number']
+   */
+  axiosChainAPI(
+      'setMF',
+      [`${admin.private_key}`, mf],
+      'invoke')
+  .then(response => {
+    let chainAPIResult = response.data;
+    console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.txId) {
+        new Result({ mf: mf }, '设置积分利率上限成功').success(res);
+      } else {
+        new Result('设置积分利率上限成功').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
+
 module.exports = router
