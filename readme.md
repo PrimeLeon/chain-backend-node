@@ -71,6 +71,9 @@ localhost:5000/index.html
     * [根据高度查询区块信息](#user_getDetailByHeight)
     * [根据哈希查询区块信息](#user_getDetailByHash)
     * [查询高度](#user_getHeight)
+    * [创建存证](#user_createStore)
+    * [获取存证](#user_getStore)
+    * [查询存证](#user_queryStore)
 * 管理员
   * [登录](#admin_login)
   * [获取管理员信息](#admin_info)
@@ -379,6 +382,45 @@ localhost:5000/index.html
   ```json
   // 请求头部包含以下字段
   Authorization ： Bearer <Token>
+  // body
+  {
+      "businessId": "100",
+      "data": {
+          "name": "daniel",
+          "money": "999"
+      }
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "创建存证成功",
+      "data": {
+          "result": {
+              "Figure": "3Jv591vK8q/+OsYMhlti1/banb3jrwfXJK5WLgDIqRo=",
+              "OK": true
+          }
+      }
+  }
+  ```
+
+
+
+|     名称     | <a id="user_createStore">创建存证</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/createStore                                        |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 创建存证                                   |
+
+* **请求示例**
+
+  ```json
+  // 请求头部包含以下字段
+  Authorization ： Bearer <Token>
   ```
   
 * **返回值示例**
@@ -393,6 +435,7 @@ localhost:5000/index.html
       }
   }
   ```
+
 
 
 

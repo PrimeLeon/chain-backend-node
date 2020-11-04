@@ -258,6 +258,49 @@ router.get('/getHeight', (req, res, next) => {
 })
 
 /**
+ * * 创建存证
+ */
+router.post('/createStore', (req, res, next) => {
+  let { businessId, data } = req.body;
+  createStore(businessId, data).then(response => {
+    if (response.data.code === 200) {
+      new Result(response.data.data, '创建存证成功').success(res);
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+ 
+/**
+ * * 获取存证
+ */
+router.post('/getStore', (req, res, next) => {
+  let { hash } = req.body;
+  getStore(hash).then(response => {
+    if (response.data.code === 200) {
+      new Result(response.data.data, '获取存证成功').success(res);
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
+/**
+ * * 查询存证 queryStore
+ */
+router.post('/queryStore', (req, res, next) => {
+  let { businessId, startTime, endTime, start } = req.body;
+  queryStore(businessId, startTime, endTime, start).then(response => {
+    if (response.data.code === 200) {
+      new Result(response.data.data, '查询存证成功').success(res);
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
+
+/**
  * * 用户转账
  */
 router.post('/transfer', [
