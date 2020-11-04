@@ -401,7 +401,7 @@ router.get('/getPausable', (req, res, next) => {
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
   /**
-   * * []
+   * * [空]
    */
   axiosChainAPI(
       'getPausable',
@@ -421,5 +421,38 @@ router.get('/getPausable', (req, res, next) => {
     }
   })
 })
+
+
+/**
+ * * 增加积分发行量
+ */
+router.post('/addTotalSupply', (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+
+  let { balance } = req.body;
+
+  /**
+   * * ['管理员私钥:string', '发行量:number']
+   */
+  axiosChainAPI(
+      'addTotalSupply',
+      [`${admin.private_key}`, balance],
+      'invoke')
+  .then(response => {
+    let chainAPIResult = response.data;
+    console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.txId) {
+        new Result('积分发行成功').success(res);
+      } else {
+        new Result('积分发行失败').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
 
 module.exports = router
