@@ -128,14 +128,14 @@ function queryStore(businessId, startTime, endTime, start){ //start：从第几�
     })
 }
 
-// 测试获取第2个区块的信息
-getDetailByHeight(2)
+// // 测试获取第2个区块的信息
+// getDetailByHeight(2)
 
-// 测试通过区块哈希值获取区块的信息
-getDetailByHash("pl+yAjHm9YRo4/rG9+qSOx+IzM2wImNlm8+/rLQ99xw=")
+// // 测试通过区块哈希值获取区块的信息
+// getDetailByHash("pl+yAjHm9YRo4/rG9+qSOx+IzM2wImNlm8+/rLQ99xw=")
 
-// 获取区块的高度
-getHeight()
+// // 获取区块的高度
+// getHeight()
 
 // 测试创建存证，传入ID和data信息
 createStore("100",{"name":"daniel","money":"999"})

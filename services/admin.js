@@ -41,7 +41,7 @@ function findUserByUsername(username) {
  * @param {string} username 用户名
  */
 function findUserOrderByRegisterTimeWithPage(page) {
-  const ITEMS_PER_PAGE = 4;
+  const ITEMS_PER_PAGE = 10;
   return querySql(`
   SELECT * 
   FROM user 

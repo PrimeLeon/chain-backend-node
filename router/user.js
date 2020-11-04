@@ -21,11 +21,21 @@ const {
   findAddressOfTransferUsers,
   transfer
 } = require('../services/user');
+
+const {
+  getDetailByHeight,
+  getDetailByHash,
+  getHeight,
+  createStore,
+  getStore,
+  queryStore
+} = require('../services/user-cts');
+
 const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 const { axiosChainAPI } = require('../chainAPI/index');
 const user = require('../services/user');
-const { response } = require('express');
+
 
 const router = express.Router();
 
@@ -207,11 +217,43 @@ router.get('/balance', (req, res, next) => {
 })
 
 /**
+ * * 获取指定高度区块信息
+ */
+router.post('/getDetailByHeight', [
+  body('height').isNumeric().withMessage('高度必须为数字')
+], (req, res, next) => {
+  let { height } = req.body;
+  getDetailByHeight(height).then(response => {
+    if (response.data.code === 200) {
+      new Result({ height: height, details: response.data.data.data }, '获取指定高度区块信息成功').success(res);
+    } else {
+      new Result('高度必须为数字').chainError(res);
+    }
+  })
+})
+
+/**
+ * * 根据哈希获取区块信息
+ */
+router.post('/getDetailByHash', [
+  body('hash').isHash().withMessage('哈希值不合法')
+], (req, res, next) => {
+  let { hash } = req.body;
+  getDetailByHash(hash).then(response => {
+    if (response.data.code === 200) {
+      new Result({ hash: hash, details: response.data.data.data }, '获取指定高度区块信息成功').success(res);
+    } else {
+      new Result('哈希值不合法').chainError(res);
+    }
+  })
+})
+
+/**
  * * 用户转账
  */
 router.post('/transfer', [
   body('touser').isString().withMessage('密码必须为字符'),
-  body('balance').isNumeric().withMessage('密码必须为字符')
+  body('balance').isNumeric().withMessage('转账金额必须为数字')
 ], async (req, res, next) => {
   let userInfoFromToken = decodeJwt(req);
   let fromuser = userInfoFromToken.user;

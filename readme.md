@@ -67,6 +67,9 @@ localhost:5000/index.html
   * [获取用户余额](#user_balance)
   * [用户转账](#user_transfer)
   * [获取用户是否在黑名单](#user_getAccountIsBlack)
+  * **存证模块**
+    * [根据高度查询区块信息](#user_getDetailByHeight)
+    * [根据哈希查询区块信息](#user_getDetailByHash)
 * 管理员
   * [登录](#admin_login)
   * [获取管理员信息](#admin_info)
@@ -264,6 +267,100 @@ localhost:5000/index.html
       "msg": "状态查询成功",
       "data": {
           "IsBlack": "false"
+      }
+  }
+  ```
+
+
+|     名称     | <a id="user_getDetailByHeight">查询区块信息</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/getDetailByHeight                                                |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 根据区块高度查询区块信息                                                 |
+
+* **请求示例**
+
+  ```json
+  // 请求头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "height": 2
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "获取指定高度区块信息成功",
+      "data": {
+          "height": 2,
+          "details": {
+              "header": {
+                  "version": 1,
+                  "height": 2,
+                  "timestamp": 1601450330,
+                  "blockHash": "pl+yAjHm9YRo4/rG9+qSOx+IzM2wImNlm8+/rLQ99xw=",
+                  "previousHash": "Ep7j7pDgg2/Brnvjcv5vQ8+NFuN40GeK1UQK1gqwUJA=",
+                  "worldStateRoot": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                  "transactionRoot": "fArdOmAKt7jygo4dKrrnrkPuMxW4cwP1Goqfwzg/D30="
+              },
+              "txs": [
+                  "veN+LAbEXz6P3GE2ldYtTbFRZE0KtKo4jylc+CuJudg="
+              ],
+              "extra": "...",
+              "raw": "...."
+          }
+      }
+  }
+  ```
+
+
+|     名称     | <a id="user_getDetailByHash">查询区块信息</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/getDetailByHash                                                |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 根据区块哈希值查询区块信息                                                 |
+
+* **请求示例**
+
+  ```json
+  // 请求头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "hash": "pl+yAjHm9YRo4/rG9+qSOx+IzM2wImNlm8+/rLQ99xw="
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "获取指定高度区块信息成功",
+      "data": {
+          "height": 2,
+          "details": {
+              "header": {
+                  "version": 1,
+                  "height": 2,
+                  "timestamp": 1601450330,
+                  "blockHash": "pl+yAjHm9YRo4/rG9+qSOx+IzM2wImNlm8+/rLQ99xw=",
+                  "previousHash": "Ep7j7pDgg2/Brnvjcv5vQ8+NFuN40GeK1UQK1gqwUJA=",
+                  "worldStateRoot": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                  "transactionRoot": "fArdOmAKt7jygo4dKrrnrkPuMxW4cwP1Goqfwzg/D30="
+              },
+              "txs": [
+                  "veN+LAbEXz6P3GE2ldYtTbFRZE0KtKo4jylc+CuJudg="
+              ],
+              "extra": "...",
+              "raw": "...."
+          }
       }
   }
   ```
