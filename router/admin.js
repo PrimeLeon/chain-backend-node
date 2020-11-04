@@ -454,5 +454,36 @@ router.post('/addTotalSupply', (req, res, next) => {
   })
 })
 
+/**
+ * * 减少积分发行量
+ */
+router.post('/subTotalSupply', (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+
+  let { balance } = req.body;
+
+  /**
+   * * ['管理员私钥:string', '减少发行量:number']
+   */
+  axiosChainAPI(
+      'subTotalSupply',
+      [`${admin.private_key}`, balance],
+      'invoke')
+  .then(response => {
+    let chainAPIResult = response.data;
+    console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.txId) {
+        new Result('积分回收成功').success(res);
+      } else {
+        new Result('积分回收失败').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
 
 module.exports = router
