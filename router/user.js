@@ -219,15 +219,13 @@ router.get('/balance', (req, res, next) => {
 /**
  * * 获取指定高度区块信息
  */
-router.post('/getDetailByHeight', [
-  body('height').isNumeric().withMessage('高度必须为数字')
-], (req, res, next) => {
+router.post('/getDetailByHeight', (req, res, next) => {
   let { height } = req.body;
   getDetailByHeight(height).then(response => {
     if (response.data.code === 200) {
       new Result({ height: height, details: response.data.data.data }, '获取指定高度区块信息成功').success(res);
     } else {
-      new Result('高度必须为数字').chainError(res);
+      new Result('函数调用失败').chainError(res);
     }
   })
 })
@@ -235,15 +233,26 @@ router.post('/getDetailByHeight', [
 /**
  * * 根据哈希获取区块信息
  */
-router.post('/getDetailByHash', [
-  body('hash').isHash().withMessage('哈希值不合法')
-], (req, res, next) => {
+router.post('/getDetailByHash', (req, res, next) => {
   let { hash } = req.body;
   getDetailByHash(hash).then(response => {
     if (response.data.code === 200) {
       new Result({ hash: hash, details: response.data.data.data }, '获取指定高度区块信息成功').success(res);
     } else {
-      new Result('哈希值不合法').chainError(res);
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
+
+/**
+ * * 获取区块高度
+ */
+router.get('/getHeight', (req, res, next) => {
+  getHeight().then(response => {
+    if (response.data.code === 200) {
+      new Result({ height: response.data.data.height }, '获取高度成功').success(res);
+    } else {
+      new Result('函数调用失败').chainError(res);
     }
   })
 })

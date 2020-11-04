@@ -70,6 +70,7 @@ localhost:5000/index.html
   * **存证模块**
     * [根据高度查询区块信息](#user_getDetailByHeight)
     * [根据哈希查询区块信息](#user_getDetailByHash)
+    * [查询高度](#user_getHeight)
 * 管理员
   * [登录](#admin_login)
   * [获取管理员信息](#admin_info)
@@ -364,6 +365,35 @@ localhost:5000/index.html
       }
   }
   ```
+
+
+
+|     名称     | <a id="user_getHeight">查询高度</a>   [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /user/getHeight                                        |
+| **请求方式** | HTTP / GET                                                  |
+|   **简介**   | 查询高度                                   |
+
+* **请求示例**
+
+  ```json
+  // 请求头部包含以下字段
+  Authorization ： Bearer <Token>
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "获取高度成功",
+      "data": {
+          "height": 266
+      }
+  }
+  ```
+
 
 
 
