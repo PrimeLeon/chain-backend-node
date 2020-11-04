@@ -272,11 +272,11 @@ localhost:5000/index.html
   ```
 
 
-|     名称     | <a id="user_getDetailByHeight">查询区块信息</a>   [回到API目录](#API_LIST) |
+|     名称     | <a id="user_getDetailByHeight">查询区块信息（高度）</a>   [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
-| **接口地址** | /user/getDetailByHeight                                                |
-| **请求方式** | HTTP / POST                                                   |
-|   **简介**   | 根据区块高度查询区块信息                                                 |
+| **接口地址** | /user/getDetailByHeight                                      |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 根据区块高度查询区块信息                                     |
 
 * **请求示例**
 
@@ -319,11 +319,11 @@ localhost:5000/index.html
   ```
 
 
-|     名称     | <a id="user_getDetailByHash">查询区块信息</a>   [回到API目录](#API_LIST) |
+|     名称     | <a id="user_getDetailByHash">查询区块信息（哈希）</a>   [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
-| **接口地址** | /user/getDetailByHash                                                |
-| **请求方式** | HTTP / POST                                                   |
-|   **简介**   | 根据区块哈希值查询区块信息                                                 |
+| **接口地址** | /user/getDetailByHash                                        |
+| **请求方式** | HTTP / POST                                                  |
+|   **简介**   | 根据区块哈希值查询区块信息                                   |
 
 * **请求示例**
 

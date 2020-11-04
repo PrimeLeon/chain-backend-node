@@ -165,7 +165,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"bb0f78f8d0fa308f0c10dda8eab89bdf23b42b7554cb64af06e4837d735ffae2\",\r\n    \"Method\": \"getOwnerBalacne\",\r\n    \"args\": [],\r\n    \"version\": \"v1.0\",\r\n    \"category\": \"wvm\"\r\n}",
+									"raw": "{\r\n    \"name\": \"bb0f78f8d0fa308f0c10dda8eab89bdf23b42b7554cb64af06e4837d735ffae2\",\r\n    \"Method\": \"getOwnerBalance\",\r\n    \"args\": [],\r\n    \"version\": \"v1.0\",\r\n    \"category\": \"wvm\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -481,6 +481,89 @@
 					"name": "普通用户",
 					"item": [
 						{
+							"name": "存证模块",
+							"item": [
+								{
+									"name": "查询对应高度的区块信息",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjE2NH0sImlhdCI6MTYwNDQ4MDk3MiwiZXhwIjoxNjA0NTY3MzcyfQ.az6GqzTwOD4McRHSmK0ESQ-UKncg44IUyPjiLom88wY",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"height\": \"asdasdasd\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://{{本地服务器}}/user/getDetailByHeight",
+											"protocol": "http",
+											"host": [
+												"{{本地服务器}}"
+											],
+											"path": [
+												"user",
+												"getDetailByHeight"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "查询对应哈希值的区块信息",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjE2NH0sImlhdCI6MTYwNDQ4MDk3MiwiZXhwIjoxNjA0NTY3MzcyfQ.az6GqzTwOD4McRHSmK0ESQ-UKncg44IUyPjiLom88wY",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"hash\": \"pl+yAjHm9YRo4/rG9+qSOx+IzM2wImNlm8+/rLQ99xw=\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://{{本地服务器}}/user/getDetailByHash",
+											"protocol": "http",
+											"host": [
+												"{{本地服务器}}"
+											],
+											"path": [
+												"user",
+												"getDetailByHash"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
 							"name": "用户登录",
 							"request": {
 								"auth": {
@@ -505,12 +588,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/user/login",
+									"raw": "http://{{本地服务器}}/user/login",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"user",
 										"login"
@@ -530,7 +612,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2NywidXNlcm5hbWUiOiJ0ZXN0dXNlcjQiLCJwYXNzd29yZCI6ImIwNGE3Y2E0NWVlM2YzYWZlMzc1MTYxYTEyMGY5ZWFhIiwibmlja25hbWUiOiJ0ZXN0dXNlcjQiLCJyb2xlIjoidXNlciIsImFkZHJlc3MiOiItLS0tLUJFR0lOIFJTQSBQVUJMSUMgS0VZLS0tLS1cbk1FZ0NRUUNsRUNQNUoyam5pRjFrSWxLODhpdENTN0NTUFYyUzlseXdNb2Y3SzBUMFdMZ2FYa0YvZWphVkJEcjdcblQwYU5aT1NZT2FoWkJNOVkyRlZtMFIzZ29Sa2JBZ01CQUFFPVxuLS0tLS1FTkQgUlNBIFBVQkxJQyBLRVktLS0tLSIsInByaXZhdGVfa2V5IjoiLS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLVxuTUlJQk93SUJBQUpCQUtVUUkva25hT2VJWFdRaVVyenlLMEpMc0pJOVhaTDJYTEF5aC9zclJQUll1QnBlUVg5NlxuTnBVRU92dFBSbzFrNUpnNXFGa0V6MWpZVldiUkhlQ2hHUnNDQXdFQUFRSkFKUnEzdTI1TWVwK0F2dDJvVTZqc1xuYUg2ek5teHMrSGhBNWFxMlBwTy9jRjJVQ0lDZGdBbzlkRER1MU1COG5vK2k5eXE0ZHNXU1Y1cFVudE8zNnpYSVxuNFFJaEFPaFVTUW1wU2g5aW1YN1YzcXN5aWhmOUFhTi93eERCTFpJdWdIRG9qdU9YQWlFQXRlRmpjeStDeDZNTVxuZjVNMHFxblAzQ0NsWE1CRWt6TGVNZTFQUE43UFZ4MENJUURZMTFJVUlsMThUWnJXTnVkTkFpN0JsUE1pbHV5SlxuaHNQeDNGVWxET25Rb1FJZ09TQVpoRXdmMzJRdXdNTVRmNmJtU2xWV210TW90ckw3WnVNS1NDd1RJMkVDSVFEblxudDRzQ1RRQ0FTY3NLUHV6amoxUFo1NDJsNWpIZXQwNGpMVVBoVnlxUmt3PT1cbi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tIiwiYmFsYW5jZSI6NTd9LCJpYXQiOjE2MDQzMDg2NzAsImV4cCI6MTYwNDMxMjI3MH0.RrH-EoxgipadIvIcawCszotVyPVHRNxEJdJ_ZDaQsm8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjE2NH0sImlhdCI6MTYwNDQ4MDk3MiwiZXhwIjoxNjA0NTY3MzcyfQ.az6GqzTwOD4McRHSmK0ESQ-UKncg44IUyPjiLom88wY",
 											"type": "string"
 										}
 									]
@@ -553,12 +635,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/user/info",
+									"raw": "http://{{本地服务器}}/user/info",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"user",
 										"info"
@@ -578,7 +659,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjMyfSwiaWF0IjoxNjA0MzA2NjA4LCJleHAiOjE2MDQzMTAyMDh9.vEmED4Ke3s_GvANx4t3kvIvU7DntUf9U3LOgn1bqSk4",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjE2NH0sImlhdCI6MTYwNDQ4MDk3MiwiZXhwIjoxNjA0NTY3MzcyfQ.az6GqzTwOD4McRHSmK0ESQ-UKncg44IUyPjiLom88wY",
 											"type": "string"
 										}
 									]
@@ -590,12 +671,47 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:5000/user/balance",
+									"raw": "http://{{本地服务器}}/user/balance",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
+									"path": [
+										"user",
+										"balance"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取用户余额 （收款人）",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2NywidXNlcm5hbWUiOiJ0ZXN0dXNlcjQiLCJwYXNzd29yZCI6ImIwNGE3Y2E0NWVlM2YzYWZlMzc1MTYxYTEyMGY5ZWFhIiwibmlja25hbWUiOiJ0ZXN0dXNlcjQiLCJyb2xlIjoidXNlciIsImFkZHJlc3MiOiItLS0tLUJFR0lOIFJTQSBQVUJMSUMgS0VZLS0tLS1cbk1FZ0NRUUNsRUNQNUoyam5pRjFrSWxLODhpdENTN0NTUFYyUzlseXdNb2Y3SzBUMFdMZ2FYa0YvZWphVkJEcjdcblQwYU5aT1NZT2FoWkJNOVkyRlZtMFIzZ29Sa2JBZ01CQUFFPVxuLS0tLS1FTkQgUlNBIFBVQkxJQyBLRVktLS0tLSIsInByaXZhdGVfa2V5IjoiLS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLVxuTUlJQk93SUJBQUpCQUtVUUkva25hT2VJWFdRaVVyenlLMEpMc0pJOVhaTDJYTEF5aC9zclJQUll1QnBlUVg5NlxuTnBVRU92dFBSbzFrNUpnNXFGa0V6MWpZVldiUkhlQ2hHUnNDQXdFQUFRSkFKUnEzdTI1TWVwK0F2dDJvVTZqc1xuYUg2ek5teHMrSGhBNWFxMlBwTy9jRjJVQ0lDZGdBbzlkRER1MU1COG5vK2k5eXE0ZHNXU1Y1cFVudE8zNnpYSVxuNFFJaEFPaFVTUW1wU2g5aW1YN1YzcXN5aWhmOUFhTi93eERCTFpJdWdIRG9qdU9YQWlFQXRlRmpjeStDeDZNTVxuZjVNMHFxblAzQ0NsWE1CRWt6TGVNZTFQUE43UFZ4MENJUURZMTFJVUlsMThUWnJXTnVkTkFpN0JsUE1pbHV5SlxuaHNQeDNGVWxET25Rb1FJZ09TQVpoRXdmMzJRdXdNTVRmNmJtU2xWV210TW90ckw3WnVNS1NDd1RJMkVDSVFEblxudDRzQ1RRQ0FTY3NLUHV6amoxUFo1NDJsNWpIZXQwNGpMVVBoVnlxUmt3PT1cbi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tIiwiYmFsYW5jZSI6MTkzfSwiaWF0IjoxNjA0NDU3NzEzLCJleHAiOjE2MDQ1NDQxMTN9.0W71fa03opZeRqlQMiaasATE_H2pd0lsqPyjQhTwiaw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{本地服务器}}/user/balance",
+									"protocol": "http",
+									"host": [
+										"{{本地服务器}}"
+									],
 									"path": [
 										"user",
 										"balance"
@@ -611,7 +727,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"testuser4\",\r\n    \"password\": \"testuserpsd\"\r\n}",
+									"raw": "{\r\n    \"username\": 123,\r\n    \"password\": 123\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -619,12 +735,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/user/register",
+									"raw": "http://{{本地服务器}}/user/register",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"user",
 										"register"
@@ -641,7 +756,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjMyfSwiaWF0IjoxNjA0MzA2NjA4LCJleHAiOjE2MDQzMTAyMDh9.vEmED4Ke3s_GvANx4t3kvIvU7DntUf9U3LOgn1bqSk4",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjE2NH0sImlhdCI6MTYwNDQ1NzQ5MSwiZXhwIjoxNjA0NTQzODkxfQ.armuS5FF5aPfzghtDJYpNEHBFzQ7KlU3R38vltCL-cU",
 											"type": "string"
 										}
 									]
@@ -650,7 +765,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"touser\": \"testuser4\",\r\n    \"balance\": 2\r\n}",
+									"raw": "{\r\n    \"touser\": \"testuser4\",\r\n    \"balance\": \"testuser4\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -658,12 +773,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/user/transfer",
+									"raw": "http://{{本地服务器}}/user/transfer",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"user",
 										"transfer"
@@ -680,7 +794,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2NywidXNlcm5hbWUiOiJ0ZXN0dXNlcjQiLCJwYXNzd29yZCI6ImIwNGE3Y2E0NWVlM2YzYWZlMzc1MTYxYTEyMGY5ZWFhIiwibmlja25hbWUiOiJ0ZXN0dXNlcjQiLCJyb2xlIjoidXNlciIsImFkZHJlc3MiOiItLS0tLUJFR0lOIFJTQSBQVUJMSUMgS0VZLS0tLS1cbk1FZ0NRUUNsRUNQNUoyam5pRjFrSWxLODhpdENTN0NTUFYyUzlseXdNb2Y3SzBUMFdMZ2FYa0YvZWphVkJEcjdcblQwYU5aT1NZT2FoWkJNOVkyRlZtMFIzZ29Sa2JBZ01CQUFFPVxuLS0tLS1FTkQgUlNBIFBVQkxJQyBLRVktLS0tLSIsInByaXZhdGVfa2V5IjoiLS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLVxuTUlJQk93SUJBQUpCQUtVUUkva25hT2VJWFdRaVVyenlLMEpMc0pJOVhaTDJYTEF5aC9zclJQUll1QnBlUVg5NlxuTnBVRU92dFBSbzFrNUpnNXFGa0V6MWpZVldiUkhlQ2hHUnNDQXdFQUFRSkFKUnEzdTI1TWVwK0F2dDJvVTZqc1xuYUg2ek5teHMrSGhBNWFxMlBwTy9jRjJVQ0lDZGdBbzlkRER1MU1COG5vK2k5eXE0ZHNXU1Y1cFVudE8zNnpYSVxuNFFJaEFPaFVTUW1wU2g5aW1YN1YzcXN5aWhmOUFhTi93eERCTFpJdWdIRG9qdU9YQWlFQXRlRmpjeStDeDZNTVxuZjVNMHFxblAzQ0NsWE1CRWt6TGVNZTFQUE43UFZ4MENJUURZMTFJVUlsMThUWnJXTnVkTkFpN0JsUE1pbHV5SlxuaHNQeDNGVWxET25Rb1FJZ09TQVpoRXdmMzJRdXdNTVRmNmJtU2xWV210TW90ckw3WnVNS1NDd1RJMkVDSVFEblxudDRzQ1RRQ0FTY3NLUHV6amoxUFo1NDJsNWpIZXQwNGpMVVBoVnlxUmt3PT1cbi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tIiwiYmFsYW5jZSI6MTkzfSwiaWF0IjoxNjA0NDA2MTAwLCJleHAiOjE2MDQ0MDk3MDB9.M0FtLn8QB5MQobyCOe24krFDL22GmZYikJCTLKwLzyM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsInBhc3N3b3JkIjoiYjA0YTdjYTQ1ZWUzZjNhZmUzNzUxNjFhMTIwZjllYWEiLCJuaWNrbmFtZSI6InRlc3R1c2VyIiwicm9sZSI6InVzZXIiLCJhZGRyZXNzIjoiLS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tXG5NRWdDUVFDK0IvYUJqZVMyQ0lMb25DTGltR2V3MWt6UGZ4Vm96TDlwbDVwRkl6RXd0VTI5cnc2RkVGOXB0MGRMXG5kbDZIR0ZEVUdoOXNoczRRTHZ0ZU1DRzRWWU9qQWdNQkFBRT1cbi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0iLCJwcml2YXRlX2tleSI6Ii0tLS0tQkVHSU4gUlNBIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUJPd0lCQUFKQkFMNEg5b0dONUxZSWd1aWNJdUtZWjdEV1RNOS9GV2pNdjJtWG1rVWpNVEMxVGIydkRvVVFcblgybTNSMHQyWG9jWVVOUWFIMnlHemhBdSsxNHdJYmhWZzZNQ0F3RUFBUUpCQUxTQmc5blVHcWYrdGJxV2RWeWdcblAvNXQwVkJYK3RJdGlyU1dXT2ZMWWZKTTRNSGdmUW05U3N0VWNldlcrcEhuWllPN3AyYXJRdVVrV0tFcEtrRlVcbitrRUNJUUR5Y2lmT2pZekE3c3dRVFBDaVJuU0xCTmRIMzZjMmJqREVEK1hYUjJTTXVRSWhBTWlucDlMcVhKRDVcbkJhVEdobitpSUdEWStsSWFzQ1ZzZ015czZseHRLVDA3QWlCanJRc3dvSUY5MEsrVkJBenFxb3kvbXYzblRzd3dcblZKMDMvbEZBY05tbUFRSWdYYnkwMGZ0YU12K2llMCtqRlkwUHd5NmFBakVsaU5ZZmRYNXlIYXVCVUhFQ0lRQ3hcbnp2bFU4TjlIdTdZTGJmUHpoL1MxcjRtUHh3ZUNPdVdaSEhHSXBaYldVUT09XG4tLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLSIsImJhbGFuY2UiOjE2NH0sImlhdCI6MTYwNDQ1NzQ5MSwiZXhwIjoxNjA0NTQzODkxfQ.armuS5FF5aPfzghtDJYpNEHBFzQ7KlU3R38vltCL-cU",
 											"type": "string"
 										}
 									]
@@ -688,12 +802,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5000/user/getAccountIsBlack",
+									"raw": "http://{{本地服务器}}/user/getAccountIsBlack",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"user",
 										"getAccountIsBlack"
@@ -724,12 +837,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/admin/login",
+									"raw": "http://{{本地服务器}}/admin/login",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"login"
@@ -746,7 +858,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0MzI2NDkzLCJleHAiOjE2MDQzMzAwOTN9.ZyisJrG_RRmOuNa5lPo8qQ9Sat5Am40o1YZi2vZLvRM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDgwNjYwLCJleHAiOjE2MDQ1NjcwNjB9.oDUaPJf6GugFTP0_o8dqH58v4Y9TH44JuPhlA1YbwKY",
 											"type": "string"
 										}
 									]
@@ -754,12 +866,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5000/admin/info",
+									"raw": "http://{{本地服务器}}/admin/info",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"info"
@@ -776,7 +887,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0MzI2NDkzLCJleHAiOjE2MDQzMzAwOTN9.ZyisJrG_RRmOuNa5lPo8qQ9Sat5Am40o1YZi2vZLvRM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDgwNjYwLCJleHAiOjE2MDQ1NjcwNjB9.oDUaPJf6GugFTP0_o8dqH58v4Y9TH44JuPhlA1YbwKY",
 											"type": "string"
 										}
 									]
@@ -784,13 +895,13 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5000/admin/ownerInit",
-									"protocol": "http",
+									"raw": "http:/{{本地服务器}}/admin/ownerInit",
 									"host": [
-										"localhost"
+										"http"
 									],
-									"port": "5000",
+									"port": "",
 									"path": [
+										"{{本地服务器}}",
 										"admin",
 										"ownerInit"
 									]
@@ -806,7 +917,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0MzI2NDkzLCJleHAiOjE2MDQzMzAwOTN9.ZyisJrG_RRmOuNa5lPo8qQ9Sat5Am40o1YZi2vZLvRM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -823,12 +934,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/admin/integralInit",
+									"raw": "http://{{本地服务器}}/admin/integralInit",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"integralInit"
@@ -845,7 +955,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0MzI2Njc3LCJleHAiOjE2MDQzMzAyNzd9.00xQ5X1a7A5uXhgapAi7rXNRd1MxAU-xvCNNYUlggJM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -853,12 +963,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5000/admin/getOwnerBalance",
+									"raw": "http://{{本地服务器}}/admin/getOwnerBalance",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"getOwnerBalance"
@@ -875,7 +984,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0Mjk0OTI3LCJleHAiOjE2MDQyOTg1Mjd9.aDFW3EBPJCX2ef_Q74mC4PRHHkt31Np8qIn4njKtsiQ",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -883,12 +992,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5000/admin/user/0",
+									"raw": "http://{{本地服务器}}/admin/user/0",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"user",
@@ -906,7 +1014,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0Mjk0OTI3LCJleHAiOjE2MDQyOTg1Mjd9.aDFW3EBPJCX2ef_Q74mC4PRHHkt31Np8qIn4njKtsiQ",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -915,7 +1023,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"testuser4\"\r\n}",
+									"raw": "{\r\n    \"username\": \"testuser5\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -923,12 +1031,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/admin/newAccount",
+									"raw": "http://{{本地服务器}}/admin/newAccount",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"newAccount"
@@ -945,7 +1052,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0MzI2NDkzLCJleHAiOjE2MDQzMzAwOTN9.ZyisJrG_RRmOuNa5lPo8qQ9Sat5Am40o1YZi2vZLvRM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -954,7 +1061,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"testuser\",\r\n    \"balance\": 1\r\n}",
+									"raw": "{\r\n    \"username\": \"testuser\",\r\n    \"balance\": 100\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -962,12 +1069,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/admin/issue",
+									"raw": "http://{{本地服务器}}/admin/issue",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"issue"
@@ -984,7 +1090,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0MzI3OTMwLCJleHAiOjE2MDQzMzE1MzB9.TgmLXDXgeY_74aATZgPjYbb6Anm8FvkmPXp8XNFVM1A",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -992,12 +1098,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5000/admin/getSumFee",
+									"raw": "http://{{本地服务器}}/admin/getSumFee",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"getSumFee"
@@ -1014,7 +1119,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDA1MTE0LCJleHAiOjE2MDQ0MDg3MTR9.pabQfYTOw5eEX-3XVBJBBMs5UmJHswol9QWYIqNW3tI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -1022,12 +1127,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5000/admin/getPausable",
+									"raw": "http://{{本地服务器}}/admin/getPausable",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"getPausable"
@@ -1044,7 +1148,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDA1MTE0LCJleHAiOjE2MDQ0MDg3MTR9.pabQfYTOw5eEX-3XVBJBBMs5UmJHswol9QWYIqNW3tI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -1061,12 +1165,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/admin/pausable",
+									"raw": "http://{{本地服务器}}/admin/pausable",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"pausable"
@@ -1083,7 +1186,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDA2MzgyLCJleHAiOjE2MDQ0MDk5ODJ9.vb0DiCbE44NBi2Ly4Ndvl7peHnxVSrSrgEYMnMjRzqA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
 											"type": "string"
 										}
 									]
@@ -1092,7 +1195,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"testuser4\",\r\n    \"isBlack\": true\r\n}",
+									"raw": "{\r\n    \"username\": \"testuser4\",\r\n    \"isBlack\": false\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1100,12 +1203,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/admin/addBlackList",
+									"raw": "http://{{本地服务器}}/admin/addBlackList",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
 										"addBlackList"
@@ -1115,20 +1217,152 @@
 							"response": []
 						},
 						{
-							"name": "创建存证",
+							"name": "增加积分发行",
 							"request": {
-								"method": "LOCK",
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"balance\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "http://localhost:5000/admin/",
+									"raw": "http://{{本地服务器}}/admin/addTotalSupply",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"{{本地服务器}}"
 									],
-									"port": "5000",
 									"path": [
 										"admin",
-										""
+										"addTotalSupply"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "减少积分发行",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"balance\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{本地服务器}}/admin/subTotalSupply",
+									"protocol": "http",
+									"host": [
+										"{{本地服务器}}"
+									],
+									"path": [
+										"admin",
+										"subTotalSupply"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "设置积分利率",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bpr\" : 900\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{本地服务器}}/admin/setBPR",
+									"protocol": "http",
+									"host": [
+										"{{本地服务器}}"
+									],
+									"path": [
+										"admin",
+										"setBPR"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "设置积分利率上限",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDU3NTQ3LCJleHAiOjE2MDQ1NDM5NDd9.LYX6FLxSKtjBx8rNboFhmWC3CRLswZKiHQ9a0Nar6MA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mf\" : 15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{本地服务器}}/admin/setMF",
+									"protocol": "http",
+									"host": [
+										"{{本地服务器}}"
+									],
+									"path": [
+										"admin",
+										"setMF"
 									]
 								}
 							},
@@ -1140,6 +1374,18 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "890fd12a-4361-499f-a157-6265505487b8",
+			"key": "本地服务器",
+			"value": "localhost:5000"
+		},
+		{
+			"id": "c10126d9-47ec-41e6-bfd4-dabc86a0ac3c",
+			"key": "远程服务器",
+			"value": "123.56.163.105:80"
 		}
 	],
 	"protocolProfileBehavior": {}
