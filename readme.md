@@ -171,17 +171,19 @@ localhost:5000/index.html
       "code": 0,
       "msg": "用户信息查询成功",
       "data": {
-          "id": 3,
-          "username": "testuser",
-          "password": "b04a7ca45ee3f3afe375161a120f9eaa",
-          "nickname": "testusernickname",
-          "role": "user",
-          "address": "testuseraddress",
-          "private_key": "testuserprivatekey",
-          "balance": 0,
-          "roles": [
-              "user"
-          ]
+          "user": {
+              "id": 63,
+              "username": "testuser",
+              "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+              "nickname": "testuser",
+              "role": "user",
+              "address": "...",
+              "private_key": "...",
+              "balance": 244,
+              "roles": [
+                  "user"
+              ]
+          }
       }
   }
   ```
@@ -206,14 +208,7 @@ localhost:5000/index.html
       "code": 0,
       "msg": "用户余额查询成功",
       "data": {
-          "id": 3,
-          "username": "testuser",
-          "password": "b04a7ca45ee3f3afe375161a120f9eaa",
-          "nickname": "testusernickname",
-          "role": "user",
-          "address": "testuseraddress",
-          "private_key": "testuserprivatekey",
-          "balance": "0"
+          "balance": "254"
       }
   }
   ```
@@ -234,12 +229,11 @@ localhost:5000/index.html
 * **返回值示例**
 
   ```json
-  // 成功
   {
       "code": 0,
-      "msg": "状态查询成功",
+      "msg": "转账成功",
       "data": {
-          "result": "false"
+          "txId": "4101fa7ef059432c241097c71a36b35e1895fee1dfebd9955fcd04eec3ffa896"
       }
   }
   ```
@@ -255,12 +249,8 @@ localhost:5000/index.html
   ```json
   // 请求头部包含以下字段
   Authorization ： Bearer <Token>
-  {
-      "touser": "testuser4",
-      "balance": 10
-  }
   ```
-
+  
 * **返回值示例**
 
   ```json
@@ -269,7 +259,7 @@ localhost:5000/index.html
       "code": 0,
       "msg": "状态查询成功",
       "data": {
-          "result": "false"
+          "IsBlack": "false"
       }
   }
   ```
@@ -335,11 +325,13 @@ localhost:5000/index.html
       "code": 0,
       "msg": "管理员信息查询成功",
       "data": {
-          "id": 1,
-          "username": "testadmin",
-          "password": "c0ffd5a3d329dd183d52521e76a89c30",
-          "private_key": "testadminprivatekey",
-          "isActivate": 1
+          "admin": {
+              "id": 2,
+              "username": "xwj123",
+              "password": "ef30d0cf6ce291f6defa9f1d332f71ae",
+              "private_key": "xwj123",
+              "isActivate": 1
+          }
       }
   }
   ```
@@ -415,7 +407,7 @@ localhost:5000/index.html
       "code": 0,
       "msg": "积分系统余额查询成功",
       "data": {
-          "balance": "24999998"
+          "balance": "25000000"
       }
   }
   ```
@@ -424,7 +416,7 @@ localhost:5000/index.html
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/user/:page                                            |
 | **请求方式** | HTTP / GET                                                   |
-|   **简介**   | 根据页码查询用户（默认一页2条记录，默认为创建时间倒序排序）  |
+|   **简介**   | 根据页码查询用户（默认一页4条记录，默认为创建时间倒序排序）  |
 
 * **请求示例**
 
@@ -441,42 +433,78 @@ localhost:5000/index.html
   {
       "code": 0,
       "msg": "用户信息查询成功",
-      "data": [
-          {
-              "id": 1,
-              "username": "admin",
-              "password": "...",
-              "nickname": "nickname",
-              "role": "admin",
-              "address": "...",
-              "private_key": "xwj123",
-              "balance": 0,
-              "create_time": "0000-00-00 00:00:00",
-              "change_time": "0000-00-00 00:00:00",
-              "delete_time": "0000-00-00 00:00:00",
-              "isBlack": "false",
-              "isDelete": "false",
-              "isActivate": 0,
-              "paycode": null
-          },
-          {
-              "id": 2,
-              "username": "user",
-              "password": "...",
-              "nickname": "usernickname",
-              "role": "user",
-              "address": "...",
-              "private_key": "...",
-              "balance": 0,
-              "create_time": "0000-00-00 00:00:00",
-              "change_time": "0000-00-00 00:00:00",
-              "delete_time": "0000-00-00 00:00:00",
-              "isBlack": "false",
-              "isDelete": "false",
-              "isActivate": 0,
-              "paycode": null
-          }
-      ]
+      "data": {
+          "users": [
+              {
+                  "id": 67,
+                  "username": "testuser4",
+                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+                  "nickname": "testuser4",
+                  "role": "user",
+                  "address": "-----BEGIN RSA PUBLIC KEY-----\nMEgCQQClECP5J2jniF1kIlK88itCS7CSPV2S9lywMof7K0T0WLgaXkF/ejaVBDr7\nT0aNZOSYOahZBM9Y2FVm0R3goRkbAgMBAAE=\n-----END RSA PUBLIC KEY-----",
+                  "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOwIBAAJBAKUQI/knaOeIXWQiUrzyK0JLsJI9XZL2XLAyh/srRPRYuBpeQX96\nNpUEOvtPRo1k5Jg5qFkEz1jYVWbRHeChGRsCAwEAAQJAJRq3u25Mep+Avt2oU6js\naH6zNmxs+HhA5aq2PpO/cF2UCICdgAo9dDDu1MB8no+i9yq4dsWSV5pUntO36zXI\n4QIhAOhUSQmpSh9imX7V3qsyihf9AaN/wxDBLZIugHDojuOXAiEAteFjcy+Cx6MM\nf5M0qqnP3CClXMBEkzLeMe1PPN7PVx0CIQDY11IUIl18TZrWNudNAi7BlPMiluyJ\nhsPx3FUlDOnQoQIgOSAZhEwf32QuwMMTf6bmSlVWmtMotrL7ZuMKSCwTI2ECIQDn\nt4sCTQCAScsKPuzjj1PZ542l5jHet04jLUPhVyqRkw==\n-----END RSA PRIVATE KEY-----",
+                  "balance": 211,
+                  "create_time": "2020-11-02T05:59:43.000Z",
+                  "change_time": "2020-11-02T05:59:43.000Z",
+                  "delete_time": "2020-11-02T05:59:43.000Z",
+                  "isBlack": "false",
+                  "isDelete": "false",
+                  "isActivate": 1,
+                  "paycode": null
+              },
+              {
+                  "id": 66,
+                  "username": "testuser3",
+                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+                  "nickname": "testuser3",
+                  "role": "user",
+                  "address": "...",
+                  "private_key": "...",
+                  "balance": 0,
+                  "create_time": "2020-11-02T05:59:41.000Z",
+                  "change_time": "2020-11-02T05:59:41.000Z",
+                  "delete_time": "2020-11-02T05:59:41.000Z",
+                  "isBlack": "false",
+                  "isDelete": "false",
+                  "isActivate": 1,
+                  "paycode": null
+              },
+              {
+                  "id": 65,
+                  "username": "testuser2",
+                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+                  "nickname": "testuser2",
+                  "role": "user",
+                  "address": "...",
+                  "private_key": "...",
+                  "balance": 0,
+                  "create_time": "2020-11-02T05:59:38.000Z",
+                  "change_time": "2020-11-02T05:59:38.000Z",
+                  "delete_time": "2020-11-02T05:59:38.000Z",
+                  "isBlack": "false",
+                  "isDelete": "false",
+                  "isActivate": 1,
+                  "paycode": null
+              },
+              {
+                  "id": 64,
+                  "username": "testuser1",
+                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+                  "nickname": "testuser1",
+                  "role": "user",
+                  "address": "...",
+                  "private_key": "...",
+                  "balance": 0,
+                  "create_time": "2020-11-02T05:59:34.000Z",
+                  "change_time": "2020-11-02T05:59:34.000Z",
+                  "delete_time": "2020-11-02T05:59:34.000Z",
+                  "isBlack": "false",
+                  "isDelete": "false",
+                  "isActivate": 1,
+                  "paycode": null
+              }
+          ]
+      }
   }
   // 此页没有记录
   {
@@ -498,7 +526,6 @@ localhost:5000/index.html
   // 头部包含以下字段
   Authorization ： Bearer <Token>
   // 请求参数如下
-  // username 用户名
   {
       "username": "testuser"
   }
@@ -509,7 +536,7 @@ localhost:5000/index.html
   ```json
   {
       "code": 0,
-      "msg": "管理员初始化成功"
+      "msg": "用户上链成功"
   }
   ```
   
@@ -538,7 +565,10 @@ localhost:5000/index.html
   // 成功
   {
       "code": 0,
-      "msg": "发行积分成功"
+      "msg": "发行积分成功",
+      "data": {
+          "txId": "5ca97a40e9dd07b7404ca1932f508a20a84155a5dff128e2f8ad97f49d48521e"
+      }
   }
   // 失败
   {
@@ -566,7 +596,9 @@ localhost:5000/index.html
   {
       "code": 0,
       "msg": "获取利息总积分成功",
-      "data": "4"
+      "data": {
+          "fee": "0"
+      }
   }
   ```
   
@@ -591,7 +623,7 @@ localhost:5000/index.html
       "code": 0,
       "msg": "获取积分暂停状态成功",
       "data": {
-          "result": "false"
+          "pausable": "false"
       }
   }
   ```
@@ -619,12 +651,10 @@ localhost:5000/index.html
   // 成功
   {
       "code": 0,
-      "msg": "积分系统状态已改变"
-  }
-  // 失败
-  {
-      "code": -1,
-      "msg": "积分系统状态已改变"
+      "msg": "积分系统状态已改变",
+      "data": {
+          "pausable": false
+      }
   }
   ```
 
@@ -652,6 +682,10 @@ localhost:5000/index.html
   // 成功
   {
       "code": 0,
-      "msg": "用户黑名单状态改变成功"
+      "msg": "用户黑名单状态改变成功",
+      "data": {
+          "user": "testuser4",
+          "isBlack": false
+      }
   }
   ```
