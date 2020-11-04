@@ -1,5 +1,4 @@
 const { querySql, queryOne } = require('../db/index');
-const { axiosChain } = require('../chainAPI/index');
 /**
  * @brief 根据用户名密码查找是否有匹配结果
  * @param {string} username 用户名
@@ -42,12 +41,12 @@ function findUserByUsername(username) {
  * @param {string} username 用户名
  */
 function findUserOrderByRegisterTimeWithPage(page) {
-  let itemsPerPage = 2;
+  const ITEMS_PER_PAGE = 4;
   return querySql(`
   SELECT * 
   FROM user 
   ORDER BY create_time DESC 
-  LIMIT ${itemsPerPage} OFFSET ${(page-1) * itemsPerPage}`);
+  LIMIT ${ITEMS_PER_PAGE} OFFSET ${(page-1) * ITEMS_PER_PAGE}`);
 }
 
 /**

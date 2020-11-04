@@ -6,5 +6,5 @@ module.exports = {
   debug: true,
   PWD_SALT: 'chainPro',
   PRIVATE_KEY: 'chainPro',
-  JWT_EXPIRED: 60 * 60
+  JWT_EXPIRED: 60 * 60 * 24
 }

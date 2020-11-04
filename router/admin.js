@@ -86,9 +86,9 @@ router.get('/info', (req, res, next) => {
   if (admin && admin.username) {
     findAdminByUsername(admin.username).then(admin => {
       if (admin) {
-        new Result(admin, '管理员信息查询成功').success(res);
+        new Result({ admin: admin }, '管理员信息查询成功').success(res);
       } else {
-        new Result(admin, '管理员信息查询失败').fail(res);
+        new Result('管理员信息查询失败').fail(res);
       }
     })
   } else {
@@ -119,9 +119,9 @@ router.get('/user/:page', [
     console.log(page)
     findUserOrderByRegisterTimeWithPage(page).then(users => {
       if (users) {
-        new Result(users, '用户信息查询成功').success(res);
+        new Result({ users: users }, '用户信息查询成功').success(res);
       } else {
-        new Result(users, '用户信息查询失败').fail(res);
+        new Result('用户信息查询失败').fail(res);
       }
     })
   }
@@ -249,8 +249,7 @@ router.get('/getOwnerBalance', (req, res, next) => {
     console.log(chainAPIResult)
     if (chainAPIResult.message === 'success') {
       if (chainAPIResult.data.result) {
-        let balanceData = { balance: chainAPIResult.data.result };
-        new Result(balanceData, '积分系统余额查询成功').success(res);
+        new Result({ balance: chainAPIResult.data.result }, '积分系统余额查询成功').success(res);
       } else {
         new Result('积分系统余额查询失败').fail(res);
       }
@@ -264,9 +263,13 @@ router.get('/getOwnerBalance', (req, res, next) => {
 /**
  * * 管理员给用户发行积分
  */
-router.post('/issue', (req, res, next) => {
+router.post('/issue', [
+  body('username').isString().withMessage('用户名必须为字符'),
+  body('balance').isNumeric().withMessage('发行量必须为数字')
+], (req, res, next) => {
   let { username, balance } = req.body;
   let adminInfoFromToken = decodeJwt(req);
+
   admin = adminInfoFromToken.admin;
   findUserByUsername(username)
   .then(user => {
@@ -284,46 +287,9 @@ router.post('/issue', (req, res, next) => {
         // console.log(chainAPIResult)
         if (chainAPIResult.message === 'success') {
           if (chainAPIResult.data.txId) {
-            new Result('发行积分成功').success(res);
+            new Result({ txId: chainAPIResult.data.txId }, '发行积分成功').success(res);
           } else {
             new Result('发行积分失败').fail(res);
-          }
-        } else {
-          new Result('函数执行失败').chainError(res);
-        }
-      })
-    } else {
-      new Result('用户不存在').fail(res);
-    }
-  })
-})
-
-/**
- * * 从黑名单添加 / 移除用户
- */
-router.post('/addBlackList', (req, res, next) => {
-  let adminInfoFromToken = decodeJwt(req);
-  admin = adminInfoFromToken.admin;
-  let { username, isBlack } = req.body;
-
-  findUserByUsername(username)
-  .then(user => {
-    if (user) {
-      /**
-       * * ['管理员私钥:string', '用户地址:string', '发行金额:number']
-       */
-      axiosChainAPI(
-          'addBlackList',
-          [`${admin.private_key}`, `${user.address}`, isBlack],
-          'invoke')
-      .then(response => {
-        let chainAPIResult = response.data;
-        console.log(chainAPIResult)
-        if (chainAPIResult.message === 'success') {
-          if (chainAPIResult.data.txId) {
-            new Result('用户黑名单状态改变成功').success(res);
-          } else {
-            new Result('用户黑名单状态改变失败').fail(res);
           }
         } else {
           new Result('函数执行失败').chainError(res);
@@ -353,7 +319,7 @@ router.get('/getSumFee', (req, res, next) => {
     // console.log(chainAPIResult)
     if (chainAPIResult.message == 'success') {
       if (chainAPIResult.data.result) {
-        new Result(chainAPIResult.data.result, '获取利息总积分成功').success(res);
+        new Result({ fee: chainAPIResult.data.result }, '获取利息总积分成功').success(res);
       } else {
         new Result('获取利息总积分失败').fail(res);
       }
@@ -364,31 +330,40 @@ router.get('/getSumFee', (req, res, next) => {
 })
 
 /**
- * * 暂停 / 启动积分系统
+ * * 从黑名单添加 / 移除用户
  */
-router.post('/pausable', (req, res, next) => {
+router.post('/addBlackList', [
+  body('username').isString().withMessage('用户名必须为字符')
+], (req, res, next) => {
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
+  let { username, isBlack } = req.body;
 
-  let { pausable } = req.body;
-  /**
-   * * ['管理员私钥:string', '设置系统状态:bool']
-   */
-  axiosChainAPI(
-      'pausable',
-      [`${admin.private_key}`, pausable],
-      'invoke')
-  .then(response => {
-    let chainAPIResult = response.data;
-    console.log(chainAPIResult)
-    if (chainAPIResult.message == 'success') {
-      if (chainAPIResult.data.txId) {
-        new Result('积分系统状态已改变').success(res);
-      } else {
-        new Result('积分系统状态改变失败').fail(res);
-      }
+  findUserByUsername(username)
+  .then(user => {
+    if (user) {
+      /**
+       * * ['管理员私钥:string', '用户地址:string', '发行金额:number']
+       */
+      axiosChainAPI(
+          'addBlackList',
+          [`${admin.private_key}`, `${user.address}`, isBlack],
+          'invoke')
+      .then(response => {
+        let chainAPIResult = response.data;
+        console.log(chainAPIResult)
+        if (chainAPIResult.message === 'success') {
+          if (chainAPIResult.data.txId) {
+            new Result({ user: username, isBlack: isBlack }, '用户黑名单状态改变成功').success(res);
+          } else {
+            new Result('用户黑名单状态改变失败').fail(res);
+          }
+        } else {
+          new Result('函数执行失败').chainError(res);
+        }
+      })
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result('用户不存在').fail(res);
     }
   })
 })
@@ -412,7 +387,7 @@ router.get('/getPausable', (req, res, next) => {
     // console.log(chainAPIResult)
     if (chainAPIResult.message == 'success') {
       if (chainAPIResult.data.result) {
-        new Result(chainAPIResult.data, '获取积分暂停状态成功').success(res);
+        new Result({ pausable: chainAPIResult.data.result }, '获取积分暂停状态成功').success(res);
       } else {
         new Result('获取积分暂停状态失败').fail(res);
       }
@@ -422,11 +397,44 @@ router.get('/getPausable', (req, res, next) => {
   })
 })
 
+/**
+ * * 暂停 / 启动积分系统
+ */
+router.post('/pausable', [
+  body('pausable').isBoolean().withMessage('状态必须为布尔值')
+], (req, res, next) => {
+  let adminInfoFromToken = decodeJwt(req);
+  admin = adminInfoFromToken.admin;
+
+  let { pausable } = req.body;
+  /**
+   * * ['管理员私钥:string', '设置系统状态:bool']
+   */
+  axiosChainAPI(
+      'pausable',
+      [`${admin.private_key}`, pausable],
+      'invoke')
+  .then(response => {
+    let chainAPIResult = response.data;
+    console.log(chainAPIResult)
+    if (chainAPIResult.message == 'success') {
+      if (chainAPIResult.data.txId) {
+        new Result({ pausable: pausable }, '积分系统状态已改变').success(res);
+      } else {
+        new Result('积分系统状态改变失败').fail(res);
+      }
+    } else {
+      new Result('函数调用失败').chainError(res);
+    }
+  })
+})
 
 /**
  * * 增加积分发行量
  */
-router.post('/addTotalSupply', (req, res, next) => {
+router.post('/addTotalSupply', [
+  body('balance').isNumeric().withMessage('发行量必须为数字')
+], (req, res, next) => {
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
 
@@ -457,7 +465,9 @@ router.post('/addTotalSupply', (req, res, next) => {
 /**
  * * 减少积分发行量
  */
-router.post('/subTotalSupply', (req, res, next) => {
+router.post('/subTotalSupply', [
+  body('balance').isNumeric().withMessage('回收量必须为数字')
+], (req, res, next) => {
   let adminInfoFromToken = decodeJwt(req);
   admin = adminInfoFromToken.admin;
 

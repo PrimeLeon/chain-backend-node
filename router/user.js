@@ -125,13 +125,13 @@ router.get('/info', (req, res, next) => {
           if (chainAPIResult.message == 'success') {
             await updateBalanceByUsername(user.username, chainAPIResult.data.result);
             user.roles = [user.role]
-            new Result(user, '用户信息查询成功').success(res);
+            new Result({ user: user }, '用户信息查询成功').success(res);
           } else {
             new Result('函数调用失败').chainError(res);
           }
         })
       } else {
-        new Result(user, '用户信息查询失败').fail(res);
+        new Result('用户信息查询失败').fail(res);
       }
     })
   } else {
@@ -140,7 +140,7 @@ router.get('/info', (req, res, next) => {
 })
 
 /**
- * * 获取用户信息
+ * * 获取用户黑名单状态
  */
 router.get('/getAccountIsBlack', (req, res, next) => {
   /**
@@ -158,7 +158,7 @@ router.get('/getAccountIsBlack', (req, res, next) => {
       console.log(chainAPIResult)
       if (chainAPIResult.message === 'success') {
         if (chainAPIResult.data.result) {
-          new Result(chainAPIResult.data, "状态查询成功").success(res);
+          new Result({ IsBlack: chainAPIResult.data.result }, "状态查询成功").success(res);
         } else {
           new Result("状态查询失败").fail(res);
         }
@@ -196,7 +196,7 @@ router.get('/balance', (req, res, next) => {
          */
         user.balance = chainAPIResult.data.result;
         await updateBalanceByUsername(user.username, user.balance);
-        new Result(user, "用户余额查询成功").success(res);
+        new Result({ balance: user.balance }, "用户余额查询成功").success(res);
       } else {
         new Result('函数调用错误').chainError(res);
       }
@@ -205,51 +205,6 @@ router.get('/balance', (req, res, next) => {
     new Result('余额查询失败').jwtError(res);
   }
 })
-
-
-/**
- * ! 废弃方案
- */
-// router.post('/transfer', [
-//   body('touser').isString().withMessage('密码必须为字符'),
-//   body('balance').isNumeric().withMessage('密码必须为字符')
-// ], (req, res, next) => {
-//   let userInfoFromToken = decodeJwt(req);
-//   let fromuser = userInfoFromToken.user;
-//   let { touser, balance } = req.body;
-
-//   if (balance >= 0) {
-//     findUserByUsername(fromuser.username)
-//     .then(fromuser => {
-//       if (fromuser.balance > balance) {
-//         findUserByUsername(touser)
-//         .then((touser) => {
-//           if (touser) {
-//             transfer(fromuser.username, touser.username, balance)
-//             .then(result => {
-//               if (result === 'success') {
-//                 axiosChainAPI(
-//                   'transfer',
-
-//                 )
-//                 new Result('转账成功').success(res);
-//               } else {
-//                 new Result('转账失败').fail(res);
-//               }
-//             })
-//           } else {
-//             new Result('收款人不存在').fail(res);
-//           }
-//         })
-//       } else {
-//         new Result('用户余额不足').fail(res);
-//       }
-//     })
-//   } else {
-//     new Result('非法数字')
-//   }
-// })
-
 
 /**
  * * 用户转账
@@ -307,7 +262,7 @@ router.post('/transfer', [
                * * 转账后同步数据库信息
                */
               await transfer(fromuser.username, touser, balance);
-              new Result('转账成功').success(res);
+              new Result({ txId: chainAPIResult.data.txId }, '转账成功').success(res);
             } else {
               new Result('转账失败').fail(res);
             }
