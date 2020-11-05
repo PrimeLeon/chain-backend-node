@@ -279,6 +279,7 @@ router.post('/getStore', (req, res, next) => {
   let { hash } = req.body;
   getStore(hash).then(response => {
     if (response.data.code === 200) {
+      console.log(response.data.data)
       new Result(response.data.data, '获取存证成功').success(res);
     } else {
       new Result('函数调用失败').chainError(res);

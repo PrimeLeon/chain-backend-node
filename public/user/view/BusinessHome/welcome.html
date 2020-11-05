@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="../EasyUI/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../EasyUI/themes/icon.css" />
+    <script type="text/javascript" src="../EasyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="../EasyUI/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/util.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <title>欢迎使用</title>
+</head>
+
+<body class="easyui-layout">
+    <div data-options="region:'north'" style="height:60px;">
+    <p>区块链商企积分联盟</p>
+    </div>
+    <div data-options="region:'west',split:true" title="导航栏菜单" style="width: 200px;">
+        <div class="easyui-accordion" data-options="fit:true,border:false">
+            <div title="常用功能" data-options="selected:true">
+                <div style="margin: 5px">
+                    <ul class="tree easyui-tree" data-options="animate:true,lines:true">
+                        <li data-options="iconCls:'icon-group'">
+                            <span>积分商城</span>
+                            <ul>
+                                <li data-options="iconCls:'icon-group_add'">
+                                    <a onclick="add1()">商品发放</a>
+                                </li>
+                                <li data-options="iconCls:'icon-group_delete'">
+                                    <a>积分交易</a>
+                                </li>
+                                <li data-options="iconCls:'icon-group_edit'">
+                                    <a>积分查询</a>
+                                </li>
+                                <li data-options="iconCls:'icon-group_edit'">
+                                    <a>积分发行</a>
+                                </li>
+                                <li data-options="iconCls:'icon-group_edit'">
+                                    <a>积分购买</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-options="state:'closed',iconCls:'icon-joystick'">
+                            <span>大数据分析</span>
+                            <ul>
+                                <li data-options="iconCls:'icon-joystick_add'">
+                                    <a>消费趋势</a>
+                                </li>
+                                <li data-options="iconCls:'icon-joystick_add'">
+                                    <a>定价分析</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div title="管理" style="padding: 10px;">
+                <div style="margin: 5px">
+                    <ul class="tree easyui-tree" data-options="animate:true,lines:true">
+                        <li data-options="state:'closed',iconCls:'icon-joystick'">
+                            <span>管理中心</span>
+                            <ul>
+                                <li data-options="iconCls:'icon-joystick_add'">
+                                    <a>积分系统配置查询</a>
+                                </li>
+                                <li data-options="iconCls:'icon-joystick_add'">
+                                    <a>信息修改</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab" data-options="region:'center'" style="padding:5px;background:#eee;">
+        <div data-options="title:'欢迎使用'">
+
+        </div>
+    </div>
+</body>
+<script>
+    $('#tab').tabs({
+        fit: true
+    });
+
+    function add1() {
+        var url = "test1.html"
+        $('#tab').tabs('add', {
+            title: '商品发放',
+            iconCls: 'fa fa-plus',
+            closable: true,
+            content: '<iframe src="' + url + '" frameborder=0 height=100% width=100% scrolling=no></iframe>'
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>欢迎使用</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="EasyUI/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="EasyUI/themes/icon.css"/>
+    <script type="text/javascript" src="EasyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="EasyUI/jquery.easyui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body>
+<div class="login">
+	<div class="container-login100">
+		<div class="wrap-login100">
+			<div class="login100-pic js-tilt" data-tilt>
+				<img src="img/img-01.png" alt="IMG">
+			</div>
+			<div class="login100-form validate-form">
+				<span class="login100-form-title">
+					注册
+				</span>
+		
+				<div class="wrap-input100 validate-input">
+					<input class="input100" type="text" id="username" name="username" placeholder="请输入用户名" data-options="required:true,validType:'用户名'">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+					</span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<input class="input100" type="password" name="password" id="password" placeholder="请输入密码" data-options="required:true,validType:'密码'">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+				</div>
+				<div class="wrap-input100 validate-input">
+					<input class="input100" type="password" id="re_pwd" placeholder="请确认密码，两次密码保持一致" required="required">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+				</div>
+				
+				<div class="container-login100-form-btn">
+					<button class="login100-form-btn" onclick="resistsubmit()">
+						加入我们
+					</button>
+				</div>
+
+				<div class="text-center p-t-136">
+					<a class="txt2" href="login.html">
+							去登录
+						<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script>
+	// function resistsubmit(){
+    // $('#resist').form('submit',{
+	// 	url:"/user/register",
+	// 	onSubmit:function(){
+	// 		if($('#re_pwd').val()!=$('#password').val()){
+	// 			alert('两次密码不一致，请验证后重新输入！');
+	// 			return false;
+	// 		}
+	// 	},
+	// 	success:function(data){
+	// 		alert("注册成功");
+	// 		console.log(data);
+	// 	}
+	// })
+	// }
+	function resistsubmit(){
+		$.ajax({
+			url:"/user/register",
+			type:"post",
+			data:{
+				username:$('#username').val(),
+				password:$('#password').val()
+			},
+			beforeSend:function(){
+				if($('#re_pwd').val()!=$('#password').val()){
+					$.messager.alert('提示','两次密码输入不相同，请确认密码');
+					$('#re_pwd').val("");
+					return false;
+				}
+			},
+			success:function(data){
+				if(data.code==0){
+				$.messager.alert('提示','注册成功');
+				$('#username').val("")
+				$('#password').val("")
+				$('#re_pwd').val("")
+				}else if(data.code==-1){
+					$.messager.alert('提示','用户名已经存在，请重新注册');
+					$('#username').val("")
+				    $('#password').val("")
+				    $('#re_pwd').val("")
+				}else{
+					$.messager.alert('提示','系统异常，请联系管理员');
+					$('#username').val("")
+				    $('#password').val("")
+				    $('#re_pwd').val("")
+				}
+			
+			}
+			
+		})
+	}
+</script>
+</html>

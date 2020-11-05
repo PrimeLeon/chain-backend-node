@@ -17,10 +17,10 @@ const timestamp = new Date().getTime()
  */
 function getDetailByHeight(blockHeight) { //blockHeight：区块的高度值，即第几个区块
   tokenStr = String(blockHeight) + String(timestamp);
-  console.log("tokenStr:" + tokenStr)
+  // console.log("tokenStr:" + tokenStr)
   token = base64.stringify(CryptoJS.HmacSHA1(tokenStr, secretkey))
-  console.log("token:" + token)
-  console.log("URLtoken:" + URLencode(token))
+  // console.log("token:" + token)
+  // console.log("URLtoken:" + URLencode(token))
   return axios({
     headers: { 'Content-type': "application/json", 'charset': 'UTF-8', 'timestamp': timestamp },
     url: serviceAddr + "/block/getDetailByHeight",
@@ -41,10 +41,10 @@ function getDetailByHeight(blockHeight) { //blockHeight：区块的高度值，�
  */
 function getDetailByHash(hash) { //hash：区块的哈希值
   tokenStr = String(hash) + String(timestamp);
-  console.log("tokenStr:" + tokenStr)
+  // console.log("tokenStr:" + tokenStr)
   token = base64.stringify(CryptoJS.HmacSHA1(tokenStr, secretkey))
-  console.log("token:" + token)
-  console.log("URLtoken:" + URLencode(token))
+  // console.log("token:" + token)
+  // console.log("URLtoken:" + URLencode(token))
   return axios({
     headers: { 'Content-type': "application/json", 'charset': 'UTF-8', 'timestamp': timestamp },
     url: serviceAddr + "/block/getDetailByHash",
@@ -64,10 +64,10 @@ function getDetailByHash(hash) { //hash：区块的哈希值
  */
 function getHeight() {
   tokenStr = String(timestamp);
-  console.log("tokenStr:" + tokenStr)
+  // console.log("tokenStr:" + tokenStr)
   token = base64.stringify(CryptoJS.HmacSHA1(tokenStr, secretkey))
-  console.log("token:" + token)
-  console.log("URLtoken:" + URLencode(token))
+  // console.log("token:" + token)
+  // console.log("URLtoken:" + URLencode(token))
   return axios({
     headers: { 'Content-type': "application/json", 'charset': 'UTF-8', 'timestamp': timestamp },
     url: serviceAddr + "/chain/getHeight",
@@ -91,10 +91,10 @@ function createStore(businessId, data) { //bussinessId：存证业务id，data�
   // 讲data转换为json
   data = JSON.stringify(data)
   tokenStr = String(businessId) + String(data) + String(timestamp);
-  console.log("tokenStr:" + tokenStr)
+  // console.log("tokenStr:" + tokenStr)
   token = base64.stringify(CryptoJS.HmacSHA1(tokenStr, secretkey))
-  console.log("token:" + token)
-  console.log("URLtoken:" + URLencode(token))
+  // console.log("token:" + token)
+  // console.log("URLtoken:" + URLencode(token))
   return axios({
     headers: { 'Content-type': "application/json", 'charset': 'UTF-8', 'timestamp': timestamp },
     url: serviceAddr + "/store/create",
@@ -115,10 +115,10 @@ function createStore(businessId, data) { //bussinessId：存证业务id，data�
  */
 function getStore(hash) { //hash：存证哈希值
   tokenStr = String(hash) + String(timestamp);
-  console.log("tokenStr:" + tokenStr)
+  // console.log("tokenStr:" + tokenStr)
   token = base64.stringify(CryptoJS.HmacSHA1(tokenStr, secretkey))
-  console.log("token:" + token)
-  console.log("URLtoken:" + URLencode(token))
+  // console.log("token:" + token)
+  // console.log("URLtoken:" + URLencode(token))
   return axios({
     headers: { 'Content-type': "application/json", 'charset': 'UTF-8', 'timestamp': timestamp },
     url: serviceAddr + "/store/get",

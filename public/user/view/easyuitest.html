@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>欢迎使用</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="EasyUI/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="EasyUI/themes/icon.css"/>
+    <script type="text/javascript" src="EasyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="EasyUI/jquery.easyui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <div id="tab">
+        <div data-options="title:'欢迎使用'">
+			<button onclick="add1()">添加</button>
+		</div>
+	</div>	  
+</body>
+<script>
+	$('#tab').tabs({
+   fit:true
+ });
+ function add1(){
+	 var url="login.html"
+   $('#tab').tabs('add',{
+   title:'界面一',
+   iconCls:'fa fa-plus',
+   closable:true,
+   //href:'${pageContext.request.contextPath}/login.html',
+   content: '<iframe src="' + url + '" frameborder=0 height=100% width=100% scrolling=no></iframe>'
+ });
+ }
+</script>
+</html>

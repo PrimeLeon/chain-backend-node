@@ -79,7 +79,7 @@ function blackUser(username) {
 
 function findAllUser() {
   return querySql(`
-  SELECT address,id as ID,balance,password,private_key as privateKey
+  SELECT *
   FROM user`)
 }
 
