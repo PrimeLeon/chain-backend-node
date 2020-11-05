@@ -91,10 +91,13 @@ localhost:5000/index.html
     * [获取当前系统暂停状态](#admin_getPausable)
     * [设置积分利率](#admin_setBPR)
     * [设置积分利率上限](#admin_setMF)
-  * [按页码查询用户](#admin_user_page)
-  * [添加用户上链](#admin_newAccount)
-  * [从黑名单移除 / 添加用户](#admin_addBlackList)
-  * [给用户发行积分](#admin_issue)
+  * **用户管理**
+    * [按页码查询用户](#admin_user_getByPage)
+    * [查询所有用户](#admin_user_all)
+    * [获取所有用户](#admin_user_all)
+    * [添加用户上链](#admin_newAccount)
+    * [从黑名单移除 / 添加用户](#admin_addBlackList)
+    * [给用户发行积分](#admin_issue)
 
 
 
@@ -124,7 +127,8 @@ localhost:5000/index.html
   }
   ```
 
-## 通用
+
+
 |     名称     | <a id="getMF">获取最大积分利息</a>   [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------- |
 | **接口地址** | /getMF                                            |
@@ -734,18 +738,21 @@ localhost:5000/index.html
   
   
 
-|     名称     | <a id="admin_user_page">根据页码查询用户</a>  [回到API目录](#API_LIST) |
+|     名称     | <a id="admin_user_getByPage">根据页码查询用户</a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
-| **接口地址** | /admin/user/:page                                            |
+| **接口地址** | /admin/user/getByPage                                        |
 | **请求方式** | HTTP / GET                                                   |
-|   **简介**   | 根据页码查询用户（默认一页4条记录，默认为创建时间倒序排序）  |
+|   **简介**   | 根据页码查询用户（默认一页10条记录，默认为创建时间倒序排序） |
 
 * **请求示例**
 
   ```json
   // 头部包含以下字段
   Authorization ： Bearer <Token>
-  // 第一页 /admin/user/1
+  // body
+  {
+      "page": 1
+  }
   ```
   
 * **返回值示例**
@@ -763,8 +770,8 @@ localhost:5000/index.html
                   "password": "b04a7ca45ee3f3afe375161a120f9eaa",
                   "nickname": "testuser4",
                   "role": "user",
-                  "address": "-----BEGIN RSA PUBLIC KEY-----\nMEgCQQClECP5J2jniF1kIlK88itCS7CSPV2S9lywMof7K0T0WLgaXkF/ejaVBDr7\nT0aNZOSYOahZBM9Y2FVm0R3goRkbAgMBAAE=\n-----END RSA PUBLIC KEY-----",
-                  "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOwIBAAJBAKUQI/knaOeIXWQiUrzyK0JLsJI9XZL2XLAyh/srRPRYuBpeQX96\nNpUEOvtPRo1k5Jg5qFkEz1jYVWbRHeChGRsCAwEAAQJAJRq3u25Mep+Avt2oU6js\naH6zNmxs+HhA5aq2PpO/cF2UCICdgAo9dDDu1MB8no+i9yq4dsWSV5pUntO36zXI\n4QIhAOhUSQmpSh9imX7V3qsyihf9AaN/wxDBLZIugHDojuOXAiEAteFjcy+Cx6MM\nf5M0qqnP3CClXMBEkzLeMe1PPN7PVx0CIQDY11IUIl18TZrWNudNAi7BlPMiluyJ\nhsPx3FUlDOnQoQIgOSAZhEwf32QuwMMTf6bmSlVWmtMotrL7ZuMKSCwTI2ECIQDn\nt4sCTQCAScsKPuzjj1PZ542l5jHet04jLUPhVyqRkw==\n-----END RSA PRIVATE KEY-----",
+                  "address": "-----BEGIN RSA PUBLIC KEY-----\nMEgCQQClECP5J2AAE=\n-----END RSA PUBLIC KEY-----",
+                  "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOwIBAAJBAKUQI/knaOeIXWQiUrzn-----END RSA PRIVATE KEY-----",
                   "balance": 211,
                   "create_time": "2020-11-02T05:59:43.000Z",
                   "change_time": "2020-11-02T05:59:43.000Z",
@@ -784,6 +791,66 @@ localhost:5000/index.html
       "data": []
   }
   ```
+  
+  
+  
+|     名称     | <a id="admin_user_all">查询所有用户</a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/user/all                                        |
+| **请求方式** | HTTP / GET                                                   |
+|   **简介**   | 查询所有用户 |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "page": 1
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 此页有记录
+  {
+      "code": 0,
+      "msg": "用户信息查询成功",
+      "data": {
+          "users": [
+              {
+                  "id": 67,
+                  "username": "testuser4",
+                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+                  "nickname": "testuser4",
+                  "role": "user",
+                  "address": "-----BEGIN RSA PUBLIC KEY-----\nMEgCQQClECP5J2AAE=\n-----END RSA PUBLIC KEY-----",
+                  "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOwIBAAJBAKUQI/knaOeIXWQiUrzn-----END RSA PRIVATE KEY-----",
+                  "balance": 211,
+                  "create_time": "2020-11-02T05:59:43.000Z",
+                  "change_time": "2020-11-02T05:59:43.000Z",
+                  "delete_time": "2020-11-02T05:59:43.000Z",
+                  "isBlack": "false",
+                  "isDelete": "false",
+                  "isActivate": 1,
+                  "paycode": null
+              },{},{}
+          ]
+      }
+  }
+  // 此页没有记录
+  {
+      "code": 0,
+      "msg": "用户信息查询成功",
+      "data": []
+  }
+  ```
+  
+  
+  
+  
   
   
 |     名称     | <a id="admin_newAccount">添加用户上链 </a>  [回到API目录](#API_LIST) |

@@ -60,16 +60,16 @@ function findUserByUsernameForUserGoOnChain(username) {
   FROM user 
   WHERE username='${username}'
   AND isActivate=0`);
-} 
+}
 
-function activateUser(username){
+function activateUser(username) {
   return queryOne(`
   UPDATE user
   SET isActivate=1
   WHERE username='${username}'`)
 }
 
-function blackUser(username){
+function blackUser(username) {
   return queryZero(`
     UPDATE user
     SET isBlack='true'
@@ -77,8 +77,15 @@ function blackUser(username){
   `)
 }
 
+function findAllUser() {
+  return querySql(`
+  SELECT address,id as ID,balance,password,private_key as privateKey
+  FROM user`)
+}
+
 module.exports = {
   login,
+  findAllUser,
   findAdminByUsername,
   findUserOrderByRegisterTimeWithPage,
   findUserByUsername,

@@ -19,6 +19,7 @@ const Result = require('../models/Result');
  */
 const {
   login,
+  findAllUser,
   findAdminByUsername,
   findUserOrderByRegisterTimeWithPage,
   findUserByUsernameForUserGoOnChain,
@@ -101,8 +102,8 @@ router.get('/info', (req, res, next) => {
 /**
  * * 获取指定页数用户
  */
-router.get('/user/:page', [
-  param('page').isNumeric().withMessage('页码必须为数字')
+router.get('/user/getByPage', [
+  body('page').isNumeric().withMessage('页码必须为数字')
 ], (req, res, next) => {
   /**
    * * 使用express-validator模块处理输入异常
@@ -116,7 +117,7 @@ router.get('/user/:page', [
      * ? 通过validator中间件解决?
      * * 处理非法页码 (小于等于0的页码)
      */
-    let page = (req.params.page > 0) ? req.params.page : 1;
+    let page = (req.body.page > 0) ? req.body.page : 1;
     console.log(page)
     findUserOrderByRegisterTimeWithPage(page).then(users => {
       if (users) {
@@ -126,6 +127,35 @@ router.get('/user/:page', [
       }
     })
   }
+})
+
+/**
+ * * 获取所有用户
+ */
+router.get('/user/all', (req, res, next) => {
+  findAllUser().then(users => {
+    if (users) {
+      new Result({ users: users }, '用户信息查询成功').success(res);
+    } else {
+      new Result('用户信息查询失败').fail(res);
+    }
+  })
+})
+
+/**
+ * * 根据用户名获取用户信息
+ */
+router.post('/user/getByUsername',[
+  body('username').isString().withMessage('用户名必须为字符'),
+], (req, res, next) => {
+  let { username } = req.body;
+  findUserByUsername(username).then(user => {
+    if (user) {
+      new Result({ user: user }, '用户信息查询成功').success(res);
+    } else {
+      new Result('用户信息查询失败').fail(res);
+    }
+  })
 })
 
 /**
@@ -561,6 +591,7 @@ router.post('/setMF', [
     }
   })
 })
+
 
 
 module.exports = router
