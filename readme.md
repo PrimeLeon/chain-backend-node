@@ -93,7 +93,7 @@ localhost:5000/index.html
     * [设置积分利率上限](#admin_setMF)
   * **用户管理**
     * [按页码查询用户](#admin_user_getByPage)
-    * [查询所有用户](#admin_user_all)
+    * [按用户名查询用户](#admin_user_getByUsername)
     * [获取所有用户](#admin_user_all)
     * [添加用户上链](#admin_newAccount)
     * [从黑名单移除 / 添加用户](#admin_addBlackList)
@@ -805,10 +805,6 @@ localhost:5000/index.html
   ```json
   // 头部包含以下字段
   Authorization ： Bearer <Token>
-  // body
-  {
-      "page": 1
-  }
   ```
   
 * **返回值示例**
@@ -849,6 +845,54 @@ localhost:5000/index.html
   ```
   
   
+  
+  |     名称     | <a id="admin_user_getByUsername">根据姓名查询用户信息</a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/user/getByUsername                                        |
+| **请求方式** | HTTP / POST                                                   |
+|   **简介**   | 根据姓名查询用户信息 |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  // body
+  {
+      "username": "testuser"
+  }
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "用户信息查询成功",
+      "data": {
+          "users": [
+              {
+                  "id": 67,
+                  "username": "testuser4",
+                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+                  "nickname": "testuser4",
+                  "role": "user",
+                  "address": "-----BEGIN RSA PUBLIC KEY-----\nMEgCQQClECP5J2AAE=\n-----END RSA PUBLIC KEY-----",
+                  "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOwIBAAJBAKUQI/knaOeIXWQiUrzn-----END RSA PRIVATE KEY-----",
+                  "balance": 211,
+                  "create_time": "2020-11-02T05:59:43.000Z",
+                  "change_time": "2020-11-02T05:59:43.000Z",
+                  "delete_time": "2020-11-02T05:59:43.000Z",
+                  "isBlack": "false",
+                  "isDelete": "false",
+                  "isActivate": 1,
+                  "paycode": null
+              },{},{}
+          ]
+      }
+  }
+  ```
   
   
   
