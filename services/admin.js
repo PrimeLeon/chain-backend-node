@@ -1,4 +1,4 @@
-const { querySql, queryOne } = require('../db/index');
+const { querySql, queryOne, queryZero } = require('../db/index');
 /**
  * @brief 根据用户名密码查找是否有匹配结果
  * @param {string} username 用户名
@@ -69,11 +69,20 @@ function activateUser(username){
   WHERE username='${username}'`)
 }
 
+function blackUser(username){
+  return queryZero(`
+    UPDATE user
+    SET isBlack='true'
+    WHERE username='${username}'
+  `)
+}
+
 module.exports = {
   login,
   findAdminByUsername,
   findUserOrderByRegisterTimeWithPage,
   findUserByUsername,
   findUserByUsernameForUserGoOnChain,
-  activateUser
+  activateUser,
+  blackUser
 }

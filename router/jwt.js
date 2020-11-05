@@ -20,6 +20,8 @@ module.exports = jwt({
     '/user/login',
     '/admin/login',
     '/user/register',
-    '/admin'
+    '/admin',
+    '/getBPR',
+    '/getMF'
   ]
 });

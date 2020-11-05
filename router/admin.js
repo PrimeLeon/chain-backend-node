@@ -23,7 +23,8 @@ const {
   findUserOrderByRegisterTimeWithPage,
   findUserByUsernameForUserGoOnChain,
   findUserByUsername,
-  activateUser
+  activateUser,
+  blackUser
 } = require('../services/admin');
 
 const { md5, decodeJwt } = require('../utils/index');
@@ -269,7 +270,6 @@ router.post('/issue', [
 ], (req, res, next) => {
   let { username, balance } = req.body;
   let adminInfoFromToken = decodeJwt(req);
-
   admin = adminInfoFromToken.admin;
   findUserByUsername(username)
   .then(user => {
@@ -349,11 +349,12 @@ router.post('/addBlackList', [
           'addBlackList',
           [`${admin.private_key}`, `${user.address}`, isBlack],
           'invoke')
-      .then(response => {
+      .then(async response => {
         let chainAPIResult = response.data;
         console.log(chainAPIResult)
         if (chainAPIResult.message === 'success') {
           if (chainAPIResult.data.txId) {
+            await blackUser(username);
             new Result({ user: username, isBlack: isBlack }, '用户黑名单状态改变成功').success(res);
           } else {
             new Result('用户黑名单状态改变失败').fail(res);

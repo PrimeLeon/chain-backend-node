@@ -4,6 +4,7 @@ const boom = require('boom');
 const Result = require('../models/Result');
 const userRouter = require('./user');
 const adminRouter = require('./admin');
+const commRouter = require('./comm');
 const jwtAuth = require('./jwt');
 /**
  * * 注册路由
@@ -11,15 +12,20 @@ const jwtAuth = require('./jwt');
 const router = express.Router();
 
 /**
+ * * 通用接口
+ */
+router.use('/', commRouter);
+
+/**
  * * jwt验证
  */
 router.use(jwtAuth);
-/**
- * * 后台主页面
- */
-router.get('/', (req, res) => {
-  res.send('管理后台');
-})
+// /**
+//  * * 后台主页面
+//  */
+// router.get('/', (req, res) => {
+//   res.send('管理后台');
+// })
 /**
  * * 引用userRouter
  */

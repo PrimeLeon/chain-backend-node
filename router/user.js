@@ -34,6 +34,7 @@ const {
 const { md5, decodeJwt } = require('../utils/index');
 const { PWD_SALT, PRIVATE_KEY, JWT_EXPIRED } = require('../utils/constant');
 const { axiosChainAPI } = require('../chainAPI/index');
+
 const user = require('../services/user');
 
 
