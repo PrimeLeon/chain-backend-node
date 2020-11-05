@@ -145,7 +145,7 @@ router.get('/user/all', (req, res, next) => {
 /**
  * * 根据用户名获取用户信息
  */
-router.post('/user/getByUsername',[
+router.get('/user/getByUsername',[
   body('username').isString().withMessage('用户名必须为字符'),
 ], (req, res, next) => {
   let { username } = req.body;

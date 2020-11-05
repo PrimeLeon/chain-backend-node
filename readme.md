@@ -846,11 +846,11 @@ localhost:5000/index.html
   
   
   
-  |     名称     | <a id="admin_user_getByUsername">根据姓名查询用户信息</a>  [回到API目录](#API_LIST) |
+|     名称     | <a id="admin_user_getByUsername">根据姓名查询用户信息</a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
-| **接口地址** | /admin/user/getByUsername                                        |
-| **请求方式** | HTTP / POST                                                   |
-|   **简介**   | 根据姓名查询用户信息 |
+| **接口地址** | /admin/user/getByUsername                                    |
+| **请求方式** | HTTP / GET                                                   |
+|   **简介**   | 根据姓名查询用户信息                                         |
 
 * **请求示例**
 
