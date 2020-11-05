@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 app.use('/', router);
 
-const server = app.listen(5000, () => {
+const server = app.listen(80, () => {
   const { address, port } = server.address();
   console.log(`Http server activated ${address}:${port}`);
 })
