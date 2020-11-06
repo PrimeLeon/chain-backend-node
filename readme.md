@@ -1118,10 +1118,7 @@ localhost:5000/index.html
   }
   ```
   
-  
-  
-  
-  |     名称     | <a id="admin_user_blackList">获取已经拉黑的所有用户 </a>  [回到API目录](#API_LIST) |
+|     名称     | <a id="admin_user_blackList">获取已经拉黑的所有用户 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/user/blackList                                           |
 | **请求方式** | HTTP / get                                                   |
@@ -1164,8 +1161,6 @@ localhost:5000/index.html
       }
   }
   ```
-  
-  
   
 |     名称     | <a id="admin_addTotalSupply">增加积分发行 </a>  [回到API目录](#API_LIST) |
 | :----------: | :----------------------------------------------------------- |
