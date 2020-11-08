@@ -17,6 +17,7 @@ const {
   login,
   register,
   findUserByUsername,
+  findUserByUsernameUnRegistered,
   updateBalanceByUsername,
   findAddressOfTransferUsers,
   transfer
@@ -95,7 +96,7 @@ router.post('/register', [
      */
     let { username, password } = req.body;
     password = md5(`${password}${PWD_SALT}`);
-    findUserByUsername(username).then(user => {
+    findUserByUsernameUnRegistered(username).then(user => {
       if (!user || user.length === 0) {
         register(username, password).then(result => {
           if (result.affectedRows === 1) {
@@ -131,7 +132,7 @@ router.post('/company/register', [
      */
     let { username, password } = req.body;
     password = md5(`${password}${PWD_SALT}`);
-    findUserByUsername(username).then(user => {
+    findUserByUsernameUnRegistered(username).then(user => {
       if (!user || user.length === 0) {
         register(username, password, 'company').then(result => {
           if (result.affectedRows === 1) {

@@ -154,7 +154,7 @@ router.get('/user/getByUsername',[
     if (user) {
       new Result({ user: user }, '用户信息查询成功').success(res);
     } else {
-      new Result('用户信息查询失败').fail(res);
+      new Result('用户不存在').fail(res);
     }
   })
 })

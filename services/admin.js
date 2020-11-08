@@ -30,7 +30,7 @@ function findAdminByUsername(username) {
  * @param {string} username 用户名
  */
 function findUserByUsername(username) {
-  return queryOne(`
+  return querySql(`
   SELECT id,username,password,nickname,role,address,private_key,balance
   FROM user 
   WHERE username='${username}'`);

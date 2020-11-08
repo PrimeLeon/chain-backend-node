@@ -97,7 +97,9 @@ localhost:5000/index.html
     * [按用户名查询用户](#admin_user_getByUsername)
     * [获取所有用户](#admin_user_all)
     * [添加用户上链](#admin_newAccount)
-    * [从黑名单移除 / 添加用户](#admin_addBlackList)
+    * **黑名单**
+      * [从黑名单移除 / 添加用户](#admin_addBlackList)
+      * [获取所有已经被拉黑的用户](#admin_user_blackList)
     * [给用户发行积分](#admin_issue)
 
 
@@ -1115,6 +1117,54 @@ localhost:5000/index.html
       }
   }
   ```
+  
+  
+  
+  
+  |     名称     | <a id="admin_user_blackList">获取已经拉黑的所有用户 </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/user/blackList                                           |
+| **请求方式** | HTTP / get                                                   |
+|   **简介**   | 从黑名单添加 / 移除用户                                         |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "拉黑用户信息查询成功",
+      "data": {
+          "users": [
+              {
+                  "id": 63,
+                  "username": "testuser",
+                  "password": "b04a7ca45ee3f3afe375161a120f9eaa",
+                  "nickname": "testuser",
+                  "role": "user",
+                  "address": "-----BEGIN RSA PUBLIC KEY-----\n-----END RSA PUBLIC KEY-----",
+                  "private_key": "-----BEGIN RSA PRIVATE KEY-----\n-----END RSA PRIVATE KEY-----",
+                  "balance": 10451,
+                  "create_time": "2020-11-02T05:59:17.000Z",
+                  "change_time": "2020-11-02T05:59:17.000Z",
+                  "delete_time": "2020-11-02T05:59:17.000Z",
+                  "isBlack": "true",
+                  "isDelete": "false",
+                  "isActivate": 1,
+                  "paycode": null
+              }
+          ]
+      }
+  }
+  ```
+  
   
   
 |     名称     | <a id="admin_addTotalSupply">增加积分发行 </a>  [回到API目录](#API_LIST) |

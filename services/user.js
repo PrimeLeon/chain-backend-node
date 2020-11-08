@@ -49,6 +49,17 @@ function findUserByUsername(username) {
   WHERE username = '${username}'
   AND isActivate = 1`);
 }
+
+/**
+ * @brief 根据用户名查找用户信息
+ * @param {string} username 用户名
+ */
+function findUserByUsernameUnRegistered(username) {
+  return queryOne(`
+  SELECT id,username,password,nickname,role,address,private_key,balance
+  FROM user 
+  WHERE username = '${username}'`);
+}
 /**
  * @brief 根据用户名更新余额
  * @param {string} username 用户名
@@ -93,6 +104,7 @@ module.exports = {
   login,
   register,
   findUserByUsername,
+  findUserByUsernameUnRegistered,
   updateBalanceByUsername,
   findAddressOfTransferUsers,
   transfer
