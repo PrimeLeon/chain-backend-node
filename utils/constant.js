@@ -11,5 +11,9 @@ module.exports = {
     serviceAddr: "https://cts-api.wutongchain.com",
     appid: "4fb18136-09fe-11eb-8a37-fa163ec0b2f0",
     secretkey: "4fd9521a-09fe-11eb-8a37-fa163ec0b2f0"
+  },
+  PORT: {
+    port_prod: 80,
+    port_dev: 5000
   }
 }

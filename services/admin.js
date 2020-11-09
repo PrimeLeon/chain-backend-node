@@ -77,6 +77,14 @@ function blackUser(username) {
   `)
 }
 
+function findAllBlackUser() {
+  return queryZero(`
+    SELECT *
+    FROM user
+    WHERE isBlack='true'
+  `)
+}
+
 function findAllUser() {
   return querySql(`
   SELECT *
@@ -90,6 +98,7 @@ module.exports = {
   findUserOrderByRegisterTimeWithPage,
   findUserByUsername,
   findUserByUsernameForUserGoOnChain,
+  findAllBlackUser,
   activateUser,
   blackUser
 }

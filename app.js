@@ -1,8 +1,8 @@
 const express = require('express');
 const router = require('./router');
-const fs = require('fs');
-const https = require('https');
 const cors = require('cors');
+
+const { port_prod,port_dev } = require('./utils/constant').PORT
 
 const bodyParser = require('body-parser');
 
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 app.use('/', router);
 
-const server = app.listen(80, () => {
+const server = app.listen(port_dev, () => {
   const { address, port } = server.address();
   console.log(`Http server activated ${address}:${port}`);
 })

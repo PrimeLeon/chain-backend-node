@@ -24,6 +24,7 @@ const {
   findUserOrderByRegisterTimeWithPage,
   findUserByUsernameForUserGoOnChain,
   findUserByUsername,
+  findAllBlackUser,
   activateUser,
   blackUser
 } = require('../services/admin');
@@ -399,10 +400,22 @@ router.post('/addBlackList', [
   })
 })
 
-
-
-
 // TODO: 获取所有黑名单用户
+/**
+ * * 获取所有被拉黑的用户
+ */
+router.get('/user/blackList', (req, res, next) => {
+  findAllBlackUser().then(users => {
+    if (users) {
+      new Result({ users: users }, '拉黑用户信息查询成功').success(res);
+    } else {
+      new Result('拉黑用户信息查询失败').fail(res);
+    }
+  })
+})
+
+
+
 
 /**
  * * 获取当前系统状态
