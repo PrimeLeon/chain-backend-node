@@ -112,6 +112,42 @@ router.post('/register', [
 })
 
 /**
+ * * 企业用户注册
+ */
+router.post('/company/register', [
+  body('username').isString().withMessage('用户名必须为字符'),
+  body('password').isString().withMessage('密码必须为字符')
+], (req, res, next) => {
+  /**
+   * * 使用express-validator模块处理输入异常
+   */
+  const err = validationResult(req);
+  if (!err.isEmpty()) {
+    const [{ msg }] = err.errors;
+    next(boom.badRequest(msg));
+  } else {
+    /**
+     * * 查询用户是否存在
+     */
+    let { username, password } = req.body;
+    password = md5(`${password}${PWD_SALT}`);
+    findUserByUsername(username).then(user => {
+      if (!user || user.length === 0) {
+        register(username, password, 'company').then(result => {
+          if (result.affectedRows === 1) {
+            new Result('申请注册成功').success(res);
+          } else {
+            new Result('申请注册失败').fail(res);
+          }
+        })
+      } else {
+        new Result('用户名已存在').fail(res);
+      }
+    })
+  }
+})
+
+/**
  * * 获取用户信息
  */
 router.get('/info', (req, res, next) => {

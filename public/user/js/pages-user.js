@@ -52,7 +52,7 @@ function getUserTrs(userArr) {
         data: JSON.stringify({username:username}),
         dataType: "json",
         beforeSend: function (XMLHttpRequest) {
-          XMLHttpRequest.setRequestHeader("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDk1MjU3LCJleHAiOjE2MDcwODcyNTd9.xu2-3QlUuIxE4MH-LjXluKsNpxZ8XUxgV3iMoO8VrbY`);
+          XMLHttpRequest.setRequestHeader("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NTc5NTQ5LCJleHAiOjE2MDcxNzE1NDl9.j8S_6wNcqkb54dpgjAYO0I6r39ij4dErk8siAf0Lja0`);
         },
         success: function (response) {
           let target = e.target;
@@ -86,7 +86,7 @@ function initUsers() {
     dataType: "json",
     beforeSend: function (XMLHttpRequest) {
       // * 此处在请求发送前设置请求头
-      XMLHttpRequest.setRequestHeader("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NDk1MjU3LCJleHAiOjE2MDcwODcyNTd9.xu2-3QlUuIxE4MH-LjXluKsNpxZ8XUxgV3iMoO8VrbY`);
+      XMLHttpRequest.setRequestHeader("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6MiwidXNlcm5hbWUiOiJ4d2oxMjMiLCJwYXNzd29yZCI6ImVmMzBkMGNmNmNlMjkxZjZkZWZhOWYxZDMzMmY3MWFlIiwicHJpdmF0ZV9rZXkiOiJ4d2oxMjMiLCJpc0FjdGl2YXRlIjoxfSwiaWF0IjoxNjA0NTc5NTQ5LCJleHAiOjE2MDcxNzE1NDl9.j8S_6wNcqkb54dpgjAYO0I6r39ij4dErk8siAf0Lja0`);
     },
     success: function (data) {
       // * 获取tr节点数组

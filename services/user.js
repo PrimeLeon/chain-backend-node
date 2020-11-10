@@ -16,7 +16,13 @@ function login(username, password) {
     AND isActivate=1`);
 }
 
-function register(username, password) {
+/**
+ * @brief 注册
+ * @param {string} username 用户名
+ * @param {string} password 密码
+ * @param {string} role 角色
+ */
+function register(username, password, role = 'user') {
   const nickname = username;
   const RSAKey = getRSAKey();
   const { address, private_key } = RSAKey;
@@ -26,9 +32,9 @@ function register(username, password) {
   const change_time = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
   return queryZero(`
     INSERT INTO user 
-    (username,password,nickname,address,private_key,create_time,change_time,delete_time) 
+    (username,password,nickname,role,address,private_key,create_time,change_time,delete_time) 
     VALUES 
-    ('${username}','${password}','${nickname}','${address}','${private_key}','${create_time}','${change_time}','${delete_time}')
+    ('${username}','${password}','${nickname}','${role}','${address}','${private_key}','${create_time}','${change_time}','${delete_time}')
   `);
 }
 

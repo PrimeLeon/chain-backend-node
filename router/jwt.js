@@ -20,6 +20,7 @@ module.exports = jwt({
     '/user/login',
     '/admin/login',
     '/user/register',
+    '/user/company/register',
     '/admin',
     '/getBPR',
     '/getMF'
