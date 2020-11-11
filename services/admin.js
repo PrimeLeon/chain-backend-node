@@ -1,11 +1,14 @@
 const { querySql, queryOne, queryZero } = require('../db/index');
+const moment = require('moment');
+
+const { FEE_LOG_COUNT } = require('../utils/constant')
+
 /**
  * @brief 根据用户名密码查找是否有匹配结果
  * @param {string} username 用户名
  * @param {string} password 密码
  */
 function login(username, password) {
-  console.log(username, password)
   return queryOne(`
     SELECT *
     FROM admin 
@@ -69,10 +72,10 @@ function activateUser(username) {
   WHERE username='${username}'`)
 }
 
-function blackUser(username) {
+function blackUser(username, isBlack) {
   return queryZero(`
     UPDATE user
-    SET isBlack='true'
+    SET isBlack='${isBlack}'
     WHERE username='${username}'
   `)
 }
@@ -91,13 +94,35 @@ function findAllUser() {
   FROM user`)
 }
 
-function updateBalance(username,balance){
+function updateBalance(username, balance) {
   return queryZero(`
     UPDATE user
     SET balance=${balance}
     WHERE username='${username}'
   `)
 }
+
+function feeLog(fee) {
+  const date = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+  return queryZero(`
+    INSERT INTO fee_log
+    (date,fee)
+    VALUES
+    ('${date}',${fee})
+  `)
+}
+
+function getFeeLog() {
+  return queryZero(`
+    SELECT date,fee
+    FROM fee_log
+    WHERE fee in
+    (SELECT fee FROM fee_log GROUP BY fee HAVING COUNT(fee)=1)
+    ORDER BY date DESC
+    LIMIT 0,${FEE_LOG_COUNT}
+  `)
+}
+
 module.exports = {
   login,
   findAllUser,
@@ -108,5 +133,7 @@ module.exports = {
   findAllBlackUser,
   updateBalance,
   activateUser,
-  blackUser
+  blackUser,
+  feeLog,
+  getFeeLog
 }

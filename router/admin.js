@@ -27,7 +27,9 @@ const {
   findAllBlackUser,
   updateBalance,
   activateUser,
-  blackUser
+  blackUser,
+  feeLog,
+  getFeeLog
 } = require('../services/admin');
 
 const { md5, decodeJwt } = require('../utils/index');
@@ -36,6 +38,7 @@ const { axiosChainAPI } = require('../chainAPI/index');
 
 const router = express.Router();
 
+const looper = require('../looper/fee_log');
 
 router.get('/', (req, res, next) => {
   res.send('hello admin');
@@ -355,12 +358,14 @@ router.get('/getSumFee', (req, res, next) => {
       'getSumFee',
       [`${admin.private_key}`],
       'query')
-  .then(response => {
+  .then(async response => {
     let chainAPIResult = response.data;
     // console.log(chainAPIResult)
     if (chainAPIResult.message == 'success') {
       if (chainAPIResult.data.result) {
-        new Result({ fee: chainAPIResult.data.result }, '获取利息总积分成功').success(res);
+        let fee = chainAPIResult.data.result;
+        await feeLog(fee);
+        new Result({ fee: fee }, '获取利息总积分成功').success(res);
       } else {
         new Result('获取利息总积分失败').fail(res);
       }
@@ -369,6 +374,20 @@ router.get('/getSumFee', (req, res, next) => {
     }
   })
 })
+
+/**
+ * * 获取总利息LOG
+ */
+router.get('/getFeeLog', (req, res, next) => {
+  getFeeLog().then(logs => {
+      if (logs) {
+        new Result({ logs: logs }, '获取积分Log成功').success(res);
+      } else {
+        new Result('获取积分Log失败').fail(res);
+      }
+  })
+})
+
 
 /**
  * * 从黑名单添加 / 移除用户
@@ -398,7 +417,7 @@ router.post('/addBlackList', [
         console.log(chainAPIResult)
         if (chainAPIResult.message === 'success') {
           if (chainAPIResult.data.txId) {
-            await blackUser(username);
+            await blackUser(username, isBlack);
             new Result({ user: username, isBlack: isBlack }, '用户黑名单状态改变成功').success(res);
           } else {
             new Result('用户黑名单状态改变失败').fail(res);

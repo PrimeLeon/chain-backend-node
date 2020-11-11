@@ -15,5 +15,7 @@ module.exports = {
   PORT: {
     port_prod: 80,
     port_dev: 5000
-  }
+  },
+  FEE_LOG_COUNT: 10,
+  FEE_LOG_INTERVAL:  15 * 1000
 }

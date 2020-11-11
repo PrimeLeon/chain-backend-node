@@ -1,5 +1,4 @@
 const { querySql, queryOne, queryZero, transaction } = require('../db/index');
-const { axiosChain } = require('../chainAPI/index');
 const { getRSAKey } = require('../utils/index');
 const moment = require('moment');
 /**
