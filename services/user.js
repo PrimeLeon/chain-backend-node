@@ -30,6 +30,7 @@ function register(username, password, role = 'user') {
   const create_time = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
   const delete_time = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
   const change_time = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
+  const telephone = 11111111111;
   return queryZero(`
     INSERT INTO user 
     (username,password,nickname,role,address,private_key,create_time,change_time,delete_time) 

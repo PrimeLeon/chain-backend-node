@@ -63,7 +63,7 @@ router.post('/login', [
     password = md5(`${password}${PWD_SALT}`);
     login(username, password).then(user => {
       if (!user || user.length === 0) {
-        new Result('登录失败').fail(res);
+        new Result('用户不存在或账号密码错误').fail(res);
       } else {
         /**
          * * 注册token
@@ -172,10 +172,10 @@ router.get('/info', (req, res, next) => {
           console.log(chainAPIResult);
           if (chainAPIResult.message == 'success') {
             await updateBalanceByUsername(user.username, chainAPIResult.data.result);
-            user.roles = [user.role]
+            // user.roles = [user.role]
             new Result({ user: user }, '用户信息查询成功').success(res);
           } else {
-            new Result('函数调用失败').chainError(res);
+            new Result(chainAPIResult, '函数调用失败').chainError(res);
           }
         })
       } else {
@@ -206,12 +206,12 @@ router.get('/getAccountIsBlack', (req, res, next) => {
       console.log(chainAPIResult)
       if (chainAPIResult.message === 'success') {
         if (chainAPIResult.data.result) {
-          new Result({ IsBlack: chainAPIResult.data.result }, "状态查询成功").success(res);
+          new Result({ IsBlack: JSON.parse(chainAPIResult.data.result) }, "状态查询成功").success(res);
         } else {
           new Result("状态查询失败").fail(res);
         }
       } else {
-        new Result("函数调用失败").chainError(res);
+        new Result(chainAPIResult, "函数调用失败").chainError(res);
       }
     })
   } else {
@@ -237,16 +237,18 @@ router.get('/balance', (req, res, next) => {
         'query')
     .then(async response => {
       let chainAPIResult = response.data;
+      console.log('-------------------------')
       console.log(chainAPIResult)
+      console.log('-------------------------')
       if (chainAPIResult.message === 'success') {
         /**
          * * 更新余额
          */
         user.balance = chainAPIResult.data.result;
         await updateBalanceByUsername(user.username, user.balance);
-        new Result({ balance: user.balance }, "用户余额查询成功").success(res);
+        new Result({ balance: parseInt(user.balance) }, "用户余额查询成功").success(res);
       } else {
-        new Result('函数调用错误').chainError(res);
+        new Result(chainAPIResult, '函数调用错误').chainError(res);
       }
     })
   } else {
@@ -263,7 +265,7 @@ router.post('/getDetailByHeight', (req, res, next) => {
     if (response.data.code === 200) {
       new Result({ height: height, details: response.data.data.data }, '获取指定高度区块信息成功').success(res);
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -277,7 +279,7 @@ router.post('/getDetailByHash', (req, res, next) => {
     if (response.data.code === 200) {
       new Result({ hash: hash, details: response.data.data.data }, '获取指定高度区块信息成功').success(res);
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -290,7 +292,7 @@ router.get('/getHeight', (req, res, next) => {
     if (response.data.code === 200) {
       new Result({ height: response.data.data.height }, '获取高度成功').success(res);
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -304,11 +306,11 @@ router.post('/createStore', (req, res, next) => {
     if (response.data.code === 200) {
       new Result(response.data.data, '创建存证成功').success(res);
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
- 
+
 /**
  * * 获取存证
  */
@@ -319,7 +321,7 @@ router.post('/getStore', (req, res, next) => {
       console.log(response.data.data)
       new Result(response.data.data, '获取存证成功').success(res);
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -333,7 +335,7 @@ router.post('/queryStore', (req, res, next) => {
     if (response.data.code === 200) {
       new Result(response.data.data, '查询存证成功').success(res);
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -400,14 +402,14 @@ router.post('/transfer', [
               new Result('转账失败').fail(res);
             }
           } else {
-            new Result('函数调用失败').fail(res);
+            new Result(chainAPIResult, '函数调用失败').fail(res);
           }
         })
       } else {
         new Result('转账失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').fail(res);
+      new Result(chainAPIResult, '函数调用失败').fail(res);
     }
   })
 })

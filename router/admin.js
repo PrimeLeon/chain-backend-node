@@ -25,6 +25,7 @@ const {
   findUserByUsernameForUserGoOnChain,
   findUserByUsername,
   findAllBlackUser,
+  updateBalance,
   activateUser,
   blackUser
 } = require('../services/admin');
@@ -146,7 +147,7 @@ router.get('/user/all', (req, res, next) => {
 /**
  * * 根据用户名获取用户信息
  */
-router.get('/user/getByUsername',[
+router.get('/user/getByUsername', [
   body('username').isString().withMessage('用户名必须为字符'),
 ], (req, res, next) => {
   let { username } = req.body;
@@ -240,10 +241,16 @@ router.post('/newAccount', [
   admin = adminInfoFromToken.admin;
   findUserByUsernameForUserGoOnChain(username)
   .then(user => {
+    /**
+     * * 更改为 1 / 0 作为标记用户类型
+     */
     if (user) {
       /**
        * * ['管理员私钥:string', '用户信息字符串:string']
        */
+      if (user.role === 'user') user.role = 0;
+      if (user.role === 'company') user.role = 1;
+
       axiosChainAPI(
           "newAccount",
           [`${admin.private_key}`, JSON.stringify(user)],
@@ -259,7 +266,7 @@ router.post('/newAccount', [
             new Result('用户上链失败').fail(res);
           }
         } else {
-          new Result('函数执行失败').chainError(res);
+          new Result(chainAPIResult, '函数执行失败').chainError(res);
         }
       })
     } else {
@@ -281,12 +288,12 @@ router.get('/getOwnerBalance', (req, res, next) => {
     console.log(chainAPIResult)
     if (chainAPIResult.message === 'success') {
       if (chainAPIResult.data.result) {
-        new Result({ balance: chainAPIResult.data.result }, '积分系统余额查询成功').success(res);
+        new Result({ balance: parseInt(chainAPIResult.data.result) }, '积分系统余额查询成功').success(res);
       } else {
         new Result('积分系统余额查询失败').fail(res);
       }
     } else {
-      new Result('函数执行失败').chainError(res);
+      new Result(chainAPIResult, '函数执行失败').chainError(res);
     }
   })
 })
@@ -304,26 +311,29 @@ router.post('/issue', [
   admin = adminInfoFromToken.admin;
   findUserByUsername(username)
   .then(user => {
+    console.log(user)
     if (user) {
       /**
        * * ['管理员私钥:string', '用户地址:string', '发行金额:number']
        */
+      // console.dir(user)
       axiosChainAPI(
           'issue',
-          [`${admin.private_key}`, `${user.address}`, balance],
+          [`${admin.private_key}`, `${user.address}`, 1000],
           'invoke')
-      .then(response => {
+      .then(async response => {
         // console.log(user.address,balance);
         let chainAPIResult = response.data;
         // console.log(chainAPIResult)
         if (chainAPIResult.message === 'success') {
           if (chainAPIResult.data.txId) {
+            await updateBalance(username, balance);
             new Result({ txId: chainAPIResult.data.txId }, '发行积分成功').success(res);
           } else {
             new Result('发行积分失败').fail(res);
           }
         } else {
-          new Result('函数执行失败').chainError(res);
+          new Result(chainAPIResult, '函数执行失败').chainError(res);
         }
       })
     } else {
@@ -355,7 +365,7 @@ router.get('/getSumFee', (req, res, next) => {
         new Result('获取利息总积分失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -376,9 +386,12 @@ router.post('/addBlackList', [
       /**
        * * ['管理员私钥:string', '用户地址:string', '发行金额:number']
        */
+      console.log('-------------------------------------')
+      console.log(user)
+      console.log('-------------------------------------')
       axiosChainAPI(
           'addBlackList',
-          [`${admin.private_key}`, `${user.address}`, isBlack],
+          [`${admin.private_key}`, `${user.address}`, JSON.parse(isBlack)],
           'invoke')
       .then(async response => {
         let chainAPIResult = response.data;
@@ -391,7 +404,7 @@ router.post('/addBlackList', [
             new Result('用户黑名单状态改变失败').fail(res);
           }
         } else {
-          new Result('函数执行失败').chainError(res);
+          new Result(chainAPIResult, '函数执行失败').chainError(res);
         }
       })
     } else {
@@ -400,7 +413,6 @@ router.post('/addBlackList', [
   })
 })
 
-// TODO: 获取所有黑名单用户
 /**
  * * 获取所有被拉黑的用户
  */
@@ -440,7 +452,7 @@ router.get('/getPausable', (req, res, next) => {
         new Result('获取积分暂停状态失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -472,7 +484,7 @@ router.post('/pausable', [
         new Result('积分系统状态改变失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -505,7 +517,7 @@ router.post('/addTotalSupply', [
         new Result('积分发行失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -538,7 +550,7 @@ router.post('/subTotalSupply', [
         new Result('积分回收失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -571,7 +583,7 @@ router.post('/setBPR', [
         new Result('设置积分利率失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -604,7 +616,7 @@ router.post('/setMF', [
         new Result('设置积分利率上限成功').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })

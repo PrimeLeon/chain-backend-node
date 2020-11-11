@@ -30,7 +30,7 @@ function findAdminByUsername(username) {
  * @param {string} username 用户名
  */
 function findUserByUsername(username) {
-  return querySql(`
+  return queryOne(`
   SELECT id,username,password,nickname,role,address,private_key,balance
   FROM user 
   WHERE username='${username}'`);
@@ -56,7 +56,7 @@ function findUserOrderByRegisterTimeWithPage(page) {
  */
 function findUserByUsernameForUserGoOnChain(username) {
   return queryOne(`
-  SELECT address,id as ID,balance,password,private_key as privateKey
+  SELECT username as name,address,id as ID,role,password as passWord,create_time,isBlack as isBlacked,isDelete as isDeleted
   FROM user 
   WHERE username='${username}'
   AND isActivate=0`);
@@ -91,6 +91,13 @@ function findAllUser() {
   FROM user`)
 }
 
+function updateBalance(username,balance){
+  return queryZero(`
+    UPDATE user
+    SET balance=${balance}
+    WHERE username='${username}'
+  `)
+}
 module.exports = {
   login,
   findAllUser,
@@ -99,6 +106,7 @@ module.exports = {
   findUserByUsername,
   findUserByUsernameForUserGoOnChain,
   findAllBlackUser,
+  updateBalance,
   activateUser,
   blackUser
 }

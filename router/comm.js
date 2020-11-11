@@ -28,7 +28,7 @@ router.get('/getBPR', (req, res, next) => {
         new Result('获取积分利率失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
@@ -51,7 +51,7 @@ router.get('/getMF', (req, res, next) => {
         new Result('获取最大积分利息失败').fail(res);
       }
     } else {
-      new Result('函数调用失败').chainError(res);
+      new Result(chainAPIResult, '函数调用失败').chainError(res);
     }
   })
 })
