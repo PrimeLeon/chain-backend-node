@@ -10,6 +10,8 @@ npm -v # v6.14.8
 
 * Mysql 8.0.22 [Mysql download](https://dev.mysql.com/downloads/installer/)
 
+
+
 ## 开始
 
 ```bash
@@ -20,7 +22,40 @@ cd chain-backend-node
 npm install
 
 node app.js # 默认启动在5000端口
+
+# 可选
+npm install supervisor
+# 使用如下命令替代node app.js
+supervisor app.js
 ```
+
+
+
+## 开发模式 / 部署模式
+
+* **切换开发模式和部署模式需要修改配置文件**
+* **./app.js**
+* **默认端口可以在 ./utils/constant.js中修改**
+
+```js
+// 其中port_dev为开发模式端口 默认5000
+// 其中port_prod为部署模式端口 默认80
+const server = app.listen(port_dev, () => {
+  const { address, port } = server.address();
+  console.log(`Http server activated ${address}:${port}`);
+})
+```
+
+* **./db/index.js**
+* **数据库配置设置均在 ./db 目录下的 \*.config.js文件中**
+
+```js
+// 其中 ./dev.config 为开发模式配置文件
+// 其中 ./prod.config 为部署模式配置文件
+const config = require('./dev.config');
+```
+
+
 
 ## 静态资源目录
 
@@ -33,6 +68,8 @@ app.use(express.static(__dirname + '/public'));
 // 访问示例
 localhost:5000/index.html
 ```
+
+
 
 ## JWT Token
 
@@ -57,6 +94,8 @@ localhost:5000/index.html
     "errMsg": "jwt expired"
 }
 ```
+
+
 
 ## <a id="API_LIST">API</a>
 
@@ -89,6 +128,7 @@ localhost:5000/index.html
     * [增加积分发行](#admin_addTotalSupply)
     * [减少积分发行](#admin_subTotalSupply)
     * [获取当前系统利息总积分](#admin_getSumFee)
+    * [获取积分Log](#admin_getFeeLog)
     * [获取当前系统暂停状态](#admin_getPausable)
     * [设置积分利率](#admin_setBPR)
     * [设置积分利率上限](#admin_setMF)
@@ -1004,7 +1044,7 @@ localhost:5000/index.html
 | :----------: | :----------------------------------------------------------- |
 | **接口地址** | /admin/getSumFee                                                 |
 | **请求方式** | HTTP / GET                                                  |
-|   **简介**   | 给用户发行积分                                               |
+|   **简介**   | 获取当前系统利息总积分                                               |
 
 * **请求示例**
 
@@ -1025,6 +1065,52 @@ localhost:5000/index.html
       }
   }
   ```
+  
+  
+  
+|     名称     | <a id="admin_getFeeLog">获取积分Log </a>  [回到API目录](#API_LIST) |
+| :----------: | :----------------------------------------------------------- |
+| **接口地址** | /admin/getFeeLog                                                 |
+| **请求方式** | HTTP / GET                                                  |
+|   **简介**   | 获取积分Log                                               |
+
+* **请求示例**
+
+  ```json
+  // 头部包含以下字段
+  Authorization ： Bearer <Token>
+  ```
+  
+* **返回值示例**
+
+  ```json
+  // 成功
+  {
+      "code": 0,
+      "msg": "获取积分Log成功",
+      "data": {
+          "logs": [
+              {
+                  "date": "2020-11-11T12:35:59.000Z",
+                  "fee": 40
+              },
+              {
+                  "date": "2020-11-11T12:35:44.000Z",
+                  "fee": 20
+              },
+              {
+                  "date": "2020-11-11T12:35:29.000Z",
+                  "fee": 10
+              },
+              {
+                  "date": "2020-11-11T12:33:44.000Z",
+                  "fee": 0
+              }
+          ]
+      }
+  }
+  ```
+  
   
   
 |     名称     | <a id="admin_getPausable">获取当前系统暂停状态 </a>  [回到API目录](#API_LIST) |

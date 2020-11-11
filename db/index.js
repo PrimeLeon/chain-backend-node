@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const config = require('./prod.config');
+const config = require('./dev.config');
 const { debug } = require('../utils/constant');
 
 function connect() {
