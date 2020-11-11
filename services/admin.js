@@ -116,8 +116,7 @@ function getFeeLog() {
   return queryZero(`
     SELECT date,fee
     FROM fee_log
-    WHERE fee in
-    (SELECT fee FROM fee_log GROUP BY fee HAVING COUNT(fee)=1)
+    GROUP BY fee
     ORDER BY date DESC
     LIMIT 0,${FEE_LOG_COUNT}
   `)
